@@ -1,5 +1,15 @@
 
+import { useEffect, useState } from 'react';
 import Button from '../components/Button';
+
+const heroMessages = [
+    'Kelola Aset Lebih Mudah.',
+    'Inventaris Tersusun Rapi.',
+    'Peminjaman Lebih Terorganisir.',
+    'Pantau Kondisi Aset Berkala.',
+    'Kelola Fasilitas Terintegrasi.',
+    'Data Aset dalam Satu Sistem.',
+];
 
 const stats = [
     { value: '01', label: 'Data aset terpusat' },
@@ -8,14 +18,62 @@ const stats = [
 ];
 
 export default function HeroSection() {
+    const [messageIndex, setMessageIndex] = useState(0);
+    const [visibleCharacters, setVisibleCharacters] = useState(0);
+
+    useEffect(() => {
+        let typingTimer: number;
+        let cycleTimer: number;
+        let currentIndex = 0;
+
+        const typeMessage = (index: number) => {
+            setMessageIndex(index);
+            setVisibleCharacters(0);
+
+            let characterIndex = 0;
+            typingTimer = window.setInterval(() => {
+                characterIndex += 1;
+                setVisibleCharacters(characterIndex);
+
+                if (characterIndex >= heroMessages[index].length) {
+                    window.clearInterval(typingTimer);
+                }
+            }, 55);
+
+            cycleTimer = window.setTimeout(() => {
+                window.clearInterval(typingTimer);
+                currentIndex = (index + 1) % heroMessages.length;
+                typeMessage(currentIndex);
+            }, 5000);
+        };
+
+        typeMessage(currentIndex);
+
+        return () => {
+            window.clearInterval(typingTimer);
+            window.clearTimeout(cycleTimer);
+        };
+    }, []);
+
     return (
         <section
             id="beranda"
-            className="relative overflow-hidden bg-white"
+            className="relative overflow-hidden bg-gradient-to-br from-white via-neutral-100 to-neutral-300"
         >
             {/* Background Decoration */}
-            <div className="pointer-events-none absolute -right-32 -top-24 h-96 w-96 rounded-full bg-neutral-100 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-neutral-100/70 blur-3xl" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_18%_22%,rgba(255,255,255,0.95),transparent_38%),radial-gradient(ellipse_at_88%_72%,rgba(64,64,64,0.16),transparent_42%)]" />
+            <div
+                className="pointer-events-none absolute inset-0 opacity-30"
+                style={{
+                    backgroundImage:
+                        'linear-gradient(rgba(23,23,23,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,23,0.05) 1px, transparent 1px)',
+                    backgroundSize: '44px 44px',
+                    maskImage:
+                        'radial-gradient(ellipse at 70% 50%, black 0%, transparent 75%)',
+                }}
+            />
+            <div className="pointer-events-none absolute -right-32 -top-24 h-96 w-96 rounded-full bg-white/70 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-neutral-400/40 blur-3xl" />
 
             <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-5 py-20 sm:py-28 lg:grid-cols-2 lg:gap-20 lg:px-8 lg:py-32">
 
@@ -28,13 +86,19 @@ export default function HeroSection() {
                         </span>
                     </div>
 
-                    <h1 className="max-w-2xl text-4xl font-semibold leading-[1.15] tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl">
-                        Kelola Aset Lebih{' '}
-                        <span className="text-neutral-400">Mudah.</span>
-                        <br />
-                        Terorganisir.
-                        <br />
-                        Terintegrasi.
+                    <h1
+                        aria-label={heroMessages[messageIndex]}
+                        className="max-w-2xl text-4xl font-semibold leading-[1.15] tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl"
+                    >
+                        <span className="block min-h-[3.45em] sm:min-h-[2.3em]">
+                            <span aria-hidden="true">
+                                {heroMessages[messageIndex].slice(0, visibleCharacters)}
+                            </span>
+                            <span
+                                aria-hidden="true"
+                                className="ml-1 inline-block h-[0.85em] translate-y-[0.08em] animate-pulse border-r-2 border-neutral-500"
+                            />
+                        </span>
                     </h1>
 
                     <p className="mt-7 max-w-xl text-base leading-8 text-neutral-500 sm:text-lg">
@@ -75,10 +139,10 @@ export default function HeroSection() {
                     {/* Decorative Background */}
                     <div className="absolute -right-5 -top-5 h-40 w-40 rounded-full border border-neutral-200 sm:-right-8 sm:-top-8 sm:h-52 sm:w-52" />
 
-                    <div className="absolute -bottom-8 -left-8 h-44 w-44 rounded-full bg-neutral-100 blur-2xl" />
+                    <div className="absolute -bottom-8 -left-8 h-44 w-44 rounded-full bg-neutral-300/70 blur-2xl" />
 
                     {/* Embossed Outer Frame */}
-                    <div className="relative rounded-[2rem] border border-neutral-200 bg-neutral-100 p-3 shadow-[12px_12px_30px_rgba(0,0,0,0.08),-8px_-8px_24px_rgba(255,255,255,0.9)] sm:rounded-[2.5rem] sm:p-5">
+                    <div className="relative rounded-[2rem] border border-white/80 bg-gradient-to-br from-white via-neutral-200 to-neutral-400 p-3 shadow-[12px_12px_40px_rgba(0,0,0,0.14),-8px_-8px_24px_rgba(255,255,255,0.8)] sm:rounded-[2.5rem] sm:p-5">
 
                         {/* Inner Frame */}
                         <div className="relative overflow-hidden rounded-[1.5rem] border border-white bg-white p-2 shadow-inner sm:rounded-[2rem] sm:p-3">
@@ -153,17 +217,27 @@ export default function HeroSection() {
                     </div>
 
                     {/* Floating Card - RFID */}
-                    <div className="absolute -bottom-5 right-3 hidden rounded-2xl border border-neutral-200 bg-white p-4 shadow-[0_12px_35px_rgba(0,0,0,0.12)] sm:block lg:-right-7">
+                    <div className="group absolute -bottom-5 right-3 hidden overflow-hidden rounded-2xl border border-neutral-700 bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-600 p-4 text-white shadow-[0_18px_45px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(0,0,0,0.35)] sm:block lg:-right-7">
+                        <div
+                            className="pointer-events-none absolute inset-0 opacity-20"
+                            style={{
+                                backgroundImage:
+                                    'repeating-linear-gradient(135deg, white 0, white 1px, transparent 1px, transparent 12px)',
+                                maskImage:
+                                    'linear-gradient(135deg, black, transparent 65%)',
+                            }}
+                        />
+                        <div className="pointer-events-none absolute -right-7 -top-9 size-24 rounded-full border border-white/20" />
                         <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-xl">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-xl text-white shadow-inner">
                                 ⌁
                             </div>
 
                             <div>
-                                <p className="text-xs font-semibold text-neutral-900">
+                                <p className="text-xs font-semibold text-white">
                                     RFID Integration
                                 </p>
-                                <p className="mt-1 text-[10px] text-neutral-500">
+                                <p className="mt-1 text-[10px] text-white/65">
                                     Identifikasi aset
                                 </p>
                             </div>

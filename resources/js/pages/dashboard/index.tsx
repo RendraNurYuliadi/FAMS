@@ -2,6 +2,7 @@
 import { Head } from '@inertiajs/react';
 import { useMemo, useState } from 'react';
 import DashboardLayout from '../../components/layouts/DashboardLayout';
+import DashboardMetricCard from '../../components/dashboard/DashboardMetricCard';
 import Icon from '../../components/Icon';
 import type { IconName } from '../../components/Icon';
 
@@ -15,8 +16,8 @@ const stats = [
         value: '120',
         description: 'Seluruh aset terdaftar',
         icon: 'building',
-        color: '#2563eb',
-        light: '#dbeafe',
+        color: '#262626',
+        light: '#e5e5e5',
         trend: '+8 aset',
     },
     {
@@ -24,8 +25,8 @@ const stats = [
         value: '82',
         description: 'Siap untuk dipinjam',
         icon: 'shield',
-        color: '#0f766e',
-        light: '#ccfbf1',
+        color: '#525252',
+        light: '#e5e5e5',
         trend: '68,3% dari total',
     },
     {
@@ -33,8 +34,8 @@ const stats = [
         value: '25',
         description: 'Aset dalam peminjaman',
         icon: 'users',
-        color: '#9333ea',
-        light: '#f3e8ff',
+        color: '#737373',
+        light: '#f5f5f5',
         trend: '20,8% dari total',
     },
     {
@@ -42,8 +43,8 @@ const stats = [
         value: '8',
         description: 'Membutuhkan pengecekan',
         icon: 'clock',
-        color: '#c2410c',
-        light: '#ffedd5',
+        color: '#404040',
+        light: '#d4d4d4',
         trend: 'Perlu tindak lanjut',
     },
 ] as const;
@@ -54,40 +55,40 @@ const activities = [
         detail: 'Proyektor Epson · Rendra Nur Yuliadi',
         time: '09.45',
         status: 'Menunggu',
-        color: '#9333ea',
-        light: '#f3e8ff',
+        color: '#737373',
+        light: '#f5f5f5',
     },
     {
         title: 'Pengembalian aset',
         detail: 'Kamera Canon · Amelia Puji Lestari',
         time: '09.20',
         status: 'Pemeriksaan',
-        color: '#0f766e',
-        light: '#ccfbf1',
+        color: '#525252',
+        light: '#e5e5e5',
     },
     {
         title: 'Laporan kerusakan',
         detail: 'Kursi ruang kelas · Herliana Tri Cahyanti',
         time: '08.50',
         status: 'Dilaporkan',
-        color: '#c2410c',
-        light: '#ffedd5',
+        color: '#404040',
+        light: '#d4d4d4',
     },
     {
         title: 'Peminjaman disetujui',
         detail: 'Laptop Lenovo · Wulan Nurfitriani',
         time: '08.15',
         status: 'Disetujui',
-        color: '#2563eb',
-        light: '#dbeafe',
+        color: '#262626',
+        light: '#e5e5e5',
     },
 ];
 
 const assetCategories = [
-    { name: 'Elektronik', total: 45, percentage: 38, color: '#2563eb' },
-    { name: 'Peralatan Kelas', total: 32, percentage: 27, color: '#9333ea' },
-    { name: 'Furniture', total: 25, percentage: 21, color: '#0f766e' },
-    { name: 'Lainnya', total: 18, percentage: 14, color: '#c2410c' },
+    { name: 'Elektronik', total: 45, percentage: 38, color: '#262626' },
+    { name: 'Peralatan Kelas', total: 32, percentage: 27, color: '#737373' },
+    { name: 'Furniture', total: 25, percentage: 21, color: '#525252' },
+    { name: 'Lainnya', total: 18, percentage: 14, color: '#404040' },
 ];
 
 type Booking = {
@@ -129,8 +130,8 @@ const bookings: Booking[] = [
         purpose: 'Kebutuhan kegiatan dan dokumentasi UKM.',
         start: '2026-11-03',
         end: '2026-11-07',
-        color: '#2563eb',
-        colorLight: '#dbeafe',
+        color: '#262626',
+        colorLight: '#e5e5e5',
         status: 'Disetujui',
     },
     {
@@ -146,8 +147,8 @@ const bookings: Booking[] = [
         purpose: 'Presentasi kegiatan akademik.',
         start: '2026-11-05',
         end: '2026-11-09',
-        color: '#9333ea',
-        colorLight: '#f3e8ff',
+        color: '#737373',
+        colorLight: '#f5f5f5',
         status: 'Disetujui',
     },
     {
@@ -163,8 +164,8 @@ const bookings: Booking[] = [
         purpose: 'Dokumentasi kegiatan fakultas.',
         start: '2026-11-12',
         end: '2026-11-15',
-        color: '#0f766e',
-        colorLight: '#ccfbf1',
+        color: '#525252',
+        colorLight: '#e5e5e5',
         status: 'Berlangsung',
     },
     {
@@ -181,8 +182,8 @@ const bookings: Booking[] = [
         purpose: 'Kebutuhan acara TahuConnect.',
         start: '2026-11-18',
         end: '2026-11-21',
-        color: '#c2410c',
-        colorLight: '#ffedd5',
+        color: '#404040',
+        colorLight: '#d4d4d4',
         status: 'Disetujui',
     },
     {
@@ -198,24 +199,24 @@ const bookings: Booking[] = [
         purpose: 'Praktikum dan penyusunan tugas.',
         start: '2026-11-24',
         end: '2026-11-27',
-        color: '#be185d',
-        colorLight: '#fce7f3',
+        color: '#a3a3a3',
+        colorLight: '#f5f5f5',
         status: 'Disetujui',
     },
 ];
 
 const borrowerStats = [
-    { name: 'Mahasiswa', total: 68, percentage: 68, color: '#2563eb', light: '#dbeafe' },
-    { name: 'Dosen', total: 18, percentage: 18, color: '#9333ea', light: '#f3e8ff' },
-    { name: 'Staf', total: 9, percentage: 9, color: '#0f766e', light: '#ccfbf1' },
-    { name: 'Organisasi', total: 5, percentage: 5, color: '#c2410c', light: '#ffedd5' },
+    { name: 'Mahasiswa', total: 68, percentage: 68, color: '#262626', light: '#e5e5e5' },
+    { name: 'Dosen', total: 18, percentage: 18, color: '#737373', light: '#f5f5f5' },
+    { name: 'Staf', total: 9, percentage: 9, color: '#525252', light: '#e5e5e5' },
+    { name: 'Organisasi', total: 5, percentage: 5, color: '#404040', light: '#d4d4d4' },
 ];
 
 const frequentBorrowers = [
-    { name: 'Rendra Nur Yuliadi', type: 'Mahasiswa', identity: '240160121104', total: 12, color: '#2563eb' },
-    { name: 'Amelia Puji Lestari', type: 'Mahasiswa', identity: '240160121007', total: 9, color: '#9333ea' },
-    { name: 'Herliana Tri Cahyanti', type: 'Mahasiswa', identity: '240160121044', total: 8, color: '#0f766e' },
-    { name: 'Jajang Didin', type: 'Mahasiswa', identity: '240160121120', total: 6, color: '#c2410c' },
+    { name: 'Rendra Nur Yuliadi', type: 'Mahasiswa', identity: '240160121104', total: 12, color: '#262626' },
+    { name: 'Amelia Puji Lestari', type: 'Mahasiswa', identity: '240160121007', total: 9, color: '#737373' },
+    { name: 'Herliana Tri Cahyanti', type: 'Mahasiswa', identity: '240160121044', total: 8, color: '#525252' },
+    { name: 'Jajang Didin', type: 'Mahasiswa', identity: '240160121120', total: 6, color: '#404040' },
 ];
 
 const frequentAssets = [
@@ -271,56 +272,25 @@ function StatCard({
     value,
     description,
     icon,
-    color,
-    light,
     trend,
+    index,
 }: {
     title: string;
     value: string;
     description: string;
     icon: IconName;
-    color: string;
-    light: string;
     trend: string;
+    index: number;
 }) {
     return (
-        <div className="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-5 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-            <div
-                className="absolute -right-7 -top-7 size-24 rounded-full opacity-40 transition group-hover:scale-125"
-                style={{ backgroundColor: light }}
-            />
-
-            <div className="relative flex items-center justify-between">
-                <div
-                    className="flex size-11 items-center justify-center rounded-xl"
-                    style={{ backgroundColor: light, color }}
-                >
-                    <Icon name={icon} size={20} />
-                </div>
-
-                <span className="rounded-full border border-neutral-100 px-2.5 py-1 text-[9px] font-semibold tracking-wide text-neutral-400">
-                    FAMS
-                </span>
-            </div>
-
-            <div className="relative mt-5">
-                <p className="text-xs font-medium text-neutral-500">{title}</p>
-                <p className="mt-1 text-3xl font-bold tracking-tight text-neutral-950">
-                    {value}
-                </p>
-                <p className="mt-1.5 text-[10px] text-neutral-400">{description}</p>
-            </div>
-
-            <div className="relative mt-4 flex items-center gap-1.5 border-t border-neutral-100 pt-3">
-                <span
-                    className="size-1.5 rounded-full"
-                    style={{ backgroundColor: color }}
-                />
-                <span className="text-[10px] font-medium text-neutral-500">
-                    {trend}
-                </span>
-            </div>
-        </div>
+        <DashboardMetricCard
+            label={title}
+            value={value}
+            description={description}
+            icon={icon}
+            trend={trend}
+            index={index}
+        />
     );
 }
 
@@ -563,11 +533,11 @@ function BookingCalendarSection() {
 
                     <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-neutral-100 pt-5">
                         {[
-                            { label: 'Peminjaman 1', color: '#2563eb' },
-                            { label: 'Peminjaman 2', color: '#9333ea' },
-                            { label: 'Peminjaman 3', color: '#0f766e' },
-                            { label: 'Peminjaman 4', color: '#c2410c' },
-                            { label: 'Peminjaman 5', color: '#be185d' },
+                            { label: 'Peminjaman 1', color: '#262626' },
+                            { label: 'Peminjaman 2', color: '#737373' },
+                            { label: 'Peminjaman 3', color: '#525252' },
+                            { label: 'Peminjaman 4', color: '#404040' },
+                            { label: 'Peminjaman 5', color: '#a3a3a3' },
                         ].map((item) => (
                             <div key={item.label} className="flex items-center gap-2">
                                 <span className="size-2.5 rounded-full" style={{ backgroundColor: item.color }} />
@@ -795,7 +765,7 @@ function BorrowingChart() {
             <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                     <div className="flex items-center gap-2">
-                        <span className="size-2 rounded-full bg-blue-600" />
+                        <span className="size-2 rounded-full bg-neutral-900" />
                         <span className="text-[9px] font-semibold uppercase tracking-widest text-neutral-400">
                             Analitik Peminjaman
                         </span>
@@ -833,7 +803,7 @@ function BorrowingChart() {
                         {data.reduce((sum, item) => sum + item.value, 0)}
                     </p>
                 </div>
-                <span className="rounded-full bg-teal-50 px-3 py-1.5 text-[10px] font-semibold text-teal-700">
+                <span className="rounded-full bg-neutral-100 px-3 py-1.5 text-[10px] font-semibold text-neutral-700">
                     +12,8% dari periode lalu
                 </span>
             </div>
@@ -850,7 +820,7 @@ function BorrowingChart() {
                                 style={{
                                     height: `${(item.value / maxValue) * 100}%`,
                                     minHeight: '8px',
-                                    backgroundColor: ['#2563eb', '#9333ea', '#0f766e', '#c2410c', '#be185d', '#2563eb', '#9333ea'][index],
+                                    backgroundColor: ['#262626', '#737373', '#525252', '#404040', '#a3a3a3', '#262626', '#737373'][index],
                                 }}
                                 title={`${item.value} peminjaman`}
                             />
@@ -864,7 +834,7 @@ function BorrowingChart() {
 
             <div className="mt-4 flex flex-wrap gap-4">
                 <div className="flex items-center gap-2">
-                    <span className="size-2 rounded-full bg-blue-600" />
+                    <span className="size-2 rounded-full bg-neutral-900" />
                     <span className="text-[10px] text-neutral-500">Transaksi peminjaman</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -909,10 +879,10 @@ function BorrowerDistribution() {
                     className="relative flex size-40 shrink-0 items-center justify-center rounded-full"
                     style={{
                         background: `conic-gradient(
-                            #2563eb 0% 68%,
-                            #9333ea 68% 86%,
-                            #0f766e 86% 95%,
-                            #c2410c 95% 100%
+                            #262626 0% 68%,
+                            #737373 68% 86%,
+                            #525252 86% 95%,
+                            #404040 95% 100%
                         )`,
                     }}
                 >
@@ -993,7 +963,7 @@ function BorrowerDistribution() {
                                     <p className="text-[9px] text-neutral-400">Peminjaman</p>
                                 </div>
                                 {index === 0 && (
-                                    <span className="rounded-md bg-amber-50 px-2 py-1 text-[8px] font-bold text-amber-700">
+                                    <span className="rounded-md bg-neutral-100 px-2 py-1 text-[8px] font-bold text-neutral-700">
                                         TOP
                                     </span>
                                 )}
@@ -1029,7 +999,7 @@ function PopularAssets() {
                         Daftar aset dengan aktivitas peminjaman tertinggi.
                     </p>
                 </div>
-                <div className="flex size-10 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
+                <div className="flex size-10 items-center justify-center rounded-xl bg-neutral-100 text-neutral-800">
                     <Icon name="building" size={19} />
                 </div>
             </div>
@@ -1055,7 +1025,7 @@ function PopularAssets() {
                                 className="h-full rounded-full transition-all duration-500"
                                 style={{
                                     width: `${asset.percentage}%`,
-                                    backgroundColor: ['#2563eb', '#9333ea', '#0f766e', '#c2410c'][index],
+                                    backgroundColor: ['#262626', '#737373', '#525252', '#404040'][index],
                                 }}
                             />
                         </div>
@@ -1237,7 +1207,7 @@ export default function DashboardIndex() {
                     <div className="relative flex min-h-[230px] flex-col justify-between gap-8 p-6 sm:p-8 lg:flex-row lg:items-center">
                         <div className="max-w-xl">
                             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur-sm">
-                                <span className="size-1.5 rounded-full bg-teal-300" />
+                                <span className="size-1.5 rounded-full bg-neutral-300" />
                                 <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/80">
                                     Faculty Asset Management System
                                 </span>
@@ -1261,7 +1231,7 @@ export default function DashboardIndex() {
                                     {formattedDate}
                                 </span>
                                 <span className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-2.5 text-[10px] font-medium text-white/90 backdrop-blur-sm">
-                                    <span className="size-1.5 rounded-full bg-teal-300" />
+                                    <span className="size-1.5 rounded-full bg-neutral-300" />
                                     Sistem aktif
                                 </span>
                             </div>
@@ -1315,16 +1285,15 @@ export default function DashboardIndex() {
                     </div>
 
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                        {stats.map((stat) => (
+                        {stats.map((stat, index) => (
                             <StatCard
                                 key={stat.title}
                                 title={stat.title}
                                 value={stat.value}
                                 description={stat.description}
                                 icon={stat.icon}
-                                color={stat.color}
-                                light={stat.light}
                                 trend={stat.trend}
+                                index={index}
                             />
                         ))}
                     </div>
@@ -1351,7 +1320,7 @@ export default function DashboardIndex() {
                 {/* BOTTOM INFORMATION */}
                 <section className="grid grid-cols-1 gap-4 md:grid-cols-3">
                     <div className="group flex items-center gap-4 rounded-2xl border border-neutral-200 bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-md">
-                        <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-700 transition group-hover:scale-105">
+                        <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-neutral-100 text-neutral-700 transition group-hover:scale-105">
                             <Icon name="clock" size={20} />
                         </div>
                         <div>
@@ -1365,7 +1334,7 @@ export default function DashboardIndex() {
                     </div>
 
                     <div className="group flex items-center gap-4 rounded-2xl border border-neutral-200 bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-md">
-                        <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-orange-700 transition group-hover:scale-105">
+                        <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-neutral-200 text-neutral-800 transition group-hover:scale-105">
                             <Icon name="shield" size={20} />
                         </div>
                         <div>
@@ -1379,7 +1348,7 @@ export default function DashboardIndex() {
                     </div>
 
                     <div className="group flex items-center gap-4 rounded-2xl border border-neutral-200 bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-md">
-                        <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-teal-700 transition group-hover:scale-105">
+                        <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-neutral-100 text-neutral-800 transition group-hover:scale-105">
                             <Icon name="building" size={20} />
                         </div>
                         <div>

@@ -4,6 +4,7 @@ import DashboardLayout from '../../../components/layouts/DashboardLayout';
 import Icon from '../../../components/Icon';
 import type { IconName } from '../../../components/Icon';
 import AssetManagementBanner from '../../../components/dashboard/AssetManagementBanner';
+import DashboardMetricCard from '../../../components/dashboard/DashboardMetricCard';
 import ImagePreviewModal from '../../../components/dashboard/ImagePreviewModal';
 import type { ImagePreviewState } from '../../../components/dashboard/ImagePreviewModal';
 
@@ -201,10 +202,10 @@ const formatDate = (value: string) => {
 };
 
 const statusStyles: Record<AssetStatus, string> = {
-    Tersedia: 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100',
-    Dipinjam: 'bg-amber-50 text-amber-700 ring-1 ring-amber-100',
-    Maintenance: 'bg-orange-50 text-orange-700 ring-1 ring-orange-100',
-    'Tidak Aktif': 'bg-rose-50 text-rose-700 ring-1 ring-rose-100',
+    Tersedia: 'bg-neutral-100 text-neutral-800 ring-1 ring-neutral-200',
+    Dipinjam: 'bg-neutral-900 text-white ring-1 ring-neutral-800',
+    Maintenance: 'bg-neutral-200 text-neutral-800 ring-1 ring-neutral-300',
+    'Tidak Aktif': 'bg-neutral-300 text-neutral-700 ring-1 ring-neutral-400',
 };
 
 const conditionStyles: Record<AssetCondition, string> = {
@@ -305,19 +306,19 @@ export default function DataAset() {
             label: 'Total Aset',
             value: assets.length,
             icon: 'package',
-            iconStyle: 'bg-sky-100 text-sky-700',
+            iconStyle: 'bg-neutral-100 text-neutral-800',
         },
         {
             label: 'Barang',
             value: assets.filter((asset) => asset.category === 'Barang').length,
             icon: 'box',
-            iconStyle: 'bg-violet-100 text-violet-700',
+            iconStyle: 'bg-neutral-200 text-neutral-800',
         },
         {
             label: 'Ruangan',
             value: assets.filter((asset) => asset.category === 'Ruangan').length,
             icon: 'building',
-            iconStyle: 'bg-amber-100 text-amber-700',
+            iconStyle: 'bg-neutral-100 text-neutral-700',
         },
         {
             label: 'Perlu Perhatian',
@@ -327,7 +328,7 @@ export default function DataAset() {
                     asset.status === 'Maintenance',
             ).length,
             icon: 'alert-circle',
-            iconStyle: 'bg-rose-100 text-rose-700',
+            iconStyle: 'bg-neutral-200 text-neutral-700',
         },
     ];
 
@@ -642,25 +643,14 @@ export default function DataAset() {
 
                 {/* STATISTICS */}
                 <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
-                    {stats.map((stat) => (
-                        <div
+                    {stats.map((stat, index) => (
+                        <DashboardMetricCard
                             key={stat.label}
-                            className="rounded-2xl border border-neutral-200 bg-white p-4 sm:p-5"
-                        >
-                            <div className="flex items-center justify-between gap-2">
-                                <p className="text-xs font-medium text-neutral-500 sm:text-sm">
-                                    {stat.label}
-                                </p>
-
-                                <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${stat.iconStyle}`}>
-                                    <Icon name={stat.icon} size={17} />
-                                </span>
-                            </div>
-
-                            <p className="mt-3 text-2xl font-bold text-neutral-950 sm:text-3xl">
-                                {stat.value}
-                            </p>
-                        </div>
+                            label={stat.label}
+                            value={stat.value}
+                            icon={stat.icon}
+                            index={index}
+                        />
                     ))}
                 </div>
 
@@ -1220,7 +1210,7 @@ export default function DataAset() {
                                                                     imageNames: [],
                                                                 }))
                                                             }
-                                                            className="text-xs font-medium text-neutral-500 transition hover:text-red-600"
+                                                            className="text-xs font-medium text-neutral-500 transition hover:text-neutral-950"
                                                         >
                                                             Hapus semua foto
                                                         </button>

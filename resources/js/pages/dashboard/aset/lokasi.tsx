@@ -5,6 +5,7 @@ import DashboardLayout from '../../../components/layouts/DashboardLayout';
 import Icon from '../../../components/Icon';
 import type { IconName } from '../../../components/Icon';
 import AssetManagementBanner from '../../../components/dashboard/AssetManagementBanner';
+import DashboardMetricCard from '../../../components/dashboard/DashboardMetricCard';
 import ImagePreviewModal from '../../../components/dashboard/ImagePreviewModal';
 import type { ImagePreviewState } from '../../../components/dashboard/ImagePreviewModal';
 
@@ -41,9 +42,9 @@ const MAX_IMAGES = 10;
 const PER_PAGE = 5;
 
 const locationTypeStyles: Record<LocationType, string> = {
-    Gedung: 'bg-sky-50 text-sky-700',
-    Area: 'bg-emerald-50 text-emerald-700',
-    Kompleks: 'bg-violet-50 text-violet-700',
+    Gedung: 'bg-neutral-100 text-neutral-800',
+    Area: 'bg-neutral-200 text-neutral-800',
+    Kompleks: 'bg-neutral-300 text-neutral-800',
     Lainnya: 'bg-neutral-100 text-neutral-600',
 };
 
@@ -228,19 +229,19 @@ export default function DataLokasi() {
             label: 'Total Lokasi',
             value: locations.length,
             icon: 'map-pin',
-            iconStyle: 'bg-sky-100 text-sky-700',
+            iconStyle: 'bg-neutral-100 text-neutral-800',
         },
         {
             label: 'Gedung',
             value: locations.filter((item) => item.type === 'Gedung').length,
             icon: 'building',
-            iconStyle: 'bg-violet-100 text-violet-700',
+            iconStyle: 'bg-neutral-200 text-neutral-800',
         },
         {
             label: 'Area',
             value: locations.filter((item) => item.type === 'Area').length,
             icon: 'map',
-            iconStyle: 'bg-emerald-100 text-emerald-700',
+            iconStyle: 'bg-neutral-100 text-neutral-700',
         },
         {
             label: 'Total Foto',
@@ -249,7 +250,7 @@ export default function DataLokasi() {
                 0,
             ),
             icon: 'image',
-            iconStyle: 'bg-amber-100 text-amber-700',
+            iconStyle: 'bg-neutral-200 text-neutral-700',
         },
     ];
 
@@ -502,25 +503,14 @@ export default function DataLokasi() {
 
                 {/* STATISTICS */}
                 <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
-                    {stats.map((stat) => (
-                        <div
+                    {stats.map((stat, index) => (
+                        <DashboardMetricCard
                             key={stat.label}
-                            className="rounded-2xl border border-neutral-200 bg-white p-4 sm:p-5"
-                        >
-                            <div className="flex items-center justify-between gap-2">
-                                <p className="text-xs font-medium text-neutral-500 sm:text-sm">
-                                    {stat.label}
-                                </p>
-
-                                <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${stat.iconStyle}`}>
-                                    <Icon name={stat.icon} size={17} />
-                                </span>
-                            </div>
-
-                            <p className="mt-3 text-2xl font-bold text-neutral-950 sm:text-3xl">
-                                {stat.value}
-                            </p>
-                        </div>
+                            label={stat.label}
+                            value={stat.value}
+                            icon={stat.icon}
+                            index={index}
+                        />
                     ))}
                 </div>
 
@@ -1026,7 +1016,7 @@ export default function DataLokasi() {
                                                             imageNames: [],
                                                         }))
                                                     }
-                                                    className="text-xs font-medium text-neutral-500 transition hover:text-red-600"
+                                                    className="text-xs font-medium text-neutral-500 transition hover:text-neutral-950"
                                                 >
                                                     Hapus semua foto
                                                 </button>

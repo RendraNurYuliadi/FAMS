@@ -3,7 +3,9 @@ import { useEffect, useMemo, useState } from 'react';
 import DashboardLayout from '../../../components/layouts/DashboardLayout';
 import Icon from '../../../components/Icon';
 import type { IconName } from '../../../components/Icon';
+import Pagination from '../../../components/Pagination';
 import AssetManagementBanner from '../../../components/dashboard/AssetManagementBanner';
+import DashboardMetricCard from '../../../components/dashboard/DashboardMetricCard';
 import ImagePreviewModal from '../../../components/dashboard/ImagePreviewModal';
 import type { ImagePreviewState } from '../../../components/dashboard/ImagePreviewModal';
 
@@ -28,6 +30,8 @@ type Asset = {
     description: string;
     images: string[];
 };
+
+const PAGE_SIZE = 4;
 
 const masterItems = [
     { id: 1, name: 'Laptop Lenovo ThinkPad' },
@@ -160,13 +164,13 @@ const formatDate = (value: string) =>
 const getStatusStyle = (status: AssetStatus) => {
     switch (status) {
         case 'Tersedia':
-            return 'bg-emerald-50 text-emerald-700 border-emerald-100';
+            return 'bg-neutral-100 text-neutral-800 border-neutral-200';
         case 'Dipinjam':
-            return 'bg-amber-50 text-amber-700 border-amber-100';
+            return 'bg-neutral-900 text-white border-neutral-800';
         case 'Maintenance':
-            return 'bg-orange-50 text-orange-700 border-orange-100';
+            return 'bg-neutral-200 text-neutral-800 border-neutral-300';
         case 'Tidak Aktif':
-            return 'bg-rose-50 text-rose-700 border-rose-100';
+            return 'bg-neutral-300 text-neutral-700 border-neutral-400';
     }
 };
 
@@ -186,6 +190,7 @@ export default function KatalogAset() {
     const [search, setSearch] = useState('');
     const [categoryFilter, setCategoryFilter] = useState('Semua');
     const [statusFilter, setStatusFilter] = useState('Semua');
+    const [page, setPage] = useState(1);
     const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
     const [activeImage, setActiveImage] =
         useState<ImagePreviewState | null>(null);
@@ -222,6 +227,13 @@ export default function KatalogAset() {
         });
     }, [assets, search, categoryFilter, statusFilter]);
 
+    const totalPages = Math.ceil(filteredAssets.length / PAGE_SIZE);
+    const currentPage = Math.min(page, Math.max(totalPages, 1));
+    const paginatedAssets = filteredAssets.slice(
+        (currentPage - 1) * PAGE_SIZE,
+        currentPage * PAGE_SIZE,
+    );
+
     const totalBarang = assets.filter((asset) => asset.category === 'Barang').length;
     const totalRuangan = assets.filter((asset) => asset.category === 'Ruangan').length;
     const totalTersedia = assets.filter((asset) => asset.status === 'Tersedia').length;
@@ -237,28 +249,28 @@ export default function KatalogAset() {
             value: assets.length,
             description: 'Seluruh data aset',
             icon: 'package',
-            iconStyle: 'bg-sky-100 text-sky-700',
+            iconStyle: 'bg-neutral-100 text-neutral-800',
         },
         {
             label: 'Aset Barang',
             value: totalBarang,
             description: 'Jenis aset barang',
             icon: 'box',
-            iconStyle: 'bg-violet-100 text-violet-700',
+            iconStyle: 'bg-neutral-200 text-neutral-800',
         },
         {
             label: 'Aset Ruangan',
             value: totalRuangan,
             description: 'Jenis aset ruangan',
             icon: 'building',
-            iconStyle: 'bg-amber-100 text-amber-700',
+            iconStyle: 'bg-neutral-100 text-neutral-700',
         },
         {
             label: 'Tersedia',
             value: totalTersedia,
             description: 'Aset siap digunakan',
             icon: 'check-circle',
-            iconStyle: 'bg-emerald-100 text-emerald-700',
+            iconStyle: 'bg-neutral-200 text-neutral-700',
         },
     ];
 
@@ -320,26 +332,15 @@ export default function KatalogAset() {
 
                 {/* Statistics */}
                 <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-                    {stats.map((stat) => (
-                        <div
+                    {stats.map((stat, index) => (
+                        <DashboardMetricCard
                             key={stat.label}
-                            className="rounded-2xl border border-neutral-200 bg-white p-4"
-                        >
-                            <div className="flex items-center justify-between gap-2">
-                                <p className="text-xs text-neutral-500">
-                                    {stat.label}
-                                </p>
-                                <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${stat.iconStyle}`}>
-                                    <Icon name={stat.icon} size={17} />
-                                </span>
-                            </div>
-                            <p className="mt-2 text-2xl font-bold text-neutral-900">
-                                {stat.value}
-                            </p>
-                            <p className="mt-1 text-xs text-neutral-400">
-                                {stat.description}
-                            </p>
-                        </div>
+                            label={stat.label}
+                            value={stat.value}
+                            icon={stat.icon}
+                            index={index}
+                            description={stat.description}
+                        />
                     ))}
                 </div>
 
@@ -357,7 +358,10 @@ export default function KatalogAset() {
                             <input
                                 type="text"
                                 value={search}
-                                onChange={(event) => setSearch(event.target.value)}
+                                onChange={(event) => {
+                                    setSearch(event.target.value);
+                                    setPage(1);
+                                }}
                                 placeholder="Cari nama aset, kode, atau lokasi..."
                                 className="w-full rounded-xl border border-neutral-200 bg-neutral-50 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-neutral-500 focus:bg-white"
                             />
@@ -365,7 +369,10 @@ export default function KatalogAset() {
 
                         <select
                             value={categoryFilter}
-                            onChange={(event) => setCategoryFilter(event.target.value)}
+                            onChange={(event) => {
+                                setCategoryFilter(event.target.value);
+                                setPage(1);
+                            }}
                             className="rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-700 outline-none focus:border-neutral-500"
                         >
                             <option value="Semua">Semua Kategori</option>
@@ -375,7 +382,10 @@ export default function KatalogAset() {
 
                         <select
                             value={statusFilter}
-                            onChange={(event) => setStatusFilter(event.target.value)}
+                            onChange={(event) => {
+                                setStatusFilter(event.target.value);
+                                setPage(1);
+                            }}
                             className="rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-700 outline-none focus:border-neutral-500"
                         >
                             <option value="Semua">Semua Status</option>
@@ -391,6 +401,7 @@ export default function KatalogAset() {
                                 setSearch('');
                                 setCategoryFilter('Semua');
                                 setStatusFilter('Semua');
+                                setPage(1);
                             }}
                             className="rounded-xl border border-neutral-200 px-4 py-3 text-sm font-medium text-neutral-600 transition hover:bg-neutral-100"
                         >
@@ -399,7 +410,15 @@ export default function KatalogAset() {
                     </div>
 
                     <div className="mt-3 flex items-center justify-between text-xs text-neutral-400">
-                        <span>Menampilkan {filteredAssets.length} dari {assets.length} aset</span>
+                        <span>
+                            Menampilkan{' '}
+                            {filteredAssets.length === 0
+                                ? 0
+                                : (currentPage - 1) * PAGE_SIZE + 1}
+                            –
+                            {Math.min(currentPage * PAGE_SIZE, filteredAssets.length)} dari{' '}
+                            {filteredAssets.length} aset
+                        </span>
                         <span>Terakhir diperbarui: Data contoh</span>
                     </div>
                 </div>
@@ -407,7 +426,7 @@ export default function KatalogAset() {
                 {/* Asset Cards */}
                 {filteredAssets.length > 0 ? (
                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-                        {filteredAssets.map((asset) => (
+                        {paginatedAssets.map((asset) => (
                             <button
                                 type="button"
                                 key={asset.id}
@@ -521,6 +540,7 @@ export default function KatalogAset() {
                                 setSearch('');
                                 setCategoryFilter('Semua');
                                 setStatusFilter('Semua');
+                                setPage(1);
                             }}
                             className="mt-4 text-xs font-semibold text-neutral-800 underline underline-offset-4"
                         >
@@ -528,6 +548,12 @@ export default function KatalogAset() {
                         </button>
                     </div>
                 )}
+
+                <Pagination
+                    page={currentPage}
+                    totalPages={totalPages}
+                    onChange={setPage}
+                />
             </div>
 
             {/* Asset Detail Modal */}

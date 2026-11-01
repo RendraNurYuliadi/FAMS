@@ -29,7 +29,7 @@ export default function Login({ status }: Props) {
         <>
             <Head title="Masuk — FAMS" />
 
-            <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#fafafa] px-4 py-6 font-sans text-neutral-950 sm:px-6">
+            <main className="auth-page-enter relative flex min-h-screen items-center justify-center overflow-hidden bg-[#fafafa] px-4 py-6 font-sans text-neutral-950 sm:px-6">
                 {/* Background */}
                 <div className="pointer-events-none absolute inset-0">
                     <div className="absolute left-1/4 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-neutral-200/40 blur-[110px]" />

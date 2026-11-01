@@ -46,7 +46,7 @@ export default function NotificationDropdown() {
                 onClick={() => setOpen(!open)}
                 aria-label="Notifikasi"
                 aria-expanded={open}
-                className="relative flex h-10 w-10 items-center justify-center rounded-xl text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950"
+                className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-950 text-white transition hover:bg-neutral-800"
             >
                 <Icon name="bell" size={19} />
 

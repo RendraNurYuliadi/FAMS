@@ -47,7 +47,7 @@ export default function PasswordInput({
                     required={required}
                     className={`h-[48px] w-full rounded-xl border bg-white py-3 pl-4 pr-12 text-sm text-neutral-900 outline-none transition-all placeholder:text-neutral-400 focus:border-neutral-950 focus:ring-2 focus:ring-neutral-950/5 ${
                         error
-                            ? 'border-red-400 focus:border-red-500'
+                            ? 'border-neutral-500 focus:border-neutral-700'
                             : 'border-neutral-200'
                     }`}
                 />
@@ -67,7 +67,7 @@ export default function PasswordInput({
             </div>
 
             {error && (
-                <p className="text-xs text-red-500">
+                <p className="text-xs text-neutral-600">
                     {error}
                 </p>
             )}

@@ -9,11 +9,11 @@ export default function SplashScreen() {
     useEffect(() => {
         const exitTimer = window.setTimeout(() => {
             setIsExiting(true);
-        }, 31500);
+        }, 3500);
 
         const removeTimer = window.setTimeout(() => {
             setIsMounted(false);
-        }, 32000);
+        }, 4000);
 
         return () => {
             window.clearTimeout(exitTimer);
@@ -25,7 +25,7 @@ export default function SplashScreen() {
 
     return (
         <div
-            className={`fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-white transition-all duration-700 ${
+            className={`fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-neutral-50 to-neutral-200 transition-all duration-700 ${
                 isExiting
                     ? 'pointer-events-none opacity-0'
                     : 'opacity-100'
@@ -35,15 +35,28 @@ export default function SplashScreen() {
         >
             {/* Background Decoration */}
             <div className="pointer-events-none absolute inset-0">
-                <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 animate-[pulse_3s_ease-in-out_infinite] rounded-full border border-neutral-100" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,rgba(255,255,255,0.95)_0%,rgba(245,245,245,0.65)_38%,rgba(163,163,163,0.16)_100%)]" />
 
-                <div className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-neutral-200 animate-[spin_25s_linear_infinite]" />
+                <div
+                    className="absolute inset-0 opacity-30"
+                    style={{
+                        backgroundImage:
+                            'linear-gradient(rgba(23,23,23,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,23,0.07) 1px, transparent 1px)',
+                        backgroundSize: '42px 42px',
+                        maskImage:
+                            'radial-gradient(ellipse at center, black 5%, transparent 76%)',
+                    }}
+                />
 
-                <div className="absolute left-1/2 top-1/2 h-[240px] w-[240px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-neutral-100" />
+                <div className="absolute -left-36 top-1/4 h-80 w-80 rounded-full bg-neutral-400/20 blur-3xl" />
 
-                <div className="absolute left-0 top-0 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-neutral-100/70 blur-3xl" />
+                <div className="absolute -right-36 bottom-0 h-96 w-96 rounded-full bg-neutral-800/10 blur-3xl" />
 
-                <div className="absolute bottom-0 right-0 h-72 w-72 translate-x-1/3 translate-y-1/3 rounded-full bg-neutral-100/70 blur-3xl" />
+                <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 animate-[pulse_3s_ease-in-out_infinite] rounded-full border border-neutral-300/70" />
+
+                <div className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 animate-[spin_25s_linear_infinite] rounded-full border border-dashed border-neutral-400/70" />
+
+                <div className="absolute left-1/2 top-1/2 h-[240px] w-[240px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/90 shadow-[0_0_80px_rgba(255,255,255,0.7)]" />
             </div>
 
             {/* Main Content */}
@@ -57,9 +70,9 @@ export default function SplashScreen() {
                 {/* Animated Logo */}
                 <div className="relative flex h-28 w-28 items-center justify-center">
                     {/* Rotating Rings */}
-                    <div className="absolute inset-0 animate-[spin_8s_linear_infinite] rounded-[2rem] border border-neutral-300" />
+                    <div className="absolute inset-0 animate-[spin_8s_linear_infinite] rounded-[2rem] border border-neutral-500/70" />
 
-                    <div className="absolute -inset-3 animate-[spin_12s_linear_infinite_reverse] rounded-[2.5rem] border border-dashed border-neutral-300" />
+                    <div className="absolute -inset-3 animate-[spin_12s_linear_infinite_reverse] rounded-[2.5rem] border border-dashed border-neutral-400" />
 
                     {/* Orbit Dot */}
                     <span className="absolute -right-2 top-5 h-3 w-3 animate-pulse rounded-full bg-neutral-950 shadow-[0_0_15px_rgba(0,0,0,0.25)]" />
@@ -67,7 +80,7 @@ export default function SplashScreen() {
                     <span className="absolute -bottom-1 left-4 h-2 w-2 rounded-full bg-neutral-400 animate-pulse" />
 
                     {/* Logo Box */}
-                    <div className="relative flex h-20 w-20 items-center justify-center rounded-3xl bg-neutral-950 shadow-2xl shadow-neutral-400/30 animate-[splash-logo_1.2s_ease-out_both]">
+                    <div className="relative flex h-20 w-20 items-center justify-center rounded-3xl border border-white/30 bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-600 shadow-2xl shadow-neutral-700/40 animate-[splash-logo_1.2s_ease-out_both]">
                         <Icon
                             name="box"
                             size={40}
@@ -89,8 +102,8 @@ export default function SplashScreen() {
 
                 {/* Loading Animation */}
                 <div className="mt-12 w-44 animate-[splash-text_0.8s_0.8s_both]">
-                    <div className="h-[3px] overflow-hidden rounded-full bg-neutral-200">
-                        <div className="h-full w-full origin-left animate-[splash-loading_3.5s_1s_ease-in-out_both] rounded-full bg-neutral-950" />
+                    <div className="h-[3px] overflow-hidden rounded-full bg-neutral-300">
+                        <div className="h-full w-full origin-left animate-[splash-loading_3.5s_1s_ease-in-out_both] rounded-full bg-gradient-to-r from-neutral-400 via-neutral-950 to-neutral-600" />
                     </div>
 
                     <div className="mt-4 flex items-center justify-between">

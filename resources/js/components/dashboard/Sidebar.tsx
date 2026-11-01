@@ -31,17 +31,17 @@ export default function Sidebar({
 
             <aside
                 className={`
-                    fixed inset-y-0 left-0 z-50 flex h-dvh w-[270px]
-                    flex-col border-r border-neutral-200 bg-white
+                    fixed inset-y-3 left-3 z-50 flex h-[calc(100dvh-1.5rem)] w-[270px]
+                    flex-col rounded-2xl border border-neutral-800 bg-neutral-950 text-white shadow-[0_20px_60px_rgba(0,0,0,0.22)]
                     transition-[width,transform] duration-300 ease-in-out
-                    lg:sticky lg:top-0 lg:z-30 lg:translate-x-0
+                    lg:sticky lg:top-4 lg:z-30 lg:my-4 lg:ml-4 lg:mr-0 lg:h-[calc(100dvh-2rem)] lg:translate-x-0
                     ${collapsed ? 'lg:w-[82px]' : 'lg:w-[270px]'}
                     ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
                 `}
             >
                 {/* Logo: fixed at top */}
                 <div
-                    className={`flex h-[76px] shrink-0 items-center border-b border-neutral-100 ${
+                    className={`flex h-[76px] shrink-0 items-center rounded-t-2xl border-b border-white/10 ${
                         collapsed
                             ? 'justify-center px-3'
                             : 'justify-between px-5'
@@ -52,16 +52,16 @@ export default function Sidebar({
                         onClick={onCloseMobile}
                         className="flex min-w-0 items-center gap-3"
                     >
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-neutral-950 text-xl font-bold text-white">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-white text-xl font-bold text-neutral-950">
                             F
                         </div>
 
                         {!collapsed && (
                             <div className="min-w-0">
-                                <p className="text-lg font-bold leading-tight tracking-tight text-neutral-950">
-                                    FAMS<span className="text-neutral-400">.</span>
+                                <p className="text-lg font-bold leading-tight tracking-tight text-white">
+                                    FAMS<span className="text-neutral-500">.</span>
                                 </p>
-                                <p className="mt-1 truncate text-[9px] font-semibold tracking-[0.13em] text-neutral-400">
+                                <p className="mt-1 truncate text-[9px] font-semibold tracking-[0.13em] text-neutral-500">
                                     FACULTY ASSET MANAGEMENT
                                 </p>
                             </div>
@@ -73,7 +73,7 @@ export default function Sidebar({
                             type="button"
                             onClick={onToggle}
                             title="Ciutkan sidebar"
-                            className="hidden h-8 w-8 items-center justify-center rounded-lg text-neutral-400 transition hover:bg-neutral-100 hover:text-neutral-900 lg:flex"
+                            className="hidden h-8 w-8 items-center justify-center rounded-lg text-neutral-400 transition hover:bg-white/10 hover:text-white lg:flex"
                         >
                             <Icon name="close" className="h-4 w-4" />
                         </button>
@@ -84,7 +84,7 @@ export default function Sidebar({
                             type="button"
                             onClick={onToggle}
                             title="Perluas sidebar"
-                            className="absolute right-[-13px] top-6 hidden h-7 w-7 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-500 shadow-sm transition hover:text-neutral-950 lg:flex"
+                            className="absolute right-[-13px] top-6 hidden h-7 w-7 items-center justify-center rounded-full border border-neutral-700 bg-neutral-900 text-neutral-300 shadow-sm transition hover:text-white lg:flex"
                         >
                             <Icon name="menu" className="h-4 w-4" />
                         </button>
@@ -93,7 +93,7 @@ export default function Sidebar({
                     <button
                         type="button"
                         onClick={onCloseMobile}
-                        className="flex h-8 w-8 items-center justify-center rounded-lg text-neutral-400 hover:bg-neutral-100 lg:hidden"
+                        className="flex h-8 w-8 items-center justify-center rounded-lg text-neutral-400 hover:bg-white/10 hover:text-white lg:hidden"
                         aria-label="Tutup sidebar"
                     >
                         <Icon name="close" className="h-5 w-5" />
@@ -109,14 +109,14 @@ export default function Sidebar({
                     }}
                 >
                     <p
-                        className={`mb-3 px-3 text-[10px] font-bold tracking-[0.16em] text-neutral-400 ${
+                        className={`mb-3 px-3 text-[10px] font-bold tracking-[0.16em] text-neutral-500 ${
                             collapsed ? 'text-center' : ''
                         }`}
                     >
                         {collapsed ? 'MENU' : 'MENU UTAMA'}
                     </p>
 
-                    <nav className="space-y-1">
+                    <nav className="sidebar-menu-enter space-y-1">
                         {dashboardMenu.map((item) => (
                             <SidebarMenu
                                 key={item.href}
@@ -129,16 +129,16 @@ export default function Sidebar({
                 </div>
 
                 {/* Preferences: fixed at bottom */}
-                <div className="shrink-0 border-t border-neutral-100 bg-white px-3 pb-3 pt-4">
+                <div className="shrink-0 rounded-b-2xl border-t border-white/10 bg-neutral-950 px-3 pb-3 pt-4">
                     <p
-                        className={`mb-3 px-3 text-[10px] font-bold tracking-[0.16em] text-neutral-400 ${
+                        className={`mb-3 px-3 text-[10px] font-bold tracking-[0.16em] text-neutral-500 ${
                             collapsed ? 'text-center' : ''
                         }`}
                     >
                         {collapsed ? 'LAIN' : 'PREFERENSI'}
                     </p>
 
-                    <nav className="space-y-1">
+                    <nav className="sidebar-menu-enter space-y-1">
                         {settingsMenu.map((item) => (
                             <SidebarMenu
                                 key={item.href}
@@ -150,23 +150,23 @@ export default function Sidebar({
                     </nav>
 
                     {!collapsed && (
-                        <div className="mt-4 flex items-center gap-3 rounded-xl bg-neutral-50 p-3">
-                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-neutral-900 text-xs font-bold text-white">
+                        <div className="mt-4 flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-3">
+                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-xs font-bold text-neutral-950">
                                 AD
                             </div>
 
                             <div className="min-w-0 flex-1">
-                                <p className="truncate text-xs font-semibold text-neutral-900">
+                                <p className="truncate text-xs font-semibold text-white">
                                     Admin FAMS
                                 </p>
-                                <p className="mt-0.5 truncate text-[10px] text-neutral-500">
+                                <p className="mt-0.5 truncate text-[10px] text-neutral-400">
                                     Administrator
                                 </p>
                             </div>
 
                             <Icon
                                 name="shield"
-                                className="h-4 w-4 shrink-0 text-neutral-400"
+                                className="h-4 w-4 shrink-0 text-neutral-500"
                             />
                         </div>
                     )}

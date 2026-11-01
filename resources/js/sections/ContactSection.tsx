@@ -73,8 +73,20 @@ export default function ContactSection() {
     return (
         <section
             id="kontak"
-            className="bg-white px-5 py-24 sm:py-28 lg:px-8"
+            className="relative isolate overflow-hidden bg-gradient-to-br from-neutral-100 via-white to-neutral-200 px-5 py-24 sm:py-28 lg:px-8"
         >
+            <div className="pointer-events-none absolute inset-0 -z-10 opacity-30">
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        backgroundImage:
+                            'linear-gradient(rgba(23,23,23,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,23,0.05) 1px, transparent 1px)',
+                        backgroundSize: '40px 40px',
+                        maskImage:
+                            'radial-gradient(ellipse at 30% 45%, black 5%, transparent 72%)',
+                    }}
+                />
+            </div>
             <div className="mx-auto max-w-7xl">
 
                 {/* Section Heading */}
@@ -90,13 +102,24 @@ export default function ContactSection() {
                 <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
 
                     {/* Left: Contact Information */}
-                    <div>
+                    <div className="relative isolate overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-700 p-6 text-white shadow-[0_20px_55px_rgba(0,0,0,0.18)] sm:p-8">
+                        <div
+                            className="pointer-events-none absolute inset-0 -z-10 opacity-15"
+                            style={{
+                                backgroundImage:
+                                    'repeating-linear-gradient(135deg, white 0, white 1px, transparent 1px, transparent 14px)',
+                                maskImage:
+                                    'linear-gradient(135deg, black, transparent 60%)',
+                            }}
+                        />
+                        <div className="pointer-events-none absolute -right-12 -top-16 -z-10 size-48 rounded-full border border-white/15" />
+                        <div className="pointer-events-none absolute -right-4 -top-8 -z-10 size-32 rounded-full border border-white/10" />
                         <div>
-                            <h3 className="text-lg font-bold text-neutral-950">
+                            <h3 className="text-lg font-bold text-white">
                                 Informasi Kontak
                             </h3>
 
-                            <p className="mt-2 text-sm leading-7 text-neutral-500">
+                            <p className="mt-2 text-sm leading-7 text-white/65">
                                 Informasi mengenai pengelolaan dan layanan
                                 fasilitas fakultas melalui sistem FAMS.
                             </p>
@@ -108,7 +131,7 @@ export default function ContactSection() {
                                     key={contact.title}
                                     className="group flex items-start gap-4"
                                 >
-                                    <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl border border-neutral-200 bg-neutral-50 transition group-hover:border-neutral-400">
+                                    <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-white transition group-hover:bg-white group-hover:text-neutral-950">
                                         <Icon
                                             name={contact.icon}
                                             size={20}
@@ -116,11 +139,11 @@ export default function ContactSection() {
                                     </span>
 
                                     <div className="pt-1">
-                                        <h4 className="text-sm font-semibold text-neutral-900">
+                                        <h4 className="text-sm font-semibold text-white">
                                             {contact.title}
                                         </h4>
 
-                                        <p className="mt-1 text-sm leading-6 text-neutral-500">
+                                        <p className="mt-1 text-sm leading-6 text-white/60">
                                             {contact.detail}
                                         </p>
                                     </div>
@@ -129,23 +152,23 @@ export default function ContactSection() {
                         </div>
 
                         {/* FAQ Card */}
-                        <div className="mt-10 rounded-3xl border border-neutral-200 bg-neutral-50 p-6 sm:p-7">
-                            <div className="flex size-11 items-center justify-center rounded-xl bg-neutral-950 text-white">
+                        <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-sm sm:p-7">
+                            <div className="flex size-11 items-center justify-center rounded-xl bg-white text-neutral-950">
                                 <Icon name="help-circle" size={21} />
                             </div>
 
-                            <h3 className="mt-5 text-lg font-bold text-neutral-950">
+                            <h3 className="mt-5 text-lg font-bold text-white">
                                 Punya pertanyaan umum?
                             </h3>
 
-                            <p className="mt-2 text-sm leading-7 text-neutral-500">
+                            <p className="mt-2 text-sm leading-7 text-white/65">
                                 Temukan jawaban dari pertanyaan yang sering
                                 diajukan seputar penggunaan dan layanan FAMS.
                             </p>
 
                             <a
                                 href="#faq"
-                                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-neutral-900 transition hover:gap-3"
+                                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white transition hover:gap-3 hover:text-white/70"
                             >
                                 Lihat FAQ
                                 <Icon name="arrow-right" size={16} />
@@ -154,7 +177,7 @@ export default function ContactSection() {
                     </div>
 
                     {/* Right: Ask a Question Form */}
-                    <div className="rounded-3xl border border-neutral-200 bg-neutral-50 p-5 sm:p-8 lg:p-9">
+                    <div className="rounded-3xl border border-white bg-gradient-to-br from-white via-white to-neutral-100 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.08)] sm:p-8 lg:p-9">
 
                         {/* Form Header */}
                         <div className="mb-8">
@@ -211,7 +234,7 @@ export default function ContactSection() {
                                             className="mb-2 block text-sm font-semibold text-neutral-800"
                                         >
                                             Nama Lengkap
-                                            <span className="ml-1 text-red-500">*</span>
+                                            <span className="ml-1 text-neutral-600">*</span>
                                         </label>
 
                                         <input
@@ -236,7 +259,7 @@ export default function ContactSection() {
                                             className="mb-2 block text-sm font-semibold text-neutral-800"
                                         >
                                             Alamat Email
-                                            <span className="ml-1 text-red-500">*</span>
+                                            <span className="ml-1 text-neutral-600">*</span>
                                         </label>
 
                                         <input
@@ -262,7 +285,7 @@ export default function ContactSection() {
                                         className="mb-2 block text-sm font-semibold text-neutral-800"
                                     >
                                         Kategori Pertanyaan
-                                        <span className="ml-1 text-red-500">*</span>
+                                        <span className="ml-1 text-neutral-600">*</span>
                                     </label>
 
                                     <select
@@ -292,7 +315,7 @@ export default function ContactSection() {
                                         className="mb-2 block text-sm font-semibold text-neutral-800"
                                     >
                                         Subjek Pertanyaan
-                                        <span className="ml-1 text-red-500">*</span>
+                                        <span className="ml-1 text-neutral-600">*</span>
                                     </label>
 
                                     <input
@@ -318,7 +341,7 @@ export default function ContactSection() {
                                             className="block text-sm font-semibold text-neutral-800"
                                         >
                                             Pertanyaan atau Pesan
-                                            <span className="ml-1 text-red-500">*</span>
+                                            <span className="ml-1 text-neutral-600">*</span>
                                         </label>
 
                                         <span className="text-xs text-neutral-400">
@@ -344,7 +367,7 @@ export default function ContactSection() {
                                 {/* Submit */}
                                 <div className="flex flex-col gap-3 border-t border-neutral-200 pt-5 sm:flex-row sm:items-center sm:justify-between">
                                     <p className="text-xs leading-5 text-neutral-400">
-                                        <span className="text-red-500">*</span>
+                                        <span className="text-neutral-600">*</span>
                                         {' '}Wajib diisi.
                                     </p>
 

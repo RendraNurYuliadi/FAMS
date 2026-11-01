@@ -1,14 +1,24 @@
 
 import { useMemo, useState } from 'react';
+import Icon from '../components/Icon';
 
 type Booking = {
     id: number;
     asset: string;
+    assetCode: string;
+    category: string;
     borrower: string;
+    borrowerType: 'Mahasiswa' | 'Dosen' | 'Organisasi' | 'Staf';
+    identity: string;
+    organization?: string;
+    phone: string;
+    email: string;
+    purpose: string;
     start: string;
     end: string;
     color: string;
     colorLight: string;
+    status: 'Disetujui' | 'Berlangsung' | 'Menunggu';
 };
 
 type CalendarDay = {
@@ -21,47 +31,88 @@ const bookings: Booking[] = [
     {
         id: 1,
         asset: 'Laptop ASUS ROG',
+        assetCode: 'AST-001',
+        category: 'Elektronik',
         borrower: 'Rendra Nur Yuliadi',
+        borrowerType: 'Mahasiswa',
+        identity: '240160121104',
+        phone: '081234567890',
+        email: 'rendra@example.com',
+        purpose: 'Kebutuhan kegiatan dan dokumentasi UKM.',
         start: '2026-11-03',
         end: '2026-11-07',
-        color: '#2563eb',
-        colorLight: '#dbeafe',
+        color: '#262626',
+        colorLight: '#e5e5e5',
+        status: 'Disetujui',
     },
     {
         id: 2,
         asset: 'Proyektor Epson',
+        assetCode: 'AST-002',
+        category: 'Elektronik',
         borrower: 'Amelia Puji Lestari',
+        borrowerType: 'Mahasiswa',
+        identity: '240160121007',
+        phone: '081234567891',
+        email: 'amelia@example.com',
+        purpose: 'Presentasi kegiatan akademik.',
         start: '2026-11-05',
         end: '2026-11-09',
-        color: '#9333ea',
-        colorLight: '#f3e8ff',
+        color: '#737373',
+        colorLight: '#f5f5f5',
+        status: 'Disetujui',
     },
     {
         id: 3,
         asset: 'Kamera Canon',
+        assetCode: 'AST-003',
+        category: 'Elektronik',
         borrower: 'Herliana Tri Cahyanti',
+        borrowerType: 'Mahasiswa',
+        identity: '240160121044',
+        phone: '081234567892',
+        email: 'herliana@example.com',
+        purpose: 'Dokumentasi kegiatan fakultas.',
         start: '2026-11-12',
         end: '2026-11-15',
-        color: '#0f766e',
-        colorLight: '#ccfbf1',
+        color: '#525252',
+        colorLight: '#e5e5e5',
+        status: 'Berlangsung',
     },
     {
         id: 4,
         asset: 'Sound System',
+        assetCode: 'AST-004',
+        category: 'Audio',
         borrower: 'UKM TahuNgoding',
+        borrowerType: 'Organisasi',
+        identity: '-',
+        organization: 'UKM TahuNgoding',
+        phone: '081234567893',
+        email: 'tahungoding@example.com',
+        purpose: 'Kebutuhan acara TahuConnect.',
         start: '2026-11-18',
         end: '2026-11-21',
-        color: '#c2410c',
-        colorLight: '#ffedd5',
+        color: '#404040',
+        colorLight: '#d4d4d4',
+        status: 'Disetujui',
     },
     {
         id: 5,
         asset: 'Laptop Lenovo',
+        assetCode: 'AST-005',
+        category: 'Elektronik',
         borrower: 'Jajang Didin',
+        borrowerType: 'Mahasiswa',
+        identity: '240160121120',
+        phone: '081234567894',
+        email: 'jajang@example.com',
+        purpose: 'Praktikum dan penyusunan tugas.',
         start: '2026-11-24',
         end: '2026-11-27',
-        color: '#be185d',
-        colorLight: '#fce7f3',
+        color: '#a3a3a3',
+        colorLight: '#f5f5f5',
+        status: 'Disetujui',
     },
 ];
 
@@ -190,8 +241,22 @@ export default function BookingCalendarSection() {
     return (
         <section
             id="kalender"
-            className="relative overflow-hidden bg-neutral-50 py-20 sm:py-24"
+            className="relative isolate overflow-hidden bg-gradient-to-br from-neutral-100 via-white to-neutral-200 py-20 sm:py-24"
         >
+            <div className="pointer-events-none absolute inset-0 -z-10 opacity-35">
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        backgroundImage:
+                            'linear-gradient(rgba(23,23,23,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,23,0.05) 1px, transparent 1px)',
+                        backgroundSize: '40px 40px',
+                        maskImage:
+                            'radial-gradient(ellipse at center, black 5%, transparent 76%)',
+                    }}
+                />
+                <div className="absolute -left-40 top-16 size-96 rounded-full bg-white blur-3xl" />
+                <div className="absolute -right-36 bottom-0 size-96 rounded-full bg-neutral-400/30 blur-3xl" />
+            </div>
             <div className="mx-auto max-w-7xl px-5 sm:px-8">
 
                 {/* Section Heading */}
@@ -215,79 +280,69 @@ export default function BookingCalendarSection() {
                         </p>
                     </div>
 
-                    {/* Year Navigation */}
-                    <div className="flex items-center gap-2">
-                        <button
-                            type="button"
-                            onClick={() => changeYear(-1)}
-                            className="flex size-10 items-center justify-center rounded-xl border border-neutral-200 bg-white text-neutral-600 transition hover:bg-neutral-100"
-                            aria-label="Tahun sebelumnya"
-                        >
-                            «
-                        </button>
-
-                        <span className="min-w-20 text-center text-lg font-bold text-neutral-950 tabular-nums">
-                            {year}
-                        </span>
-
-                        <button
-                            type="button"
-                            onClick={() => changeYear(1)}
-                            className="flex size-10 items-center justify-center rounded-xl border border-neutral-200 bg-white text-neutral-600 transition hover:bg-neutral-100"
-                            aria-label="Tahun berikutnya"
-                        >
-                            »
-                        </button>
-                    </div>
                 </div>
 
                 {/* Calendar and Detail */}
-                <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
+                <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_330px]">
 
                     {/* Calendar Card */}
-                    <div className="rounded-3xl border border-neutral-200 bg-white p-4 shadow-sm sm:p-7">
+                    <div className="min-w-0 rounded-2xl border border-neutral-200 bg-white p-3 sm:p-5">
 
                         {/* Calendar Header */}
-                        <div className="mb-7 flex flex-wrap items-center justify-between gap-4">
-                            <div>
+                        <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+                            <div className="relative">
                                 <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
                                     Kalender
                                 </p>
 
-                                <h3 className="mt-1 text-2xl font-bold tracking-tight text-neutral-950 sm:text-3xl">
+                                <h3 className="mt-1 text-xl font-semibold tracking-tight text-neutral-950">
                                     {monthNames[month]} {year}
                                 </h3>
 
-                                <p className="mt-1 text-xs text-neutral-400">
+                                <p className="mt-1 text-[10px] text-neutral-400">
                                     {monthlyBookings.length} jadwal peminjaman terdaftar
                                 </p>
                             </div>
 
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1.5">
                                 <button
                                     type="button"
-                                    onClick={goToToday}
-                                    className="rounded-xl border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-600 transition hover:bg-neutral-100"
+                                    onClick={() => changeYear(-1)}
+                                    className="flex size-9 items-center justify-center rounded-lg border border-neutral-200 text-sm text-neutral-600 transition hover:bg-neutral-100"
+                                    aria-label="Tahun sebelumnya"
                                 >
-                                    Hari ini
+                                    «
                                 </button>
-
                                 <button
                                     type="button"
                                     onClick={() => changeMonth(-1)}
-                                    className="flex size-10 items-center justify-center rounded-xl border border-neutral-200 text-xl text-neutral-600 transition hover:bg-neutral-100"
+                                    className="flex size-9 items-center justify-center rounded-lg border border-neutral-200 text-lg text-neutral-600 transition hover:bg-neutral-100"
                                     aria-label="Bulan sebelumnya"
                                 >
                                     ‹
                                 </button>
-
                                 <button
                                     type="button"
                                     onClick={() => changeMonth(1)}
-                                    className="flex size-10 items-center justify-center rounded-xl border border-neutral-200 text-xl text-neutral-600 transition hover:bg-neutral-100"
+                                    className="flex size-9 items-center justify-center rounded-lg border border-neutral-200 text-lg text-neutral-600 transition hover:bg-neutral-100"
                                     aria-label="Bulan berikutnya"
                                 >
                                     ›
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => changeYear(1)}
+                                    className="flex size-9 items-center justify-center rounded-lg border border-neutral-200 text-sm text-neutral-600 transition hover:bg-neutral-100"
+                                    aria-label="Tahun berikutnya"
+                                >
+                                    »
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={goToToday}
+                                    className="ml-1 rounded-xl bg-neutral-900 px-4 py-3 text-[10px] font-semibold text-white transition hover:bg-neutral-700"
+                                >
+                                    Hari ini
                                 </button>
                             </div>
                         </div>
@@ -297,7 +352,7 @@ export default function BookingCalendarSection() {
                             {weekdays.map((day) => (
                                 <div
                                     key={day}
-                                    className="text-center text-xs font-bold text-neutral-400"
+                                    className="text-center text-[10px] font-bold text-neutral-400 sm:text-xs"
                                 >
                                     {day}
                                 </div>
@@ -329,15 +384,11 @@ export default function BookingCalendarSection() {
                                                 ? `${cell.day} ${monthNames[month]} ${year}${isToday ? ', hari ini' : ''}, ${dayBookings.length} peminjaman`
                                                 : undefined
                                         }
-                                        className={`group relative min-h-20 border-b border-r border-neutral-100 p-1 text-left transition sm:min-h-28 sm:p-2 ${
+                                        className={`group relative min-h-[76px] border-b border-r border-neutral-100 p-1 text-left transition sm:min-h-[105px] sm:p-2 ${
                                             cell.outside
                                                 ? 'cursor-default bg-neutral-50/40'
                                                 : 'cursor-pointer hover:bg-neutral-50'
-                                        } ${
-                                            isSelected
-                                                ? 'bg-neutral-100'
-                                                : ''
-                                        }`}
+                                        } ${isSelected ? 'bg-neutral-100' : ''}`}
                                     >
                                         {/* Date Number */}
                                         <div className="flex items-center justify-between gap-1">
@@ -354,7 +405,7 @@ export default function BookingCalendarSection() {
                                             </span>
 
                                             {isToday && (
-                                                <span className="hidden text-[9px] font-bold uppercase tracking-wider text-neutral-900 sm:inline">
+                                                <span className="hidden text-[8px] font-bold uppercase tracking-wider text-neutral-900 sm:inline">
                                                     Hari ini
                                                 </span>
                                             )}
@@ -398,145 +449,212 @@ export default function BookingCalendarSection() {
                         </div>
 
                         {/* Legend */}
-                        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-neutral-100 pt-5">
-                            <div className="flex items-center gap-2">
-                                <span className="size-2.5 rounded-full bg-blue-600" />
-                                <span className="text-xs text-neutral-500">
-                                    Peminjaman
-                                </span>
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                                <span className="size-2.5 rounded-full bg-purple-600" />
-                                <span className="text-xs text-neutral-500">
-                                    Jadwal lainnya
-                                </span>
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                                <span className="size-2.5 rounded-full border-2 border-neutral-900 bg-white" />
-                                <span className="text-xs text-neutral-500">
-                                    Hari ini
-                                </span>
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                                <span className="size-2.5 rounded-full bg-neutral-900" />
-                                <span className="text-xs text-neutral-500">
-                                    Tanggal dipilih
-                                </span>
-                            </div>
+                        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-neutral-100 pt-5">
+                            {[
+                                { label: 'Peminjaman 1', color: '#262626' },
+                                { label: 'Peminjaman 2', color: '#737373' },
+                                { label: 'Peminjaman 3', color: '#525252' },
+                                { label: 'Peminjaman 4', color: '#404040' },
+                                { label: 'Peminjaman 5', color: '#a3a3a3' },
+                            ].map((item) => (
+                                <div key={item.label} className="flex items-center gap-2">
+                                    <span
+                                        className="size-2.5 rounded-full"
+                                        style={{ backgroundColor: item.color }}
+                                    />
+                                    <span className="text-[10px] text-neutral-500">
+                                        {item.label}
+                                    </span>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
                     {/* Booking Details */}
-                    <aside className="flex flex-col rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-
-                        {/* Detail Header */}
-                        <div className="mb-6">
-                            <div className="flex items-center justify-between">
-                                <p className="text-xs font-bold uppercase tracking-widest text-neutral-400">
-                                    Detail Jadwal
+                    <aside className="flex min-w-0 flex-col rounded-xl border border-neutral-200 bg-neutral-50/70 p-4 sm:p-5">
+                        <div>
+                            <div className="flex items-center justify-between gap-2">
+                                <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">
+                                    Detail Peminjaman
                                 </p>
-
                                 {selectedDate === today && (
-                                    <span className="rounded-full bg-neutral-950 px-3 py-1 text-[10px] font-semibold text-white">
+                                    <span className="rounded-full bg-neutral-950 px-2.5 py-1 text-[9px] font-semibold text-white">
                                         Hari Ini
                                     </span>
                                 )}
                             </div>
-
-                            <h3 className="mt-3 text-xl font-bold text-neutral-950">
+                            <h3 className="mt-3 text-lg font-semibold text-neutral-950">
                                 {formatDate(selectedDate)}
                             </h3>
-
-                            <p className="mt-1 text-sm text-neutral-500">
+                            <p className="mt-1 text-[10px] text-neutral-500">
                                 {selectedBookings.length} peminjaman pada tanggal ini
                             </p>
                         </div>
 
-                        {/* Booking List */}
+                        <div className="my-4 h-px bg-neutral-200" />
+
                         {selectedBookings.length > 0 ? (
                             <div className="space-y-4">
                                 {selectedBookings.map((booking) => (
                                     <div
                                         key={booking.id}
-                                        className="rounded-2xl border border-neutral-200 p-4 transition hover:border-neutral-300"
+                                        className="overflow-hidden rounded-xl border border-neutral-200 bg-white transition hover:border-neutral-300 hover:shadow-sm"
                                     >
-                                        <div className="mb-3 flex items-center gap-2">
-                                            <span
-                                                className="size-2.5 rounded-full"
-                                                style={{
-                                                    backgroundColor: booking.color,
-                                                }}
-                                            />
-
-                                            <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
-                                                Sedang Dipinjam
-                                            </span>
+                                        <div className="border-b border-neutral-100 p-3">
+                                            <div className="mb-2 flex items-center justify-between gap-2">
+                                                <span
+                                                    className="rounded-md px-2 py-1 text-[9px] font-semibold"
+                                                    style={{
+                                                        backgroundColor: booking.colorLight,
+                                                        color: booking.color,
+                                                    }}
+                                                >
+                                                    {booking.status}
+                                                </span>
+                                                <span className="text-[9px] font-medium text-neutral-400">
+                                                    #{String(booking.id).padStart(3, '0')}
+                                                </span>
+                                            </div>
+                                            <h4 className="text-sm font-semibold text-neutral-900">
+                                                {booking.asset}
+                                            </h4>
+                                            <p className="mt-1 text-[10px] text-neutral-400">
+                                                {booking.assetCode} · {booking.category}
+                                            </p>
                                         </div>
 
-                                        <h4 className="font-bold text-neutral-900">
-                                            {booking.asset}
-                                        </h4>
-
-                                        <p className="mt-1 text-sm text-neutral-500">
-                                            {booking.borrower}
-                                        </p>
-
-                                        <div className="mt-4 rounded-xl bg-neutral-50 p-3">
-                                            <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
-                                                Periode Peminjaman
-                                            </p>
-
-                                            <div className="mt-2 flex items-center justify-between gap-2">
-                                                <span className="text-xs font-semibold text-neutral-700">
-                                                    {formatDate(booking.start)}
-                                                </span>
-
-                                                <span className="text-xs text-neutral-400">
-                                                    →
+                                        <div className="space-y-3 p-3">
+                                            <div>
+                                                <p className="mb-1.5 text-[9px] font-bold uppercase tracking-wider text-neutral-400">
+                                                    Informasi Peminjam
+                                                </p>
+                                                <p className="text-xs font-semibold text-neutral-900">
+                                                    {booking.borrower}
+                                                </p>
+                                                <span className="mt-1 inline-flex rounded-md bg-neutral-100 px-2 py-1 text-[9px] font-medium text-neutral-600">
+                                                    {booking.borrowerType}
                                                 </span>
                                             </div>
 
-                                            <p className="mt-1 text-xs font-semibold text-neutral-700">
-                                                {formatDate(booking.end)}
-                                            </p>
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <div className="rounded-lg bg-neutral-50 p-2">
+                                                    <p className="text-[9px] text-neutral-400">
+                                                        NIM / NIP
+                                                    </p>
+                                                    <p className="mt-1 break-all text-[10px] font-semibold text-neutral-700">
+                                                        {booking.identity}
+                                                    </p>
+                                                </div>
+                                                {booking.organization && (
+                                                    <div className="rounded-lg bg-neutral-50 p-2">
+                                                        <p className="text-[9px] text-neutral-400">
+                                                            Organisasi
+                                                        </p>
+                                                        <p className="mt-1 text-[10px] font-semibold text-neutral-700">
+                                                            {booking.organization}
+                                                        </p>
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <div className="space-y-2 border-t border-neutral-100 pt-3">
+                                                <p className="text-[9px] font-bold uppercase tracking-wider text-neutral-400">
+                                                    Informasi Kontak
+                                                </p>
+                                                <a
+                                                    href={`tel:${booking.phone}`}
+                                                    className="flex items-center gap-2 text-[10px] text-neutral-600 transition hover:text-neutral-950"
+                                                >
+                                                    <span className="flex size-7 items-center justify-center rounded-lg bg-neutral-100">
+                                                        <Icon name="phone" size={13} />
+                                                    </span>
+                                                    {booking.phone}
+                                                </a>
+                                                <a
+                                                    href={`mailto:${booking.email}`}
+                                                    className="flex min-w-0 items-center gap-2 text-[10px] text-neutral-600 transition hover:text-neutral-950"
+                                                >
+                                                    <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-neutral-100">
+                                                        <Icon name="mail" size={13} />
+                                                    </span>
+                                                    <span className="truncate">{booking.email}</span>
+                                                </a>
+                                            </div>
+
+                                            <div className="rounded-lg bg-neutral-50 p-3">
+                                                <p className="text-[9px] font-bold uppercase tracking-wider text-neutral-400">
+                                                    Periode Peminjaman
+                                                </p>
+                                                <div className="mt-2 flex items-center justify-between gap-2">
+                                                    <div>
+                                                        <p className="text-[9px] text-neutral-400">
+                                                            Tanggal pinjam
+                                                        </p>
+                                                        <p className="mt-1 text-[10px] font-semibold text-neutral-800">
+                                                            {formatDate(booking.start)}
+                                                        </p>
+                                                    </div>
+                                                    <span className="text-neutral-400">→</span>
+                                                    <div className="text-right">
+                                                        <p className="text-[9px] text-neutral-400">
+                                                            Batas kembali
+                                                        </p>
+                                                        <p className="mt-1 text-[10px] font-semibold text-neutral-800">
+                                                            {formatDate(booking.end)}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <p className="text-[9px] font-bold uppercase tracking-wider text-neutral-400">
+                                                    Keperluan Peminjaman
+                                                </p>
+                                                <p className="mt-1 text-[10px] leading-5 text-neutral-600">
+                                                    {booking.purpose}
+                                                </p>
+                                            </div>
+
+                                            <div className="grid grid-cols-2 gap-2 border-t border-neutral-100 pt-3">
+                                                <a
+                                                    href={`tel:${booking.phone}`}
+                                                    className="flex items-center justify-center gap-2 rounded-lg border border-neutral-200 px-2 py-2.5 text-[10px] font-semibold text-neutral-700 transition hover:bg-neutral-100"
+                                                >
+                                                    <Icon name="phone" size={13} />
+                                                    Telepon
+                                                </a>
+                                                <a
+                                                    href={`mailto:${booking.email}`}
+                                                    className="flex items-center justify-center gap-2 rounded-lg bg-neutral-900 px-2 py-2.5 text-[10px] font-semibold text-white transition hover:bg-neutral-700"
+                                                >
+                                                    <Icon name="mail" size={13} />
+                                                    Email
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         ) : (
-                            <div className="flex flex-1 flex-col items-center justify-center rounded-2xl border border-dashed border-neutral-200 px-5 py-10 text-center">
-                                <div className="mb-4 flex size-14 items-center justify-center rounded-2xl bg-neutral-100">
-                                    <svg
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="1.5"
-                                        className="size-7 text-neutral-500"
-                                    >
-                                        <rect x="3" y="5" width="18" height="16" rx="2" />
-                                        <path d="M16 3v4M8 3v4M3 10h18" />
-                                        <path d="m9 16 2 2 4-4" />
-                                    </svg>
+                            <div className="flex flex-1 flex-col items-center justify-center rounded-xl border border-dashed border-neutral-300 bg-white px-5 py-10 text-center">
+                                <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-neutral-100 text-neutral-500">
+                                    <Icon name="calendar" size={22} />
                                 </div>
-
-                                <h4 className="font-bold text-neutral-800">
+                                <h4 className="text-xs font-semibold text-neutral-800">
                                     Tidak ada peminjaman
                                 </h4>
-
-                                <p className="mt-2 max-w-52 text-xs leading-6 text-neutral-400">
+                                <p className="mt-2 max-w-52 text-[10px] leading-5 text-neutral-400">
                                     Belum ada jadwal peminjaman aset pada tanggal ini.
+                                    Pilih tanggal lain untuk melihat jadwal.
                                 </p>
                             </div>
                         )}
 
-                        {/* Information */}
-                        <div className="mt-6 border-t border-neutral-100 pt-4">
-                            <p className="text-xs leading-6 text-neutral-400">
-                                Jadwal yang ditampilkan merupakan data demonstrasi
-                                dan belum terhubung dengan database peminjaman FAMS.
+                        <div className="mt-5 border-t border-neutral-200 pt-4">
+                            <p className="text-[10px] leading-5 text-neutral-400">
+                                Informasi peminjam ditampilkan untuk membantu
+                                pengelola melakukan konfirmasi dan koordinasi
+                                pengembalian aset.
                             </p>
                         </div>
                     </aside>

@@ -26,13 +26,13 @@ export default function AuthInput({
             <input
                 id={inputId}
                 className={`h-12 w-full rounded-lg border bg-white px-4 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/5 ${
-                    error ? 'border-red-400' : 'border-neutral-200'
+                    error ? 'border-neutral-500' : 'border-neutral-200'
                 } ${className}`}
                 {...props}
             />
 
             {error && (
-                <p className="text-xs text-red-500">{error}</p>
+                <p className="text-xs text-neutral-600">{error}</p>
             )}
         </div>
     );

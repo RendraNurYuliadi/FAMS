@@ -39,7 +39,7 @@ export default function AssetManagementBanner({
             <div className="relative flex min-h-[230px] flex-col justify-between gap-8 p-6 sm:p-8 lg:flex-row lg:items-center">
                 <div className="max-w-xl">
                     <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur-sm">
-                        <span className="size-1.5 rounded-full bg-teal-300" />
+                        <span className="size-1.5 rounded-full bg-neutral-300" />
                         <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/80">
                             Faculty Asset Management System
                         </span>
@@ -61,7 +61,7 @@ export default function AssetManagementBanner({
                             {contextLabel}
                         </span>
                         <span className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-2.5 text-[10px] font-medium text-white/90 backdrop-blur-sm">
-                            <span className="size-1.5 rounded-full bg-teal-300" />
+                            <span className="size-1.5 rounded-full bg-neutral-300" />
                             {statusLabel}
                         </span>
                     </div>

@@ -4,6 +4,39 @@ import SectionHeading from '../components/SectionHeading';
 import Icon from '../components/Icon';
 import { testimonials } from '../data/landing';
 
+const testimonialTones = [
+    {
+        card: 'from-neutral-950 via-neutral-800 to-neutral-600 text-white',
+        number: 'text-white/50',
+        quote: 'text-white',
+        divider: 'border-white/20',
+        initials: 'bg-white text-neutral-950',
+        name: 'text-white',
+        role: 'text-white/60',
+        decoration: 'border-white/10 bg-white/5',
+    },
+    {
+        card: 'from-white via-neutral-50 to-neutral-200 text-neutral-950',
+        number: 'text-neutral-500',
+        quote: 'text-neutral-800',
+        divider: 'border-neutral-300',
+        initials: 'bg-neutral-800 text-white',
+        name: 'text-neutral-950',
+        role: 'text-neutral-500',
+        decoration: 'border-neutral-500/15 bg-white/40',
+    },
+    {
+        card: 'from-neutral-300 via-neutral-200 to-neutral-100 text-neutral-950',
+        number: 'text-neutral-600',
+        quote: 'text-neutral-900',
+        divider: 'border-neutral-400',
+        initials: 'bg-neutral-950 text-white',
+        name: 'text-neutral-950',
+        role: 'text-neutral-600',
+        decoration: 'border-neutral-700/15 bg-white/30',
+    },
+];
+
 export default function TestimonialsSection() {
     const [active, setActive] = useState(0);
 
@@ -18,7 +51,21 @@ export default function TestimonialsSection() {
     }
 
     return (
-        <section className="overflow-hidden bg-neutral-50 px-5 py-24 sm:py-28 lg:px-8">
+        <section className="relative isolate overflow-hidden bg-neutral-100 px-5 py-24 sm:py-28 lg:px-8">
+            <div className="pointer-events-none absolute inset-0 -z-10 opacity-40">
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        backgroundImage:
+                            'linear-gradient(rgba(23,23,23,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,23,0.05) 1px, transparent 1px)',
+                        backgroundSize: '38px 38px',
+                        maskImage:
+                            'radial-gradient(ellipse at center, black 10%, transparent 78%)',
+                    }}
+                />
+                <div className="absolute -left-36 top-0 size-96 rounded-full bg-white blur-3xl" />
+                <div className="absolute -right-36 bottom-0 size-96 rounded-full bg-neutral-400/40 blur-3xl" />
+            </div>
             <div className="mx-auto max-w-7xl">
                 <SectionHeading
                     eyebrow="Perspektif Pengguna"
@@ -31,38 +78,50 @@ export default function TestimonialsSection() {
                     <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
                         {Array.from({ length: Math.min(3, total) }).map((_, index) => {
                             const item = getTestimonial(index);
+                            const tone = testimonialTones[index % testimonialTones.length];
 
                             return (
                                 <article
                                     key={`${active}-${index}`}
-                                    className="group flex min-h-[300px] flex-col rounded-3xl border border-neutral-200 bg-white p-7 transition-all duration-500 hover:-translate-y-1 hover:border-neutral-400 hover:shadow-xl hover:shadow-neutral-200/60 sm:p-8"
+                                    className={`group relative isolate flex min-h-[300px] flex-col overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br ${tone.card} p-7 shadow-[0_16px_45px_rgba(0,0,0,0.1)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(0,0,0,0.18)] sm:p-8`}
                                 >
+                                    <div className={`pointer-events-none absolute -right-12 -top-14 -z-10 size-44 rounded-full border ${tone.decoration}`} />
+                                    <div className={`pointer-events-none absolute -right-4 -top-6 -z-10 size-28 rounded-full border ${tone.decoration}`} />
+                                    <div
+                                        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.12]"
+                                        style={{
+                                            backgroundImage:
+                                                'repeating-linear-gradient(135deg, currentColor 0, currentColor 1px, transparent 1px, transparent 13px)',
+                                            maskImage:
+                                                'linear-gradient(135deg, black, transparent 55%)',
+                                        }}
+                                    />
                                     <div className="flex items-center justify-between">
                                         <Icon
                                             name="quote"
                                             size={30}
-                                            className="text-neutral-300 transition-colors group-hover:text-neutral-950"
+                                            className="opacity-60 transition-opacity group-hover:opacity-100"
                                         />
 
-                                        <span className="text-xs font-medium tracking-widest text-neutral-300">
+                                        <span className={`text-xs font-medium tracking-widest ${tone.number}`}>
                                             {String(((active + index) % total) + 1).padStart(2, '0')}
                                         </span>
                                     </div>
 
-                                    <blockquote className="mt-7 flex-1 text-base font-medium leading-relaxed tracking-tight text-neutral-800 sm:text-lg">
+                                    <blockquote className={`mt-7 flex-1 text-base font-medium leading-relaxed tracking-tight ${tone.quote} sm:text-lg`}>
                                         “{item.quote}”
                                     </blockquote>
 
-                                    <div className="mt-8 flex items-center gap-3 border-t border-neutral-100 pt-6">
-                                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-neutral-950 text-xs font-semibold text-white">
+                                    <div className={`mt-8 flex items-center gap-3 border-t pt-6 ${tone.divider}`}>
+                                        <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${tone.initials}`}>
                                             {item.initials}
                                         </span>
 
                                         <div className="min-w-0">
-                                            <p className="truncate text-sm font-semibold text-neutral-950">
+                                            <p className={`truncate text-sm font-semibold ${tone.name}`}>
                                                 {item.name}
                                             </p>
-                                            <p className="mt-1 truncate text-xs text-neutral-500">
+                                            <p className={`mt-1 truncate text-xs ${tone.role}`}>
                                                 {item.role}
                                             </p>
                                         </div>

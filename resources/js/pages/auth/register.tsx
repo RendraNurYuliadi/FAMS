@@ -141,7 +141,7 @@ export default function Register() {
         <>
             <Head title="Daftar Akun — FAMS" />
 
-            <main className="relative flex min-h-screen items-center justify-center overflow-x-hidden bg-[#fafafa] px-3 py-3 font-sans text-neutral-950 sm:px-5 sm:py-5">
+            <main className="auth-page-enter relative flex min-h-screen items-center justify-center overflow-x-hidden bg-[#fafafa] px-3 py-3 font-sans text-neutral-950 sm:px-5 sm:py-5">
                 {/* Background */}
                 <div className="pointer-events-none fixed inset-0">
                     <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-neutral-200/40 blur-[110px]" />
@@ -249,7 +249,7 @@ export default function Register() {
                                                 <button
                                                     type="button"
                                                     onClick={removePhoto}
-                                                    className="text-xs font-medium text-neutral-500 transition hover:text-red-600"
+                                                    className="text-xs font-medium text-neutral-500 transition hover:text-neutral-950"
                                                 >
                                                     Hapus foto
                                                 </button>
@@ -278,7 +278,7 @@ export default function Register() {
                                         )}
 
                                         {errors.photo && (
-                                            <p className="mt-1 text-xs text-red-500">
+                                            <p className="mt-1 text-xs text-neutral-600">
                                                 {errors.photo}
                                             </p>
                                         )}
@@ -378,7 +378,7 @@ export default function Register() {
                                     </div>
 
                                     {errors.borrower_type && (
-                                        <p className="mt-2 text-xs text-red-500">
+                                        <p className="mt-2 text-xs text-neutral-600">
                                             {errors.borrower_type}
                                         </p>
                                     )}
@@ -586,7 +586,7 @@ export default function Register() {
                                         )}
 
                                         {errors.borrowing_context && (
-                                            <p className="mt-2 text-xs text-red-500">
+                                            <p className="mt-2 text-xs text-neutral-600">
                                                 {errors.borrowing_context}
                                             </p>
                                         )}
@@ -616,7 +616,7 @@ export default function Register() {
                                     />
 
                                     {errors.address && (
-                                        <p className="mt-1 text-xs text-red-500">
+                                        <p className="mt-1 text-xs text-neutral-600">
                                             {errors.address}
                                         </p>
                                     )}

@@ -17,7 +17,7 @@ export default function Splash() {
         <>
             <Head title="FAMS — Faculty Asset Management System" />
 
-            <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#080808] px-6 text-white">
+            <main className="auth-page-enter relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#080808] px-6 text-white">
 
                 {/* Background */}
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.09)_0%,_transparent_55%)]" />

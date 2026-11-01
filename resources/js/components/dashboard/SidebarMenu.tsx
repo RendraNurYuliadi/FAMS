@@ -46,8 +46,8 @@ export default function SidebarMenu({
                 title={collapsed ? item.title : undefined}
                 className={`group flex min-h-10 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     active
-                        ? 'bg-neutral-900 text-white'
-                        : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-950'
+                        ? 'bg-white font-semibold text-neutral-950 shadow-sm'
+                        : 'text-neutral-300 hover:bg-white/10 hover:text-white'
                 } ${collapsed ? 'justify-center px-2' : ''}`}
             >
                 <Icon
@@ -74,8 +74,8 @@ export default function SidebarMenu({
                 }}
                 className={`flex min-h-10 w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors ${
                     isChildActive
-                        ? 'bg-neutral-100 text-neutral-950'
-                        : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-950'
+                        ? 'bg-white/10 text-white'
+                        : 'text-neutral-300 hover:bg-white/10 hover:text-white'
                 } ${collapsed ? 'justify-center px-2' : ''}`}
             >
                 <Icon
@@ -100,7 +100,7 @@ export default function SidebarMenu({
             </button>
 
             {!collapsed && isOpen && (
-                <div className="ml-[21px] space-y-1 border-l border-neutral-200 pl-3">
+                <div className="dashboard-submenu-enter ml-[21px] space-y-1 border-l border-white/15 pl-3">
                     {item.children?.map((child) => {
                         const childActive = currentPath === child.href;
 
@@ -111,8 +111,8 @@ export default function SidebarMenu({
                                 onClick={onNavigate}
                                 className={`flex min-h-9 items-center rounded-lg px-3 py-2 text-[13px] transition-colors ${
                                     childActive
-                                        ? 'bg-neutral-900 font-medium text-white'
-                                        : 'text-neutral-500 hover:bg-neutral-100 hover:text-neutral-950'
+                                        ? 'bg-white font-semibold text-neutral-950 shadow-sm'
+                                        : 'text-neutral-400 hover:bg-white/10 hover:text-white'
                                 }`}
                             >
                                 <span className="truncate">{child.title}</span>

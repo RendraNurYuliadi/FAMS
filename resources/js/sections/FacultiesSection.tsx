@@ -46,12 +46,101 @@ const faculties = [
     },
 ];
 
+const facultyTones = [
+    {
+        card: 'from-white via-neutral-50 to-neutral-200',
+        foreground: 'text-neutral-950',
+        number: 'text-neutral-500',
+        arrow: 'border-neutral-300 text-neutral-500 group-hover:border-neutral-950 group-hover:bg-neutral-950 group-hover:text-white',
+        acronym: 'text-neutral-950',
+        divider: 'bg-neutral-300',
+        name: 'text-neutral-900',
+        description: 'text-neutral-600',
+        footer: 'border-neutral-300 text-neutral-500',
+        footerArrow: 'text-neutral-500 group-hover:text-neutral-950',
+    },
+    {
+        card: 'from-neutral-100 via-neutral-200 to-neutral-400',
+        foreground: 'text-neutral-950',
+        number: 'text-neutral-600',
+        arrow: 'border-neutral-400 text-neutral-700 group-hover:border-neutral-950 group-hover:bg-neutral-950 group-hover:text-white',
+        acronym: 'text-neutral-900',
+        divider: 'bg-neutral-400',
+        name: 'text-neutral-900',
+        description: 'text-neutral-700',
+        footer: 'border-neutral-400 text-neutral-600',
+        footerArrow: 'text-neutral-600 group-hover:text-neutral-950',
+    },
+    {
+        card: 'from-neutral-950 via-neutral-800 to-neutral-600',
+        foreground: 'text-white',
+        number: 'text-white/60',
+        arrow: 'border-white/25 text-white/70 group-hover:border-white group-hover:bg-white group-hover:text-neutral-950',
+        acronym: 'text-white',
+        divider: 'bg-white/25',
+        name: 'text-white',
+        description: 'text-white/70',
+        footer: 'border-white/20 text-white/60',
+        footerArrow: 'text-white/60 group-hover:text-white',
+    },
+    {
+        card: 'from-neutral-200 via-neutral-100 to-white',
+        foreground: 'text-neutral-950',
+        number: 'text-neutral-500',
+        arrow: 'border-neutral-300 text-neutral-500 group-hover:border-neutral-950 group-hover:bg-neutral-950 group-hover:text-white',
+        acronym: 'text-neutral-950',
+        divider: 'bg-neutral-300',
+        name: 'text-neutral-900',
+        description: 'text-neutral-600',
+        footer: 'border-neutral-300 text-neutral-500',
+        footerArrow: 'text-neutral-500 group-hover:text-neutral-950',
+    },
+    {
+        card: 'from-neutral-800 via-neutral-700 to-neutral-500',
+        foreground: 'text-white',
+        number: 'text-white/60',
+        arrow: 'border-white/25 text-white/70 group-hover:border-white group-hover:bg-white group-hover:text-neutral-950',
+        acronym: 'text-white',
+        divider: 'bg-white/25',
+        name: 'text-white',
+        description: 'text-white/70',
+        footer: 'border-white/20 text-white/60',
+        footerArrow: 'text-white/60 group-hover:text-white',
+    },
+    {
+        card: 'from-neutral-50 via-neutral-100 to-neutral-300',
+        foreground: 'text-neutral-950',
+        number: 'text-neutral-500',
+        arrow: 'border-neutral-300 text-neutral-500 group-hover:border-neutral-950 group-hover:bg-neutral-950 group-hover:text-white',
+        acronym: 'text-neutral-950',
+        divider: 'bg-neutral-300',
+        name: 'text-neutral-900',
+        description: 'text-neutral-600',
+        footer: 'border-neutral-300 text-neutral-500',
+        footerArrow: 'text-neutral-500 group-hover:text-neutral-950',
+    },
+];
+
 export default function FacultiesSection() {
     return (
         <section
             id="fakultas"
-            className="relative overflow-hidden bg-[#fafafa] py-20 sm:py-24 lg:py-28"
+            className="relative isolate overflow-hidden bg-neutral-100 py-20 sm:py-24 lg:py-28"
         >
+            <div className="pointer-events-none absolute inset-0 -z-10 opacity-40">
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        backgroundImage:
+                            'linear-gradient(rgba(23,23,23,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,23,0.045) 1px, transparent 1px)',
+                        backgroundSize: '36px 36px',
+                        maskImage:
+                            'radial-gradient(ellipse at center, black 10%, transparent 75%)',
+                    }}
+                />
+                <div className="absolute -left-40 top-20 size-96 rounded-full bg-white/80 blur-3xl" />
+                <div className="absolute -right-36 bottom-0 size-96 rounded-full bg-neutral-300/70 blur-3xl" />
+            </div>
             <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
                 {/* Section Heading */}
                 <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -91,55 +180,72 @@ export default function FacultiesSection() {
 
                 {/* Faculty Cards */}
                 <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
-                    {faculties.map((faculty) => (
+                    {faculties.map((faculty, index) => {
+                        const tone = facultyTones[index];
+
+                        return (
                         <article
                             key={faculty.acronym}
-                            className="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-neutral-400 hover:shadow-[0_18px_45px_rgba(0,0,0,0.06)] sm:p-7"
+                            className={`group relative isolate overflow-hidden rounded-2xl border border-white/60 bg-gradient-to-br ${tone.card} ${tone.foreground} p-6 shadow-[0_12px_35px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-neutral-400 hover:shadow-[0_22px_55px_rgba(0,0,0,0.14)] sm:p-7`}
                         >
+                            <div
+                                className="pointer-events-none absolute inset-0 -z-10 opacity-[0.12] transition-opacity duration-300 group-hover:opacity-25"
+                                style={{
+                                    backgroundImage:
+                                        'repeating-linear-gradient(135deg, currentColor 0, currentColor 1px, transparent 1px, transparent 12px)',
+                                    maskImage:
+                                        'linear-gradient(135deg, black, transparent 55%)',
+                                }}
+                            />
+                            <div className="pointer-events-none absolute -right-12 -top-14 -z-10 size-44 rounded-full border border-current opacity-10 transition-transform duration-500 group-hover:scale-125" />
+                            <div className="pointer-events-none absolute -right-5 -top-7 -z-10 size-28 rounded-full border border-current opacity-10" />
+                            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-neutral-950/10 via-neutral-950/50 to-white/70" />
+
                             {/* Card Header */}
                             <div className="flex items-start justify-between">
-                                <span className="text-xs font-medium tracking-widest text-neutral-400">
+                                <span className={`text-xs font-medium tracking-widest ${tone.number}`}>
                                     {faculty.number}
                                 </span>
 
-                                <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-200 text-neutral-400 transition-all duration-300 group-hover:border-neutral-950 group-hover:bg-neutral-950 group-hover:text-white">
+                                <span className={`flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-300 ${tone.arrow}`}>
                                     <Icon name="arrow-up-right" size={16} />
                                 </span>
                             </div>
 
                             {/* Faculty Acronym */}
                             <div className="mt-9">
-                                <p className="text-4xl font-bold tracking-tight text-neutral-950 transition-colors duration-300 group-hover:text-neutral-600 sm:text-5xl">
+                                <p className={`text-4xl font-bold tracking-tight ${tone.acronym} transition-colors duration-300 sm:text-5xl`}>
                                     {faculty.acronym}
-                                    <span className="text-neutral-300">.</span>
+                                    <span className={tone.number}>.</span>
                                 </p>
 
-                                <div className="mt-5 h-px w-full bg-neutral-100" />
+                                <div className={`mt-5 h-px w-full ${tone.divider}`} />
                             </div>
 
                             {/* Faculty Information */}
                             <div className="mt-5">
-                                <h3 className="min-h-[52px] text-base font-semibold leading-6 text-neutral-900">
+                                <h3 className={`min-h-[52px] text-base font-semibold leading-6 ${tone.name}`}>
                                     {faculty.name}
                                 </h3>
 
-                                <p className="mt-3 min-h-[72px] text-[13px] leading-6 text-neutral-500">
+                                <p className={`mt-3 min-h-[72px] text-[13px] leading-6 ${tone.description}`}>
                                     {faculty.description}
                                 </p>
                             </div>
 
                             {/* Card Footer */}
-                            <div className="mt-7 flex items-center justify-between border-t border-neutral-100 pt-5">
-                                <span className="text-[10px] font-semibold tracking-[0.14em] text-neutral-400">
+                            <div className={`mt-7 flex items-center justify-between border-t pt-5 ${tone.footer}`}>
+                                <span className="text-[10px] font-semibold tracking-[0.14em]">
                                     UNIVERSITAS SEBELAS APRIL
                                 </span>
 
-                                <span className="text-neutral-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-neutral-950">
+                                <span className={`transition-all duration-300 group-hover:translate-x-1 ${tone.footerArrow}`}>
                                     <Icon name="arrow-right" size={17} />
                                 </span>
                             </div>
                         </article>
-                    ))}
+                        );
+                    })}
                 </div>
 
                 {/* Bottom Information */}

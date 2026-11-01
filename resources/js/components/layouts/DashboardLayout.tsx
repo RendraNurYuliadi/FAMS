@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import type { ReactNode } from 'react';
+import { usePage } from '@inertiajs/react';
 import Sidebar from '../dashboard/Sidebar';
 import Header from '../dashboard/Header';
 
@@ -13,6 +14,7 @@ export default function DashboardLayout({
 }: DashboardLayoutProps) {
     const [collapsed, setCollapsed] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const { url } = usePage();
 
     return (
         <div className="min-h-screen bg-neutral-50 text-neutral-950">
@@ -28,7 +30,9 @@ export default function DashboardLayout({
                     <Header onOpenSidebar={() => setMobileOpen(true)} />
 
                     <main className="min-h-[calc(100vh-72px)] px-4 py-5 sm:px-6 lg:px-8">
-                        {children}
+                        <div key={url} className="dashboard-page-enter">
+                            {children}
+                        </div>
                     </main>
 
                     <footer className="border-t border-neutral-200 px-4 py-5 text-center text-xs text-neutral-400 sm:px-6 lg:px-8">

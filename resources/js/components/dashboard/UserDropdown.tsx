@@ -22,7 +22,7 @@ export default function UserDropdown() {
             <button
                 type="button"
                 onClick={() => setOpen(!open)}
-                className="flex items-center gap-2 rounded-xl p-1.5 transition hover:bg-neutral-100"
+                className="flex items-center gap-2 rounded-xl bg-neutral-950 p-1.5 text-white transition hover:bg-neutral-800"
                 aria-expanded={open}
                 aria-label="Menu pengguna"
             >
@@ -39,7 +39,7 @@ export default function UserDropdown() {
                 </div>
 
                 <div className="hidden text-left sm:block">
-                    <p className="max-w-[120px] truncate text-xs font-semibold text-neutral-800">
+                    <p className="max-w-[120px] truncate text-xs font-semibold text-white">
                         {name}
                     </p>
                     <p className="text-[10px] text-neutral-400">
@@ -47,7 +47,7 @@ export default function UserDropdown() {
                     </p>
                 </div>
 
-                <Icon name="arrow-right" size={13} className="hidden rotate-90 text-neutral-400 sm:block" />
+                <Icon name="arrow-right" size={13} className="hidden rotate-90 text-neutral-300 sm:block" />
             </button>
 
             {open && (

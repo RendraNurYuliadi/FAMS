@@ -28,6 +28,45 @@ const stats = [
     },
 ];
 
+const statTones = [
+    {
+        card: 'from-white via-neutral-50 to-neutral-200 text-neutral-950',
+        value: 'text-neutral-950',
+        label: 'text-neutral-800',
+        icon: 'bg-neutral-950 text-white',
+        arrow: 'text-neutral-500',
+        description: 'text-neutral-600',
+        motif: 'text-neutral-950',
+    },
+    {
+        card: 'from-neutral-950 via-neutral-800 to-neutral-600 text-white',
+        value: 'text-white',
+        label: 'text-white',
+        icon: 'bg-white/15 text-white ring-1 ring-white/20',
+        arrow: 'text-white/60',
+        description: 'text-white/65',
+        motif: 'text-white',
+    },
+    {
+        card: 'from-neutral-300 via-neutral-200 to-neutral-100 text-neutral-950',
+        value: 'text-neutral-950',
+        label: 'text-neutral-900',
+        icon: 'bg-neutral-700 text-white',
+        arrow: 'text-neutral-600',
+        description: 'text-neutral-600',
+        motif: 'text-neutral-950',
+    },
+    {
+        card: 'from-neutral-800 via-neutral-700 to-neutral-500 text-white',
+        value: 'text-white',
+        label: 'text-white',
+        icon: 'bg-white text-neutral-950',
+        arrow: 'text-white/65',
+        description: 'text-white/70',
+        motif: 'text-white',
+    },
+];
+
 const additionalStats = [
     {
         icon: 'check' as const,
@@ -128,34 +167,49 @@ export default function OverviewSection() {
                     <div className="p-5 sm:p-8">
                         {/* Main Statistics */}
                         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                            {stats.map((stat) => (
+                            {stats.map((stat, index) => {
+                                const tone = statTones[index % statTones.length];
+
+                                return (
                                 <article
                                     key={stat.label}
-                                    className="group rounded-2xl border border-neutral-200 bg-white p-5 transition duration-300 hover:-translate-y-1 hover:border-neutral-400 hover:shadow-lg hover:shadow-neutral-200/50"
+                                    className={`group relative isolate overflow-hidden rounded-2xl border border-white/50 bg-gradient-to-br ${tone.card} p-5 shadow-[0_12px_35px_rgba(0,0,0,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(0,0,0,0.16)]`}
                                 >
+                                    <div
+                                        className={`pointer-events-none absolute inset-0 -z-10 opacity-[0.12] transition-opacity duration-300 group-hover:opacity-20 ${tone.motif}`}
+                                        style={{
+                                            backgroundImage:
+                                                'repeating-linear-gradient(135deg, currentColor 0, currentColor 1px, transparent 1px, transparent 13px)',
+                                            maskImage:
+                                                'linear-gradient(135deg, black, transparent 60%)',
+                                        }}
+                                    />
+                                    <div className={`pointer-events-none absolute -right-10 -top-12 -z-10 size-36 rounded-full border border-current opacity-10 transition-transform duration-500 group-hover:scale-125`} />
+                                    <div className="pointer-events-none absolute -right-3 -top-5 -z-10 size-24 rounded-full border border-current opacity-10" />
                                     <div className="flex items-center justify-between">
-                                        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 text-neutral-700 transition group-hover:bg-neutral-950 group-hover:text-white">
+                                        <span className={`flex h-10 w-10 items-center justify-center rounded-xl ${tone.icon} transition group-hover:scale-105`}>
                                             <Icon name={stat.icon} size={20} />
                                         </span>
 
-                                        <span className="text-xs text-neutral-300">
+                                        <span className={`text-xs ${tone.arrow}`}>
                                             ↗
                                         </span>
                                     </div>
 
-                                    <p className="mt-6 text-3xl font-semibold tracking-tight text-neutral-950">
+                                    <p className={`mt-6 text-3xl font-semibold tracking-tight ${tone.value}`}>
                                         {stat.value}
                                     </p>
 
-                                    <h4 className="mt-2 text-sm font-semibold text-neutral-800">
+                                    <h4 className={`mt-2 text-sm font-semibold ${tone.label}`}>
                                         {stat.label}
                                     </h4>
 
-                                    <p className="mt-1 text-xs text-neutral-400">
+                                    <p className={`mt-1 text-xs ${tone.description}`}>
                                         {stat.description}
                                     </p>
                                 </article>
-                            ))}
+                                );
+                            })}
                         </div>
 
                         {/* Additional Statistics */}
