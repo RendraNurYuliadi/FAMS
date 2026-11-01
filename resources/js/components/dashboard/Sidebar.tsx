@@ -1,0 +1,177 @@
+
+import { Link } from '@inertiajs/react';
+import Icon from '../Icon';
+import SidebarMenu from './SidebarMenu';
+import { dashboardMenu, settingsMenu } from '../config/dashboard-menu';
+
+type SidebarProps = {
+    collapsed: boolean;
+    onToggle: () => void;
+    mobileOpen: boolean;
+    onCloseMobile: () => void;
+};
+
+export default function Sidebar({
+    collapsed,
+    onToggle,
+    mobileOpen,
+    onCloseMobile,
+}: SidebarProps) {
+    return (
+        <>
+            {/* Mobile overlay */}
+            {mobileOpen && (
+                <button
+                    type="button"
+                    aria-label="Tutup sidebar"
+                    onClick={onCloseMobile}
+                    className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[2px] lg:hidden"
+                />
+            )}
+
+            <aside
+                className={`
+                    fixed inset-y-0 left-0 z-50 flex h-dvh w-[270px]
+                    flex-col border-r border-neutral-200 bg-white
+                    transition-[width,transform] duration-300 ease-in-out
+                    lg:sticky lg:top-0 lg:z-30 lg:translate-x-0
+                    ${collapsed ? 'lg:w-[82px]' : 'lg:w-[270px]'}
+                    ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+                `}
+            >
+                {/* Logo: fixed at top */}
+                <div
+                    className={`flex h-[76px] shrink-0 items-center border-b border-neutral-100 ${
+                        collapsed
+                            ? 'justify-center px-3'
+                            : 'justify-between px-5'
+                    }`}
+                >
+                    <Link
+                        href="/dashboard"
+                        onClick={onCloseMobile}
+                        className="flex min-w-0 items-center gap-3"
+                    >
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-neutral-950 text-xl font-bold text-white">
+                            F
+                        </div>
+
+                        {!collapsed && (
+                            <div className="min-w-0">
+                                <p className="text-lg font-bold leading-tight tracking-tight text-neutral-950">
+                                    FAMS<span className="text-neutral-400">.</span>
+                                </p>
+                                <p className="mt-1 truncate text-[9px] font-semibold tracking-[0.13em] text-neutral-400">
+                                    FACULTY ASSET MANAGEMENT
+                                </p>
+                            </div>
+                        )}
+                    </Link>
+
+                    {!collapsed && (
+                        <button
+                            type="button"
+                            onClick={onToggle}
+                            title="Ciutkan sidebar"
+                            className="hidden h-8 w-8 items-center justify-center rounded-lg text-neutral-400 transition hover:bg-neutral-100 hover:text-neutral-900 lg:flex"
+                        >
+                            <Icon name="close" className="h-4 w-4" />
+                        </button>
+                    )}
+
+                    {collapsed && (
+                        <button
+                            type="button"
+                            onClick={onToggle}
+                            title="Perluas sidebar"
+                            className="absolute right-[-13px] top-6 hidden h-7 w-7 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-500 shadow-sm transition hover:text-neutral-950 lg:flex"
+                        >
+                            <Icon name="menu" className="h-4 w-4" />
+                        </button>
+                    )}
+
+                    <button
+                        type="button"
+                        onClick={onCloseMobile}
+                        className="flex h-8 w-8 items-center justify-center rounded-lg text-neutral-400 hover:bg-neutral-100 lg:hidden"
+                        aria-label="Tutup sidebar"
+                    >
+                        <Icon name="close" className="h-5 w-5" />
+                    </button>
+                </div>
+
+                {/* Scrollable menu area only */}
+                <div
+                    className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-5"
+                    style={{
+                        scrollbarWidth: 'thin',
+                        scrollbarColor: '#d4d4d4 transparent',
+                    }}
+                >
+                    <p
+                        className={`mb-3 px-3 text-[10px] font-bold tracking-[0.16em] text-neutral-400 ${
+                            collapsed ? 'text-center' : ''
+                        }`}
+                    >
+                        {collapsed ? 'MENU' : 'MENU UTAMA'}
+                    </p>
+
+                    <nav className="space-y-1">
+                        {dashboardMenu.map((item) => (
+                            <SidebarMenu
+                                key={item.href}
+                                item={item}
+                                collapsed={collapsed}
+                                onNavigate={onCloseMobile}
+                            />
+                        ))}
+                    </nav>
+                </div>
+
+                {/* Preferences: fixed at bottom */}
+                <div className="shrink-0 border-t border-neutral-100 bg-white px-3 pb-3 pt-4">
+                    <p
+                        className={`mb-3 px-3 text-[10px] font-bold tracking-[0.16em] text-neutral-400 ${
+                            collapsed ? 'text-center' : ''
+                        }`}
+                    >
+                        {collapsed ? 'LAIN' : 'PREFERENSI'}
+                    </p>
+
+                    <nav className="space-y-1">
+                        {settingsMenu.map((item) => (
+                            <SidebarMenu
+                                key={item.href}
+                                item={item}
+                                collapsed={collapsed}
+                                onNavigate={onCloseMobile}
+                            />
+                        ))}
+                    </nav>
+
+                    {!collapsed && (
+                        <div className="mt-4 flex items-center gap-3 rounded-xl bg-neutral-50 p-3">
+                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-neutral-900 text-xs font-bold text-white">
+                                AD
+                            </div>
+
+                            <div className="min-w-0 flex-1">
+                                <p className="truncate text-xs font-semibold text-neutral-900">
+                                    Admin FAMS
+                                </p>
+                                <p className="mt-0.5 truncate text-[10px] text-neutral-500">
+                                    Administrator
+                                </p>
+                            </div>
+
+                            <Icon
+                                name="shield"
+                                className="h-4 w-4 shrink-0 text-neutral-400"
+                            />
+                        </div>
+                    )}
+                </div>
+            </aside>
+        </>
+    );
+}
