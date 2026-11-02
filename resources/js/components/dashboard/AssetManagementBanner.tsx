@@ -9,7 +9,7 @@ type Props = {
     statusLabel: string;
     metrics: {
         label: string;
-        value: number;
+        value: number | string;
     }[];
 };
 
@@ -89,7 +89,9 @@ export default function AssetManagementBanner({
                                         {metric.label}
                                     </p>
                                     <p className="mt-1 text-lg font-bold">
-                                        {metric.value.toLocaleString('id-ID')}
+                                        {typeof metric.value === 'number'
+                                            ? metric.value.toLocaleString('id-ID')
+                                            : metric.value}
                                     </p>
                                 </div>
                             ))}

@@ -1,5 +1,6 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import Icon from '../Icon';
 import type { DashboardNotification } from '../../types/dashboard';
 
@@ -33,6 +34,23 @@ export default function NotificationDropdown() {
 
     const unreadCount = notifications.filter((item) => item.unread).length;
 
+    useEffect(() => {
+        if (!open) return;
+
+        const previousOverflow = document.body.style.overflow;
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') setOpen(false);
+        };
+
+        document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [open]);
+
     function markAllAsRead() {
         setNotifications((current) =>
             current.map((item) => ({ ...item, unread: false })),
@@ -46,51 +64,67 @@ export default function NotificationDropdown() {
                 onClick={() => setOpen(!open)}
                 aria-label="Notifikasi"
                 aria-expanded={open}
-                className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-950 text-white transition hover:bg-neutral-800"
+                aria-haspopup="dialog"
+                className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-950 text-white transition hover:bg-neutral-800"
             >
-                <Icon name="bell" size={19} />
+                <Icon name="bell" size={20} />
 
                 {unreadCount > 0 && (
                     <span className="absolute right-2 top-2 flex h-2 w-2 rounded-full border-2 border-white bg-neutral-950" />
                 )}
             </button>
 
-            {open && (
-                <>
-                    <button
-                        type="button"
-                        aria-label="Tutup notifikasi"
-                        className="fixed inset-0 z-40 cursor-default"
-                        onClick={() => setOpen(false)}
-                    />
-
-                    <div className="fixed top-[68px] left-3 right-3 z-50 mx-auto w-auto max-w-[350px] overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-[0_15px_50px_rgba(0,0,0,0.12)] sm:absolute sm:top-full sm:right-0 sm:left-auto sm:mt-3 sm:w-[350px]">
-                        <div className="flex items-center justify-between gap-2 border-b border-neutral-100 px-3 py-3 sm:px-4 sm:py-4">
+            {open &&
+                createPortal(
+                    <div
+                        className="fixed inset-0 z-[100] flex items-start justify-end bg-neutral-950/45 p-3 pt-[72px] backdrop-blur-sm sm:p-6 sm:pt-[88px]"
+                        onMouseDown={(event) => {
+                            if (event.target === event.currentTarget) {
+                                setOpen(false);
+                            }
+                        }}
+                    >
+                        <section
+                            role="dialog"
+                            aria-modal="true"
+                            aria-labelledby="notification-modal-title"
+                            className="w-full max-w-lg overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl"
+                        >
+                        <div className="flex items-center justify-between gap-2 border-b border-neutral-100 px-4 py-4 sm:px-5">
                             <div>
-                                <h3 className="text-sm font-semibold text-neutral-900">
+                                <h2 id="notification-modal-title" className="text-sm font-semibold text-neutral-900">
                                     Notifikasi
-                                </h3>
+                                </h2>
                                 <p className="mt-0.5 text-[10px] leading-4 text-neutral-400">
                                     {unreadCount} pemberitahuan belum dibaca
                                 </p>
                             </div>
-
-                            <button
-                                type="button"
-                                onClick={markAllAsRead}
-                                aria-label="Tandai semua notifikasi sudah dibaca"
-                                title="Tandai semua sudah dibaca"
-                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950"
-                            >
-                                <Icon name="check" size={16} />
-                            </button>
+                            <div className="flex items-center gap-1">
+                                <button
+                                    type="button"
+                                    onClick={markAllAsRead}
+                                    aria-label="Tandai semua notifikasi sudah dibaca"
+                                    title="Tandai semua sudah dibaca"
+                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950"
+                                >
+                                    <Icon name="check" size={16} />
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setOpen(false)}
+                                    aria-label="Tutup notifikasi"
+                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950"
+                                >
+                                    <Icon name="close" size={18} />
+                                </button>
+                            </div>
                         </div>
 
-                        <div className="max-h-[340px] overflow-y-auto">
+                        <div className="max-h-[min(60dvh,420px)] overflow-y-auto">
                             {notifications.map((item) => (
                                 <div
                                     key={item.id}
-                                    className={`flex gap-3 border-b border-neutral-100 px-3 py-3 sm:px-4 sm:py-4 last:border-0 ${
+                                    className={`flex gap-3 border-b border-neutral-100 px-4 py-4 sm:px-5 ${
                                         item.unread ? 'bg-neutral-50/80' : ''
                                     }`}
                                 >
@@ -125,9 +159,10 @@ export default function NotificationDropdown() {
                                 Notifikasi FAMS
                             </span>
                         </div>
-                    </div>
-                </>
-            )}
+                        </section>
+                    </div>,
+                    document.body,
+                )}
         </div>
     );
 }

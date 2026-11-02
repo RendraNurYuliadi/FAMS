@@ -8,6 +8,7 @@ import {
 import { createPortal } from 'react-dom';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import Icon, { type IconName } from '@/components/Icon';
+import AssetManagementBanner from '@/components/dashboard/AssetManagementBanner';
 
 type BorrowingStatus =
     | 'Menunggu'
@@ -279,11 +280,11 @@ const initialBorrowings: Borrowing[] = [
 ];
 
 const statusStyles: Record<BorrowingStatus, string> = {
-    Menunggu: 'bg-amber-50 text-amber-700 border-amber-100',
-    Disetujui: 'bg-emerald-50 text-emerald-700 border-emerald-100',
-    Ditolak: 'bg-rose-50 text-rose-700 border-rose-100',
-    Dipinjam: 'bg-sky-50 text-sky-700 border-sky-100',
-    Selesai: 'bg-violet-50 text-violet-700 border-violet-100',
+    Menunggu: 'bg-neutral-100 text-neutral-700 border-neutral-200',
+    Disetujui: 'bg-neutral-200 text-neutral-800 border-neutral-300',
+    Ditolak: 'bg-neutral-300 text-neutral-900 border-neutral-400',
+    Dipinjam: 'bg-neutral-100 text-neutral-800 border-neutral-300',
+    Selesai: 'bg-black text-white border-black',
 };
 
 const statusIcons: Record<BorrowingStatus, IconName> = {
@@ -295,8 +296,8 @@ const statusIcons: Record<BorrowingStatus, IconName> = {
 };
 
 const assetTypeStyles: Record<BorrowingAssetType, string> = {
-    Barang: 'bg-sky-50 text-sky-700 border-sky-100',
-    Ruangan: 'bg-violet-50 text-violet-700 border-violet-100',
+    Barang: 'bg-neutral-100 text-neutral-800 border-neutral-200',
+    Ruangan: 'bg-neutral-200 text-neutral-800 border-neutral-300',
     Campuran: 'bg-neutral-100 text-neutral-700 border-neutral-200',
 };
 
@@ -462,7 +463,7 @@ function Field({
         <label className="block space-y-1.5">
             <span className="text-sm font-medium text-gray-700">
                 {label}
-                {required && <span className="ml-1 text-rose-500">*</span>}
+                {required && <span className="ml-1 text-neutral-500">*</span>}
             </span>
             {children}
         </label>
@@ -599,7 +600,7 @@ function FileUpload({
             <div
                 className={`rounded-xl border border-dashed p-4 transition ${
                     error
-                        ? 'border-rose-300 bg-rose-50/50'
+                        ? 'border-neutral-500 bg-neutral-100'
                         : 'border-gray-300 bg-gray-50 hover:border-gray-500 hover:bg-gray-100'
                 }`}
             >
@@ -620,7 +621,7 @@ function FileUpload({
                         </p>
 
                         {file && (
-                            <p className="mt-1 text-xs text-emerald-600">
+                            <p className="mt-1 text-xs text-neutral-700">
                                 <Icon
                                     name="check-circle"
                                     size={12}
@@ -648,7 +649,7 @@ function FileUpload({
                         <button
                             type="button"
                             onClick={handleRemove}
-                            className="inline-flex items-center gap-1.5 text-xs font-medium text-rose-500 hover:text-rose-700"
+                            className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 hover:text-black"
                         >
                             <Icon name="trash-2" size={13} />
                             Hapus file
@@ -657,7 +658,7 @@ function FileUpload({
                 )}
 
                 {error && (
-                    <div className="mt-3 flex items-start gap-2 rounded-lg border border-rose-200 bg-rose-50 p-3 text-xs leading-5 text-rose-600">
+                    <div className="mt-3 flex items-start gap-2 rounded-lg border border-neutral-300 bg-neutral-100 p-3 text-xs leading-5 text-neutral-700">
                         <Icon
                             name="alert-circle"
                             size={16}
@@ -684,6 +685,7 @@ export default function PeminjamanIndex({
 
     const [modalOpen, setModalOpen] = useState(startWithCreateModal);
     const [currentStep, setCurrentStep] = useState(0);
+    const [completedSteps, setCompletedSteps] = useState<number[]>([]);
     const [detailItem, setDetailItem] = useState<Borrowing | null>(null);
     const [form, setForm] = useState<BorrowingForm>({ ...emptyForm });
     const [formError, setFormError] = useState('');
@@ -759,7 +761,12 @@ export default function PeminjamanIndex({
             label: 'Total Peminjaman',
             value: borrowings.length,
             icon: 'clipboard-list' as IconName,
-            color: 'bg-sky-50 text-sky-600',
+            card: 'border-gray-900 bg-gray-950 text-white',
+            labelColor: 'text-gray-300',
+            valueColor: 'text-white',
+            descriptionColor: 'text-gray-400',
+            iconColor: 'bg-white/10 text-white',
+            texture: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,.14) 1px, transparent 0)',
             description: 'Seluruh pengajuan',
         },
         {
@@ -767,7 +774,12 @@ export default function PeminjamanIndex({
             value: borrowings.filter((item) => item.status === 'Menunggu')
                 .length,
             icon: 'clock' as IconName,
-            color: 'bg-amber-50 text-amber-600',
+            card: 'border-gray-700 bg-gray-800 text-white',
+            labelColor: 'text-gray-300',
+            valueColor: 'text-white',
+            descriptionColor: 'text-gray-400',
+            iconColor: 'bg-white/10 text-gray-100',
+            texture: 'repeating-linear-gradient(135deg, rgba(255,255,255,.055) 0px, rgba(255,255,255,.055) 1px, transparent 1px, transparent 10px)',
             description: 'Perlu ditinjau',
         },
         {
@@ -775,7 +787,12 @@ export default function PeminjamanIndex({
             value: borrowings.filter((item) => item.status === 'Dipinjam')
                 .length,
             icon: 'package' as IconName,
-            color: 'bg-violet-50 text-violet-600',
+            card: 'border-gray-300 bg-gray-200 text-gray-950',
+            labelColor: 'text-gray-600',
+            valueColor: 'text-gray-950',
+            descriptionColor: 'text-gray-600',
+            iconColor: 'bg-white/70 text-gray-800',
+            texture: 'radial-gradient(circle at 1px 1px, rgba(17,24,39,.11) 1px, transparent 0)',
             description: 'Belum dikembalikan',
         },
         {
@@ -783,7 +800,12 @@ export default function PeminjamanIndex({
             value: borrowings.filter((item) => item.status === 'Selesai')
                 .length,
             icon: 'check-circle' as IconName,
-            color: 'bg-emerald-50 text-emerald-600',
+            card: 'border-gray-200 bg-white text-gray-950',
+            labelColor: 'text-gray-500',
+            valueColor: 'text-gray-950',
+            descriptionColor: 'text-gray-500',
+            iconColor: 'bg-gray-100 text-gray-700',
+            texture: 'repeating-linear-gradient(45deg, rgba(17,24,39,.035) 0px, rgba(17,24,39,.035) 1px, transparent 1px, transparent 9px)',
             description: 'Telah dikembalikan',
         },
     ];
@@ -861,6 +883,7 @@ export default function PeminjamanIndex({
     const openCreateModal = () => {
         setForm({ ...emptyForm });
         setCurrentStep(0);
+        setCompletedSteps([]);
         setFormError('');
         setModalOpen(true);
     };
@@ -868,6 +891,7 @@ export default function PeminjamanIndex({
     const closeModal = () => {
         setModalOpen(false);
         setCurrentStep(0);
+        setCompletedSteps([]);
         setFormError('');
     };
 
@@ -996,6 +1020,11 @@ export default function PeminjamanIndex({
     const goNext = () => {
         if (!validateStep(currentStep)) return;
 
+        setCompletedSteps((completed) =>
+            completed.includes(currentStep)
+                ? completed
+                : [...completed, currentStep],
+        );
         setCurrentStep((step) =>
             Math.min(step + 1, steps.length - 1),
         );
@@ -1012,6 +1041,7 @@ export default function PeminjamanIndex({
 
         if (!validateStep(5)) return;
 
+        setCompletedSteps(steps.map((_, index) => index));
         const newItem: Borrowing = {
             id: Date.now(),
             code: `PJM-${new Date().getFullYear()}-${String(
@@ -1108,7 +1138,7 @@ export default function PeminjamanIndex({
                             <div className="flex-1 text-center sm:text-left">
                                 <p className="text-sm font-semibold text-gray-800">
                                     Foto Profil Peminjam{' '}
-                                    <span className="text-rose-500">*</span>
+                                    <span className="text-neutral-500">*</span>
                                 </p>
                                 <p className="mt-1 text-xs text-gray-400">
                                     Gunakan foto yang jelas. Format JPG atau
@@ -1149,7 +1179,7 @@ export default function PeminjamanIndex({
                                         onClick={() =>
                                             updateForm('photo', null)
                                         }
-                                        className="ml-2 text-xs text-rose-500"
+                                        className="ml-2 text-xs text-neutral-600"
                                     >
                                         Hapus
                                     </button>
@@ -2336,6 +2366,23 @@ export default function PeminjamanIndex({
     return (
         <DashboardLayout>
             <div className="space-y-6 pb-8">
+                <AssetManagementBanner
+                    title="Kelola Peminjaman Aset."
+                    description="Pantau pengajuan peminjaman barang dan ruangan, kelola persetujuan, serta awasi penggunaan aset fakultas."
+                    contextLabel="Data peminjaman"
+                    icon="clipboard-list"
+                    statusLabel="Pengajuan dipantau"
+                    metrics={[
+                        { label: 'Total peminjaman', value: borrowings.length },
+                        {
+                            label: 'Menunggu persetujuan',
+                            value: borrowings.filter(
+                                (item) => item.status === 'Menunggu',
+                            ).length,
+                        },
+                    ]}
+                />
+
                 {/* Breadcrumb */}
                 <div className="flex items-center gap-2 text-xs text-gray-400">
                     <span>Dashboard</span>
@@ -2345,66 +2392,45 @@ export default function PeminjamanIndex({
                     </span>
                 </div>
 
-                {/* Hero */}
-                <section className="relative isolate overflow-hidden rounded-2xl border border-gray-200 bg-gradient-to-r from-[#f5f6f7] via-[#f8f9fa] to-[#eef1f3] p-6 sm:p-8">
-                    <div className="relative z-10 max-w-xl">
-                        <span className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/80 px-3 py-1.5 text-[11px] font-semibold tracking-wider text-gray-500">
-                            <Icon name="clipboard-list" size={13} />
-                            MANAJEMEN PEMINJAMAN
-                        </span>
-
-                        <h1 className="mt-4 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                            Kelola Peminjaman Aset
-                        </h1>
-
-                        <p className="mt-2 max-w-lg text-sm leading-6 text-gray-500">
-                            Pantau pengajuan peminjaman barang dan
-                            ruangan, kelola persetujuan, serta awasi
-                            penggunaan aset fakultas.
-                        </p>
-
-                        <button
-                            onClick={openCreateModal}
-                            className="mt-5 inline-flex items-center gap-2 rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-gray-700"
-                        >
-                            <Icon name="plus" size={16} />
-                            Tambah Peminjaman
-                        </button>
-                    </div>
-
-                    <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] overflow-hidden lg:block">
-                        <img
-                            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80"
-                            alt="Ilustrasi ruang kerja pengelolaan aset"
-                            className="h-full w-full object-cover opacity-30"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#f5f6f7] via-[#f5f6f7]/50 to-transparent" />
-                    </div>
-
-                    <div className="pointer-events-none absolute -right-10 -top-16 h-56 w-56 rounded-full border-[30px] border-white/30" />
-                </section>
-
                 {/* Statistics */}
                 <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
                     {stats.map((stat) => (
                         <div
                             key={stat.label}
-                            className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                            className={`group relative isolate overflow-hidden rounded-2xl border p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg ${stat.card}`}
                         >
-                            <div className="flex items-start justify-between">
-                                <div>
-                                    <p className="text-sm text-gray-500">
+                            <div
+                                aria-hidden="true"
+                                className="pointer-events-none absolute inset-0 -z-10 opacity-70 transition duration-300 group-hover:scale-105 group-hover:opacity-100"
+                                style={{
+                                    backgroundImage: stat.texture,
+                                    backgroundSize:
+                                        stat.label === 'Total Peminjaman'
+                                            ? '14px 14px'
+                                            : 'auto',
+                                }}
+                            />
+                            <div
+                                aria-hidden="true"
+                                className="pointer-events-none absolute -right-10 -top-12 -z-10 h-36 w-36 rounded-full border border-current opacity-[0.08] transition duration-300 group-hover:scale-110"
+                            />
+                            <div className="relative flex min-h-28 items-start justify-between gap-3">
+                                <div className="flex min-h-28 flex-col">
+                                    <p className={`text-sm font-medium ${stat.labelColor}`}>
                                         {stat.label}
                                     </p>
-                                    <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900">
+                                    <p className={`mt-2 text-4xl font-bold tracking-tight ${stat.valueColor}`}>
                                         {stat.value}
                                     </p>
-                                    <p className="mt-1 text-xs text-gray-400">
-                                        {stat.description}
-                                    </p>
+                                    <div className="mt-auto flex items-center gap-2 pt-2">
+                                        <span className="h-px w-5 bg-current opacity-30" />
+                                        <p className={`text-xs ${stat.descriptionColor}`}>
+                                            {stat.description}
+                                        </p>
+                                    </div>
                                 </div>
                                 <div
-                                    className={`rounded-xl p-3 ${stat.color}`}
+                                    className={`rounded-xl p-3 shadow-sm ring-1 ring-current/5 transition duration-300 group-hover:rotate-3 group-hover:scale-105 ${stat.iconColor}`}
                                 >
                                     <Icon name={stat.icon} size={21} />
                                 </div>
@@ -2577,7 +2603,7 @@ export default function PeminjamanIndex({
                                                         setDetailItem(item)
                                                     }
                                                     title="Lihat detail"
-                                                    className="rounded-lg p-2 text-gray-400 transition hover:bg-sky-50 hover:text-sky-600"
+                                                    className="rounded-lg p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-900"
                                                 >
                                                     <Icon
                                                         name="eye"
@@ -2596,7 +2622,7 @@ export default function PeminjamanIndex({
                                                                 )
                                                             }
                                                             title="Setujui"
-                                                            className="rounded-lg p-2 text-gray-400 transition hover:bg-emerald-50 hover:text-emerald-600"
+                                                            className="rounded-lg p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-900"
                                                         >
                                                             <Icon
                                                                 name="check"
@@ -2611,7 +2637,7 @@ export default function PeminjamanIndex({
                                                                 )
                                                             }
                                                             title="Tolak"
-                                                            className="rounded-lg p-2 text-gray-400 transition hover:bg-rose-50 hover:text-rose-600"
+                                                            className="rounded-lg p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-900"
                                                         >
                                                             <Icon
                                                                 name="x"
@@ -2631,7 +2657,7 @@ export default function PeminjamanIndex({
                                                             )
                                                         }
                                                         title="Tandai sedang dipinjam"
-                                                        className="rounded-lg p-2 text-gray-400 transition hover:bg-sky-50 hover:text-sky-600"
+                                                        className="rounded-lg p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-900"
                                                     >
                                                         <Icon
                                                             name="package"
@@ -2650,7 +2676,7 @@ export default function PeminjamanIndex({
                                                             )
                                                         }
                                                         title="Tandai selesai"
-                                                        className="rounded-lg p-2 text-gray-400 transition hover:bg-emerald-50 hover:text-emerald-600"
+                                                        className="rounded-lg p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-900"
                                                     >
                                                         <Icon
                                                             name="check-check"
@@ -2786,7 +2812,7 @@ export default function PeminjamanIndex({
                                     </p>
                                     <p className="text-xs font-semibold text-gray-700">
                                         {Math.round(
-                                            ((currentStep + 1) /
+                                            (completedSteps.length /
                                                 steps.length) *
                                                 100,
                                         )}
@@ -2799,7 +2825,7 @@ export default function PeminjamanIndex({
                                         className="h-full rounded-full bg-gray-900 transition-all duration-300"
                                         style={{
                                             width: `${
-                                                ((currentStep + 1) /
+                                                (completedSteps.length /
                                                     steps.length) *
                                                 100
                                             }%`,
@@ -2813,28 +2839,30 @@ export default function PeminjamanIndex({
                                             type="button"
                                             key={step.title}
                                             onClick={() => {
-                                                if (index < currentStep) {
+                                                if (index < currentStep && completedSteps.includes(index)) {
                                                     setCurrentStep(index);
                                                     setFormError('');
                                                 }
                                             }}
-                                            disabled={index > currentStep}
+                                            disabled={index >= currentStep || !completedSteps.includes(index)}
                                             title={step.title}
+                                            aria-label={`${step.title}${completedSteps.includes(index) ? ', selesai' : index === currentStep ? ', tahap aktif' : ', belum dimulai'}`}
                                             className="group flex min-w-0 flex-col items-center gap-1.5 disabled:cursor-not-allowed"
                                         >
                                             <span
                                                 className={`flex h-8 w-8 items-center justify-center rounded-full text-xs transition ${
                                                     index === currentStep
                                                         ? 'bg-gray-900 text-white'
-                                                        : index < currentStep
-                                                          ? 'bg-gray-200 text-gray-800'
+                                                        : completedSteps.includes(index)
+                                                          ? 'bg-gray-700 text-white shadow-sm ring-2 ring-gray-200'
                                                           : 'bg-gray-100 text-gray-400'
                                                 }`}
                                             >
-                                                {index < currentStep ? (
+                                                {completedSteps.includes(index) ? (
                                                     <Icon
                                                         name="check"
-                                                        size={15}
+                                                        size={20}
+                                                        strokeWidth={3}
                                                     />
                                                 ) : (
                                                     <Icon
@@ -2867,7 +2895,7 @@ export default function PeminjamanIndex({
                                     {renderStepContent()}
 
                                     {formError && (
-                                        <div className="mt-5 flex items-start gap-2 rounded-xl border border-rose-100 bg-rose-50 p-3 text-sm text-rose-600">
+                                        <div className="mt-5 flex items-start gap-2 rounded-xl border border-neutral-300 bg-neutral-100 p-3 text-sm text-neutral-700">
                                             <Icon
                                                 name="alert-circle"
                                                 size={17}
@@ -3130,7 +3158,7 @@ export default function PeminjamanIndex({
                                                     'Ditolak',
                                                 )
                                             }
-                                            className="flex-1 rounded-xl border border-rose-200 px-4 py-2.5 text-sm font-medium text-rose-600 hover:bg-rose-50"
+                                            className="flex-1 rounded-xl border border-neutral-300 px-4 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-100"
                                         >
                                             Tolak Pengajuan
                                         </button>
@@ -3142,7 +3170,7 @@ export default function PeminjamanIndex({
                                                     'Disetujui',
                                                 )
                                             }
-                                            className="flex-1 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-emerald-700"
+                                            className="flex-1 rounded-xl bg-neutral-800 px-4 py-2.5 text-sm font-medium text-white hover:bg-black"
                                         >
                                             Setujui Pengajuan
                                         </button>
@@ -3157,7 +3185,7 @@ export default function PeminjamanIndex({
                                                 'Dipinjam',
                                             )
                                         }
-                                        className="w-full rounded-xl bg-sky-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-sky-700"
+                                        className="w-full rounded-xl bg-neutral-800 px-4 py-2.5 text-sm font-medium text-white hover:bg-black"
                                     >
                                         Tandai Aset Telah Dipinjam
                                     </button>
@@ -3171,7 +3199,7 @@ export default function PeminjamanIndex({
                                                 'Selesai',
                                             )
                                         }
-                                        className="w-full rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-emerald-700"
+                                        className="w-full rounded-xl bg-neutral-800 px-4 py-2.5 text-sm font-medium text-white hover:bg-black"
                                     >
                                         Tandai Peminjaman Selesai
                                     </button>

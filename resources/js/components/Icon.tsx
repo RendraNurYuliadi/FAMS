@@ -18,6 +18,8 @@ export type IconName =
     | 'building'
     | 'building-2'
     | 'calendar'
+    | 'calendar-days'
+    | 'list-checks'
     | 'bell'
     | 'check'
     | 'check-circle'
@@ -27,6 +29,7 @@ export type IconName =
     | 'phone'
     | 'message'
     | 'shield'
+    | 'shield-check'
     | 'tag'
     | 'wrench'
     | 'chart'
@@ -51,9 +54,14 @@ export type IconName =
     | 'eye-off'
     | 'clipboard-list'
     | 'file-check'
+    | 'file-check-2'
+    | 'file-text'
+    | 'clipboard-check'
+    | 'hard-drive'
     | 'upload'
     | 'upload-cloud'
     | 'user-round'
+    | 'user'
     | 'inbox'
     | 'save'
     | 'alert-circle'
@@ -130,10 +138,53 @@ const paths: Record<IconName, ReactNode> = {
         </>
     ),
 
+    'clipboard-check': (
+        <>
+            <rect x="5" y="4" width="14" height="18" rx="2" />
+            <path d="M9 4.5V3h6v1.5m-6 10 2 2 4-4" />
+        </>
+    ),
+
+    'list-checks': (
+        <>
+            <path d="M3 5h.01M3 12h.01M3 19h.01M8 5h13M8 12h13M8 19h13" />
+            <path d="m2 11 1 1 2-2m-3 8 1 1 2-2" />
+        </>
+    ),
+
+    'shield-check': (
+        <>
+            <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" />
+            <path d="m9 12 2 2 4-4" />
+        </>
+    ),
+
+    'hard-drive': (
+        <>
+            <path d="M22 12H2l2-8h16l2 8Z" />
+            <path d="M2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6" />
+            <path d="M6 16h.01M10 16h.01" />
+        </>
+    ),
+
     'file-check': (
         <>
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
             <path d="M14 2v6h6m-12 5 2 2 4-4" />
+        </>
+    ),
+
+    'file-check-2': (
+        <>
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+            <path d="M14 2v6h6m-12 5 2 2 4-4" />
+        </>
+    ),
+
+    'file-text': (
+        <>
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+            <path d="M14 2v6h6M8 13h8m-8 4h8" />
         </>
     ),
 
@@ -152,6 +203,13 @@ const paths: Record<IconName, ReactNode> = {
     ),
 
     'user-round': (
+        <>
+            <circle cx="12" cy="8" r="5" />
+            <path d="M20 21a8 8 0 0 0-16 0" />
+        </>
+    ),
+
+    user: (
         <>
             <circle cx="12" cy="8" r="5" />
             <path d="M20 21a8 8 0 0 0-16 0" />
@@ -288,6 +346,13 @@ const paths: Record<IconName, ReactNode> = {
         <>
             <rect x="3" y="5" width="18" height="16" rx="2" />
             <path d="M16 3v4M8 3v4M3 10h18" />
+        </>
+    ),
+
+    'calendar-days': (
+        <>
+            <rect x="3" y="5" width="18" height="16" rx="2" />
+            <path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01M16 17h.01" />
         </>
     ),
 

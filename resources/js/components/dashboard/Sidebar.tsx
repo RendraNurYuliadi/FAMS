@@ -62,7 +62,7 @@ export default function Sidebar({
                     transition-[width,transform] duration-300 ease-in-out
                     lg:sticky lg:top-4 lg:z-30 lg:my-4 lg:ml-4 lg:mr-0 lg:h-[calc(100dvh-2rem)] lg:translate-x-0
                     ${collapsed ? 'lg:w-[82px]' : 'lg:w-[270px]'}
-                    ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+                    ${mobileOpen ? 'translate-x-0' : '-translate-x-[calc(100%_+_0.75rem)] lg:translate-x-0'}
                 `}
             >
                 {/* Logo: fixed at top */}
