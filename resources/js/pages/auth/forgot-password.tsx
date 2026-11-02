@@ -4,7 +4,11 @@ import AuthInput from '../../components/auth/AuthInput';
 import Icon from '../../components/Icon';
 import AuthVisualPanel from '../../components/auth/AuthVisualPanel';
 
-export default function ForgotPassword() {
+type Props = {
+    status?: string;
+};
+
+export default function ForgotPassword({ status }: Props) {
     const { data, setData, post, processing, errors } = useForm({
         email: '',
     });
@@ -62,10 +66,20 @@ export default function ForgotPassword() {
                             </h1>
 
                             <p className="mt-2 max-w-[350px] text-[13px] leading-6 text-neutral-500">
-                                Masukkan email akun Anda untuk melanjutkan ke
-                                langkah verifikasi reset password.
+                                Masukkan email akun Anda. Setelah kode berhasil
+                                dikirim, Anda langsung diarahkan ke halaman
+                                verifikasi untuk memasukkan kode 6 digit.
                             </p>
                         </div>
+
+                        {status && (
+                            <div
+                                role="status"
+                                className="mb-5 rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-xs leading-5 text-neutral-700"
+                            >
+                                {status}
+                            </div>
+                        )}
 
                         <form onSubmit={submit} className="space-y-5">
                             <AuthInput
@@ -87,8 +101,8 @@ export default function ForgotPassword() {
                             >
                                 <span>
                                     {processing
-                                        ? 'Memproses...'
-                                        : 'Lanjutkan Verifikasi'}
+                                        ? 'Mengirim kode...'
+                                        : 'Kirim Kode Verifikasi'}
                                 </span>
                                 <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 transition-all duration-300 group-hover:translate-x-1 group-hover:bg-white/20">
                                     {processing ? (

@@ -6,13 +6,11 @@ import Icon from '../../components/Icon';
 import AuthVisualPanel from '../../components/auth/AuthVisualPanel';
 
 type Props = {
-    token: string;
     email: string;
 };
 
-export default function ResetPassword({ token, email }: Props) {
+export default function ResetPassword({ email }: Props) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        token,
         email,
         password: '',
         password_confirmation: '',

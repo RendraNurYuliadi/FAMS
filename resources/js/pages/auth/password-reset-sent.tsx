@@ -1,21 +1,29 @@
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
 import Icon from '../../components/Icon';
 import AuthVisualPanel from '../../components/auth/AuthVisualPanel';
 
 type Props = {
     email: string;
+    status?: string;
 };
 
-export default function PasswordResetSent({ email }: Props) {
-    const resetUrl = `/reset-password/demo-token?email=${encodeURIComponent(email)}`;
-    const [code, setCode] = useState('');
+export default function PasswordResetSent({ email, status }: Props) {
+    const { data, setData, post, processing, errors } = useForm({
+        email,
+        code: '',
+    });
     const [codeFocused, setCodeFocused] = useState(false);
-    const [notice, setNotice] = useState('');
 
     function continueToReset() {
-        if (code.length !== 6) return;
-        router.visit(resetUrl);
+        post('/forgot-password/verify');
+    }
+
+    function resendCode() {
+        post('/forgot-password', {
+            preserveScroll: true,
+            onSuccess: () => setData('code', ''),
+        });
     }
 
     return (
@@ -73,11 +81,26 @@ export default function PasswordResetSent({ email }: Props) {
                                     Kode verifikasi dikirim ke
                                 </p>
                                 <p className="mt-1 break-all text-xs leading-5 text-neutral-500">
-                                    {email || 'Email belum diisi'}
+                                    {data.email || 'Email belum diisi'}
                                 </p>
                             </div>
                         </div>
 
+                        {status && (
+                            <div
+                                role="status"
+                                className="mb-5 rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-xs leading-5 text-neutral-700"
+                            >
+                                {status}
+                            </div>
+                        )}
+
+                        <form
+                            onSubmit={(event) => {
+                                event.preventDefault();
+                                continueToReset();
+                            }}
+                        >
                         <div className="mb-5">
                             <label
                                 htmlFor="verification-code"
@@ -97,12 +120,12 @@ export default function PasswordResetSent({ email }: Props) {
                                         <span
                                             key={index}
                                             className={`flex h-10 w-9 items-center justify-center rounded-lg border text-lg font-semibold transition sm:w-10 ${
-                                                code[index]
+                                                data.code[index]
                                                     ? 'border-neutral-400 bg-neutral-50 text-neutral-950'
                                                     : 'border-neutral-200 bg-white text-neutral-300'
                                             }`}
                                         >
-                                            {code[index] || '•'}
+                                            {data.code[index] || '•'}
                                         </span>
                                     ))}
                                 </div>
@@ -113,9 +136,9 @@ export default function PasswordResetSent({ email }: Props) {
                                     inputMode="numeric"
                                     pattern="[0-9]*"
                                     maxLength={6}
-                                    value={code}
+                                    value={data.code}
                                     onChange={(event) =>
-                                        setCode(event.target.value.replace(/\D/g, '').slice(0, 6))
+                                        setData('code', event.target.value.replace(/\D/g, '').slice(0, 6))
                                     }
                                     onFocus={() => setCodeFocused(true)}
                                     onBlur={() => setCodeFocused(false)}
@@ -128,40 +151,36 @@ export default function PasswordResetSent({ email }: Props) {
                                 </span>
                                 <button
                                     type="button"
-                                    onClick={() =>
-                                        setNotice('Mode pratinjau: kode tidak benar-benar dikirim melalui email.')
-                                    }
+                                    onClick={resendCode}
+                                    disabled={processing}
                                     className="font-semibold text-neutral-800 underline underline-offset-2 transition hover:text-neutral-500"
                                 >
                                     Kirim ulang kode
                                 </button>
                             </div>
+                            {errors.code && (
+                                <p className="mt-2 text-xs text-neutral-600">{errors.code}</p>
+                            )}
                         </div>
 
                         <div className="mb-5 flex items-start gap-2 rounded-xl border border-neutral-200 bg-neutral-50 p-3 text-[10px] leading-4 text-neutral-500">
                             <Icon name="info" size={14} className="mt-0.5 shrink-0" />
                             <span>
-                                Mode pratinjau: pengiriman dan pemeriksaan kode belum diaktifkan.
+                                Kode hanya berlaku selama 10 menit dan maksimal 5 kali percobaan.
                             </span>
                         </div>
 
-                        {notice && (
-                            <p role="status" className="mb-4 text-xs text-neutral-600">
-                                {notice}
-                            </p>
-                        )}
-
                         <button
-                            type="button"
-                            onClick={continueToReset}
-                            disabled={code.length !== 6}
+                            type="submit"
+                            disabled={data.code.length !== 6 || processing}
                             className="group flex h-[50px] w-full items-center justify-between rounded-xl bg-neutral-950 px-5 text-sm font-semibold text-white transition-all duration-300 hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-neutral-500"
                         >
-                            <span>Verifikasi &amp; Lanjutkan</span>
+                            <span>{processing ? 'Memverifikasi...' : 'Verifikasi & Lanjutkan'}</span>
                             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 transition-all duration-300 group-hover:translate-x-1 group-hover:bg-white/20">
                                 <Icon name="arrow-right" size={16} />
                             </span>
                         </button>
+                        </form>
 
                         <div className="mt-7 border-t border-neutral-100 pt-6">
                             <Link

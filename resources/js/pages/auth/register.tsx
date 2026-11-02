@@ -94,9 +94,34 @@ export default function Register() {
 
         post('/register', {
             forceFormData: true,
+            onError: () => {
+                document.getElementById('register-errors')?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                });
+            },
             onFinish: () => reset('password', 'password_confirmation'),
         });
     }
+
+    const errorLabels: Record<string, string> = {
+        name: 'Nama lengkap',
+        email: 'Email',
+        phone: 'Nomor handphone',
+        borrower_type: 'Kategori peminjam',
+        identity_number: 'NIM / NIP / NIK',
+        faculty: 'Fakultas',
+        study_program: 'Program studi',
+        enrollment_year: 'Angkatan',
+        unit_name: 'Unit kerja',
+        position: 'Jabatan',
+        organization_name: 'Nama organisasi / instansi',
+        borrowing_context: 'Konteks peminjaman',
+        address: 'Alamat',
+        photo: 'Foto profil',
+        password: 'Password / konfirmasi password',
+        password_confirmation: 'Konfirmasi password',
+    };
 
     function removePhoto() {
         setData('photo', null);
@@ -199,6 +224,42 @@ export default function Register() {
                                 onSubmit={submit}
                                 className="space-y-7"
                             >
+                                {Object.keys(errors).length > 0 && (
+                                    <div
+                                        id="register-errors"
+                                        role="alert"
+                                        aria-live="assertive"
+                                        className="scroll-mt-4 rounded-xl border border-red-200 bg-red-50 p-4 text-red-900"
+                                    >
+                                        <p className="text-sm font-semibold">
+                                            Pendaftaran belum berhasil. Periksa {Object.keys(errors).length} bagian berikut:
+                                        </p>
+                                        <ul className="mt-2 space-y-1.5">
+                                            {Object.entries(errors).map(([field, message]) => (
+                                                <li key={field}>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            const input = document.getElementById(field);
+                                                            input?.scrollIntoView({
+                                                                behavior: 'smooth',
+                                                                block: 'center',
+                                                            });
+                                                            input?.focus({ preventScroll: true });
+                                                        }}
+                                                        className="text-left text-xs leading-5 underline decoration-red-300 underline-offset-2 hover:decoration-red-700"
+                                                    >
+                                                        <span className="font-semibold">
+                                                            {errorLabels[field] ?? field}:
+                                                        </span>{' '}
+                                                        {message}
+                                                    </button>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+
                                 {/* Foto Profil */}
                                 <div className="flex flex-col gap-4 rounded-xl border border-neutral-200 bg-neutral-50 p-4 sm:flex-row sm:items-center">
                                     <div className="relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-neutral-200 bg-white">
@@ -343,6 +404,7 @@ export default function Register() {
                                         {borrowerOptions.map((option) => (
                                             <button
                                                 key={option.value}
+                                                id={option.value === 'mahasiswa' ? 'borrower_type' : undefined}
                                                 type="button"
                                                 onClick={() =>
                                                     changeBorrowerType(option.value as BorrowerType)

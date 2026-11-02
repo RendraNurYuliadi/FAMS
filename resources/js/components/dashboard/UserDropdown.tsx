@@ -5,12 +5,27 @@ import Icon from '../Icon';
 
 export default function UserDropdown() {
     const [open, setOpen] = useState(false);
-    const page = usePage();
-    const auth = (page.props as any).auth;
-    const user = auth?.user;
+    const { auth } = usePage<{
+        auth: {
+            user: {
+                name: string;
+                email: string;
+                role: string;
+                avatar?: string;
+            } | null;
+        };
+    }>().props;
+    const user = auth.user;
 
     const name = user?.name ?? 'Admin FAMS';
     const email = user?.email ?? 'admin@fams.ac.id';
+    const role = user?.role ?? 'admin';
+    const roleLabel =
+        role === 'peminjam'
+            ? 'Peminjam'
+            : role === 'pengelola'
+              ? 'Pengelola'
+              : 'Administrator';
     const initial = name.charAt(0).toUpperCase();
 
     function logout() {
@@ -42,9 +57,7 @@ export default function UserDropdown() {
                     <p className="max-w-[120px] truncate text-xs font-semibold text-white">
                         {name}
                     </p>
-                    <p className="text-[10px] text-neutral-400">
-                        Administrator
-                    </p>
+                    <p className="text-[10px] text-neutral-400">{roleLabel}</p>
                 </div>
 
                 <Icon name="arrow-right" size={13} className="hidden rotate-90 text-neutral-300 sm:block" />
@@ -75,11 +88,11 @@ export default function UserDropdown() {
                                 </div>
                             </div>
                             <span className="mt-3 inline-flex rounded-full bg-neutral-100 px-2.5 py-1 text-[10px] font-medium text-neutral-600">
-                                Administrator
+                                {roleLabel}
                             </span>
                         </div>
 
-                        <div className="p-2">
+                        {role !== 'peminjam' && <div className="p-2">
                             <a
                                 href="/dashboard/pengaturan/profil"
                                 onClick={() => setOpen(false)}
@@ -97,7 +110,7 @@ export default function UserDropdown() {
                                 <Icon name="shield" size={16} />
                                 Pengaturan
                             </a>
-                        </div>
+                        </div>}
 
                         <div className="border-t border-neutral-100 p-2">
                             <button

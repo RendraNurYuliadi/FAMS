@@ -7,6 +7,7 @@ export type IconName =
     | 'arrow-left'
     | 'arrow-down'
     | 'arrow-up-right'
+    | 'rotate-ccw'
     | 'trending-up'
     | 'menu'
     | 'close'
@@ -15,6 +16,7 @@ export type IconName =
     | 'box'
     | 'package'
     | 'building'
+    | 'building-2'
     | 'calendar'
     | 'bell'
     | 'check'
@@ -48,7 +50,15 @@ export type IconName =
     | 'eye'
     | 'eye-off'
     | 'clipboard-list'
+    | 'file-check'
+    | 'upload'
+    | 'upload-cloud'
+    | 'user-round'
+    | 'inbox'
+    | 'save'
     | 'alert-circle'
+    | 'x-circle'
+    | 'check-check'
     | 'pencil'
     | 'trash-2'
     | 'image'
@@ -63,6 +73,13 @@ const paths: Record<IconName, ReactNode> = {
     'arrow-left': <path d="M19 12H5m7 7-7-7 7-7" />,
     'arrow-down': <path d="M12 5v14m7-7-7 7-7-7" />,
     'arrow-up-right': <path d="M7 17 17 7M7 7h10v10" />,
+    'rotate-ccw': (
+        <>
+            <path d="M3 12a9 9 0 1 0 2.6-6.4L3 8" />
+            <path d="M3 3v5h5" />
+            <path d="M12 7v5l3 2" />
+        </>
+    ),
     'trending-up': (
         <>
             <path d="m22 7-8.5 8.5-5-5L2 17" />
@@ -113,10 +130,67 @@ const paths: Record<IconName, ReactNode> = {
         </>
     ),
 
+    'file-check': (
+        <>
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+            <path d="M14 2v6h6m-12 5 2 2 4-4" />
+        </>
+    ),
+
+    upload: (
+        <>
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <path d="m17 8-5-5-5 5m5-5v12" />
+        </>
+    ),
+
+    'upload-cloud': (
+        <>
+            <path d="M20 16.2A4.5 4.5 0 0 0 18 7.5h-1.3A7 7 0 1 0 4 14.3" />
+            <path d="M12 12v9m-4-5 4-4 4 4" />
+        </>
+    ),
+
+    'user-round': (
+        <>
+            <circle cx="12" cy="8" r="5" />
+            <path d="M20 21a8 8 0 0 0-16 0" />
+        </>
+    ),
+
+    inbox: (
+        <>
+            <path d="M4 4h16l2 11v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-4L4 4Z" />
+            <path d="M2 15h6l2 3h4l2-3h6" />
+        </>
+    ),
+
+    save: (
+        <>
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" />
+            <path d="M17 21v-8H7v8M7 3v5h8" />
+        </>
+    ),
+
     'alert-circle': (
         <>
             <circle cx="12" cy="12" r="10" />
             <path d="M12 8v4m0 4h.01" />
+        </>
+    ),
+
+    'x-circle': (
+        <>
+            <circle cx="12" cy="12" r="10" />
+            <path d="m15 9-6 6m0-6 6 6" />
+        </>
+    ),
+
+    'check-check': (
+        <>
+            <path d="m18 6-7 7-3-3" />
+            <path d="m22 11-7.5 7.5L12 16" />
+            <path d="M2 12.5 5.5 16 12 9.5" />
         </>
     ),
 
@@ -200,6 +274,13 @@ const paths: Record<IconName, ReactNode> = {
         <>
             <rect x="4" y="3" width="16" height="18" rx="1" />
             <path d="M9 7h2m2 0h2M9 11h2m2 0h2M9 15h2m2 0h2M10 21v-3h4v3" />
+        </>
+    ),
+
+    'building-2': (
+        <>
+            <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2m12-10h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2" />
+            <path d="M10 6h4m-4 4h4m-4 4h4m-4 4h4" />
         </>
     ),
 

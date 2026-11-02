@@ -1,5 +1,5 @@
 
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import Icon from '../Icon';
 import SidebarMenu from './SidebarMenu';
 import { dashboardMenu, settingsMenu } from '../config/dashboard-menu';
@@ -17,6 +17,32 @@ export default function Sidebar({
     mobileOpen,
     onCloseMobile,
 }: SidebarProps) {
+    const { auth } = usePage<{
+        auth: { user: { role: string } | null };
+    }>().props;
+    const role = auth.user?.role;
+    const visibleDashboardMenu =
+        role === 'admin'
+            ? dashboardMenu
+            : role === 'pengelola'
+              ? dashboardMenu.filter((item) => item.href !== '/dashboard/pengguna')
+              : dashboardMenu
+                  .map((item) => {
+                      if (item.href === '/dashboard') return item;
+                      const children = item.children?.filter(({ href }) =>
+                          [
+                              '/dashboard/aset/katalog',
+                              '/dashboard/peminjaman',
+                              '/dashboard/pengembalian',
+                              '/dashboard/pengaduan',
+                          ].some((section) => href === section || href.startsWith(`${section}/`)),
+                      );
+
+                      return children?.length ? { ...item, children } : null;
+                  })
+                  .filter((item) => item !== null);
+    const visibleSettingsMenu = role === 'peminjam' ? [] : settingsMenu;
+
     return (
         <>
             {/* Mobile overlay */}
@@ -117,7 +143,7 @@ export default function Sidebar({
                     </p>
 
                     <nav className="sidebar-menu-enter space-y-1">
-                        {dashboardMenu.map((item) => (
+                        {visibleDashboardMenu.map((item) => (
                             <SidebarMenu
                                 key={item.href}
                                 item={item}
@@ -130,16 +156,16 @@ export default function Sidebar({
 
                 {/* Preferences: fixed at bottom */}
                 <div className="shrink-0 rounded-b-2xl border-t border-white/10 bg-neutral-950 px-3 pb-3 pt-4">
-                    <p
+                    {visibleSettingsMenu.length > 0 && <p
                         className={`mb-3 px-3 text-[10px] font-bold tracking-[0.16em] text-neutral-500 ${
                             collapsed ? 'text-center' : ''
                         }`}
                     >
                         {collapsed ? 'LAIN' : 'PREFERENSI'}
-                    </p>
+                    </p>}
 
-                    <nav className="sidebar-menu-enter space-y-1">
-                        {settingsMenu.map((item) => (
+                    {visibleSettingsMenu.length > 0 && <nav className="sidebar-menu-enter space-y-1">
+                        {visibleSettingsMenu.map((item) => (
                             <SidebarMenu
                                 key={item.href}
                                 item={item}
@@ -147,9 +173,9 @@ export default function Sidebar({
                                 onNavigate={onCloseMobile}
                             />
                         ))}
-                    </nav>
+                    </nav>}
 
-                    {!collapsed && (
+                    {!collapsed && role !== 'peminjam' && (
                         <div className="mt-4 flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-3">
                             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-xs font-bold text-neutral-950">
                                 AD
