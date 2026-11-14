@@ -1,4 +1,3 @@
-
 import { useState, type FormEvent } from 'react';
 import SectionHeading from '../components/SectionHeading';
 import Icon from '../components/Icon';
@@ -51,10 +50,7 @@ export default function ContactSection() {
         setSubmitted(true);
     };
 
-    const handleChange = (
-        field: keyof typeof initialForm,
-        value: string,
-    ) => {
+    const handleChange = (field: keyof typeof initialForm, value: string) => {
         setForm((previous) => ({
             ...previous,
             [field]: value,
@@ -73,22 +69,13 @@ export default function ContactSection() {
     return (
         <section
             id="kontak"
-            className="relative isolate overflow-hidden bg-gradient-to-br from-neutral-100 via-white to-neutral-200 px-5 py-24 sm:py-28 lg:px-8"
+            className="landing-section relative isolate overflow-hidden bg-surface-warm px-space-lg py-space-section sm:py-space-section-lg lg:px-space-2xl"
         >
-            <div className="pointer-events-none absolute inset-0 -z-10 opacity-30">
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        backgroundImage:
-                            'linear-gradient(rgba(23,23,23,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,23,0.05) 1px, transparent 1px)',
-                        backgroundSize: '40px 40px',
-                        maskImage:
-                            'radial-gradient(ellipse at 30% 45%, black 5%, transparent 72%)',
-                    }}
-                />
-            </div>
-            <div className="mx-auto max-w-7xl">
+            {/* Background Decoration */}
+            <div className="pointer-events-none absolute top-20 -left-32 -z-10 h-80 w-80 rounded-full bg-orange-200/40 blur-3xl" />
+            <div className="pointer-events-none absolute right-0 -bottom-32 -z-10 h-96 w-96 rounded-full bg-[#F97316]/10 blur-3xl" />
 
+            <div className="relative mx-auto max-w-7xl">
                 {/* Section Heading */}
                 <div className="mb-12 max-w-2xl">
                     <SectionHeading
@@ -99,51 +86,47 @@ export default function ContactSection() {
                     />
                 </div>
 
-                <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+                <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
+                    {/* LEFT: CONTACT INFORMATION */}
+                    <div className="relative isolate overflow-hidden rounded-3xl bg-charcoal-900 p-space-xl text-white shadow-xl shadow-orange-950/10 sm:p-space-2xl">
+                        {/* Decorative Elements */}
+                        <div className="pointer-events-none absolute -top-20 -right-20 -z-10 h-64 w-64 rounded-full border border-white/10" />
+                        <div className="pointer-events-none absolute -top-10 -right-10 -z-10 h-44 w-44 rounded-full border border-[#F97316]/20" />
+                        <div className="pointer-events-none absolute -bottom-24 -left-20 -z-10 h-64 w-64 rounded-full bg-[#F97316]/10 blur-3xl" />
 
-                    {/* Left: Contact Information */}
-                    <div className="relative isolate overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-700 p-6 text-white shadow-[0_20px_55px_rgba(0,0,0,0.18)] sm:p-8">
-                        <div
-                            className="pointer-events-none absolute inset-0 -z-10 opacity-15"
-                            style={{
-                                backgroundImage:
-                                    'repeating-linear-gradient(135deg, white 0, white 1px, transparent 1px, transparent 14px)',
-                                maskImage:
-                                    'linear-gradient(135deg, black, transparent 60%)',
-                            }}
-                        />
-                        <div className="pointer-events-none absolute -right-12 -top-16 -z-10 size-48 rounded-full border border-white/15" />
-                        <div className="pointer-events-none absolute -right-4 -top-8 -z-10 size-32 rounded-full border border-white/10" />
                         <div>
-                            <h3 className="text-lg font-bold text-white">
+                            <span className="inline-flex items-center gap-2 rounded-full border border-orange-400/25 bg-[#F97316]/10 px-3 py-2 text-micro font-semibold tracking-[0.16em] text-orange-400">
+                                <span className="h-1.5 w-1.5 rounded-full bg-[#F97316]" />
+                                CONTACT INFORMATION
+                            </span>
+
+                            <h3 className="mt-7 text-heading font-bold text-white">
                                 Informasi Kontak
                             </h3>
 
-                            <p className="mt-2 text-sm leading-7 text-white/65">
+                            <p className="mt-3 max-w-sm text-body leading-7 text-gray-400">
                                 Informasi mengenai pengelolaan dan layanan
                                 fasilitas fakultas melalui sistem FAMS.
                             </p>
                         </div>
 
-                        <div className="mt-8 space-y-6">
-                            {contacts.map((contact) => (
+                        {/* Contact List */}
+                        <div className="mt-10 space-y-7">
+                            {contacts.map((contact, index) => (
                                 <div
                                     key={contact.title}
-                                    className="group flex items-start gap-4"
+                                    className="flex items-start gap-4"
                                 >
-                                    <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-white transition group-hover:bg-white group-hover:text-neutral-950">
-                                        <Icon
-                                            name={contact.icon}
-                                            size={20}
-                                        />
+                                    <span className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-orange-400/20 bg-[#F97316]/10 text-[#F97316]">
+                                        <Icon name={contact.icon} size={20} />
                                     </span>
 
-                                    <div className="pt-1">
-                                        <h4 className="text-sm font-semibold text-white">
+                                    <div className="min-w-0 pt-1">
+                                        <h4 className="text-body font-semibold text-white">
                                             {contact.title}
                                         </h4>
 
-                                        <p className="mt-1 text-sm leading-6 text-white/60">
+                                        <p className="mt-1 text-body leading-6 text-gray-400">
                                             {contact.detail}
                                         </p>
                                     </div>
@@ -152,89 +135,93 @@ export default function ContactSection() {
                         </div>
 
                         {/* FAQ Card */}
-                        <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-sm sm:p-7">
-                            <div className="flex size-11 items-center justify-center rounded-xl bg-white text-neutral-950">
+                        <div className="mt-12 rounded-2xl border border-white/10 bg-white/[0.06] p-6">
+                            <div className="flex size-11 items-center justify-center rounded-xl bg-[#F97316] text-white">
                                 <Icon name="help-circle" size={21} />
                             </div>
 
-                            <h3 className="mt-5 text-lg font-bold text-white">
+                            <h3 className="mt-5 text-subheading font-bold text-white">
                                 Punya pertanyaan umum?
                             </h3>
 
-                            <p className="mt-2 text-sm leading-7 text-white/65">
+                            <p className="mt-2 text-body leading-7 text-gray-400">
                                 Temukan jawaban dari pertanyaan yang sering
                                 diajukan seputar penggunaan dan layanan FAMS.
                             </p>
 
                             <a
                                 href="#faq"
-                                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white transition hover:gap-3 hover:text-white/70"
+                                className="mt-5 inline-flex items-center gap-2 text-body font-semibold text-[#FB923C] transition hover:gap-3 hover:text-orange-300"
                             >
                                 Lihat FAQ
                                 <Icon name="arrow-right" size={16} />
                             </a>
                         </div>
+
+                        {/* Bottom Accent */}
+                        <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#EA580C] via-[#F97316] to-orange-300" />
                     </div>
 
-                    {/* Right: Ask a Question Form */}
-                    <div className="rounded-3xl border border-white bg-gradient-to-br from-white via-white to-neutral-100 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.08)] sm:p-8 lg:p-9">
-
+                    {/* RIGHT: QUESTION FORM */}
+                    <div className="rounded-3xl border border-orange-100 bg-white p-5 shadow-lg shadow-orange-950/[0.04] sm:p-8 lg:p-9">
                         {/* Form Header */}
-                        <div className="mb-8">
-                            <div className="flex size-12 items-center justify-center rounded-2xl bg-neutral-950 text-white">
+                        <div className="mb-8 flex items-start gap-4">
+                            <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#FFF0E3] text-[#EA580C]">
                                 <Icon name="message" size={22} />
                             </div>
 
-                            <h3 className="mt-5 text-2xl font-bold tracking-tight text-neutral-950">
-                                Ask a Question
-                            </h3>
+                            <div>
+                                <h3 className="text-heading font-bold tracking-tight text-[#171717]">
+                                    Ask a Question
+                                </h3>
 
-                            <p className="mt-2 text-sm leading-7 text-neutral-500">
-                                Sampaikan pertanyaan, kendala, atau masukan
-                                terkait pengelolaan aset melalui formulir berikut.
-                            </p>
+                                <p className="mt-2 text-body leading-7 text-gray-500">
+                                    Sampaikan pertanyaan, kendala, atau masukan
+                                    terkait pengelolaan aset melalui formulir
+                                    berikut.
+                                </p>
+                            </div>
                         </div>
 
                         {submitted ? (
-                            /* Success State */
-                            <div className="rounded-2xl border border-neutral-200 bg-white p-7 text-center sm:p-10">
-                                <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-neutral-950 text-white">
+                            /* SUCCESS STATE */
+                            <div className="rounded-2xl border border-green-200 bg-green-50/70 p-7 text-center sm:p-10">
+                                <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-green-600 text-white">
                                     <Icon name="check" size={26} />
                                 </div>
 
-                                <h4 className="mt-5 text-lg font-bold text-neutral-950">
+                                <h4 className="mt-5 text-subheading font-bold text-[#171717]">
                                     Formulir berhasil disubmit!
                                 </h4>
 
-                                <p className="mx-auto mt-2 max-w-sm text-sm leading-7 text-neutral-500">
+                                <p className="mx-auto mt-2 max-w-sm text-body leading-7 text-gray-600">
                                     Terima kasih telah mengirimkan pertanyaan.
-                                    Formulir ini masih dalam mode demo dan
-                                    belum dikirim ke pengelola FAMS.
+                                    Formulir ini masih dalam mode demo dan belum
+                                    dikirim ke pengelola FAMS.
                                 </p>
 
                                 <button
                                     type="button"
                                     onClick={handleReset}
-                                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-neutral-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-700"
+                                    className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#F97316] px-6 py-3 text-body font-semibold text-white transition hover:bg-[#EA580C]"
                                 >
                                     Kirim pertanyaan lainnya
                                     <Icon name="arrow-right" size={16} />
                                 </button>
                             </div>
                         ) : (
-                            <form
-                                onSubmit={handleSubmit}
-                                className="space-y-5"
-                            >
+                            <form onSubmit={handleSubmit} className="space-y-5">
                                 {/* Name and Email */}
                                 <div className="grid gap-5 sm:grid-cols-2">
                                     <div>
                                         <label
                                             htmlFor="contact-name"
-                                            className="mb-2 block text-sm font-semibold text-neutral-800"
+                                            className="mb-2 block text-body font-semibold text-gray-800"
                                         >
                                             Nama Lengkap
-                                            <span className="ml-1 text-neutral-600">*</span>
+                                            <span className="ml-1 text-[#EA580C]">
+                                                *
+                                            </span>
                                         </label>
 
                                         <input
@@ -247,19 +234,24 @@ export default function ContactSection() {
                                             placeholder="Masukkan nama lengkap"
                                             value={form.name}
                                             onChange={(e) =>
-                                                handleChange('name', e.target.value)
+                                                handleChange(
+                                                    'name',
+                                                    e.target.value,
+                                                )
                                             }
-                                            className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/5"
+                                            className="w-full rounded-xl border border-gray-200 bg-[#FFFCF9] px-4 py-3 text-body text-gray-900 transition outline-none placeholder:text-gray-400 focus:border-[#F97316] focus:ring-2 focus:ring-[#F97316]/15"
                                         />
                                     </div>
 
                                     <div>
                                         <label
                                             htmlFor="contact-email"
-                                            className="mb-2 block text-sm font-semibold text-neutral-800"
+                                            className="mb-2 block text-body font-semibold text-gray-800"
                                         >
                                             Alamat Email
-                                            <span className="ml-1 text-neutral-600">*</span>
+                                            <span className="ml-1 text-[#EA580C]">
+                                                *
+                                            </span>
                                         </label>
 
                                         <input
@@ -271,9 +263,12 @@ export default function ContactSection() {
                                             placeholder="nama@email.com"
                                             value={form.email}
                                             onChange={(e) =>
-                                                handleChange('email', e.target.value)
+                                                handleChange(
+                                                    'email',
+                                                    e.target.value,
+                                                )
                                             }
-                                            className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/5"
+                                            className="w-full rounded-xl border border-gray-200 bg-[#FFFCF9] px-4 py-3 text-body text-gray-900 transition outline-none placeholder:text-gray-400 focus:border-[#F97316] focus:ring-2 focus:ring-[#F97316]/15"
                                         />
                                     </div>
                                 </div>
@@ -282,10 +277,12 @@ export default function ContactSection() {
                                 <div>
                                     <label
                                         htmlFor="contact-category"
-                                        className="mb-2 block text-sm font-semibold text-neutral-800"
+                                        className="mb-2 block text-body font-semibold text-gray-800"
                                     >
                                         Kategori Pertanyaan
-                                        <span className="ml-1 text-neutral-600">*</span>
+                                        <span className="ml-1 text-[#EA580C]">
+                                            *
+                                        </span>
                                     </label>
 
                                     <select
@@ -293,9 +290,12 @@ export default function ContactSection() {
                                         required
                                         value={form.category}
                                         onChange={(e) =>
-                                            handleChange('category', e.target.value)
+                                            handleChange(
+                                                'category',
+                                                e.target.value,
+                                            )
                                         }
-                                        className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-800 outline-none transition focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/5"
+                                        className="w-full rounded-xl border border-gray-200 bg-[#FFFCF9] px-4 py-3 text-body text-gray-800 transition outline-none focus:border-[#F97316] focus:ring-2 focus:ring-[#F97316]/15"
                                     >
                                         {categories.map((category) => (
                                             <option
@@ -312,10 +312,12 @@ export default function ContactSection() {
                                 <div>
                                     <label
                                         htmlFor="contact-subject"
-                                        className="mb-2 block text-sm font-semibold text-neutral-800"
+                                        className="mb-2 block text-body font-semibold text-gray-800"
                                     >
                                         Subjek Pertanyaan
-                                        <span className="ml-1 text-neutral-600">*</span>
+                                        <span className="ml-1 text-[#EA580C]">
+                                            *
+                                        </span>
                                     </label>
 
                                     <input
@@ -327,9 +329,12 @@ export default function ContactSection() {
                                         placeholder="Contoh: Informasi peminjaman proyektor"
                                         value={form.subject}
                                         onChange={(e) =>
-                                            handleChange('subject', e.target.value)
+                                            handleChange(
+                                                'subject',
+                                                e.target.value,
+                                            )
                                         }
-                                        className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/5"
+                                        className="w-full rounded-xl border border-gray-200 bg-[#FFFCF9] px-4 py-3 text-body text-gray-900 transition outline-none placeholder:text-gray-400 focus:border-[#F97316] focus:ring-2 focus:ring-[#F97316]/15"
                                     />
                                 </div>
 
@@ -338,13 +343,15 @@ export default function ContactSection() {
                                     <div className="mb-2 flex items-center justify-between gap-2">
                                         <label
                                             htmlFor="contact-message"
-                                            className="block text-sm font-semibold text-neutral-800"
+                                            className="block text-body font-semibold text-gray-800"
                                         >
                                             Pertanyaan atau Pesan
-                                            <span className="ml-1 text-neutral-600">*</span>
+                                            <span className="ml-1 text-[#EA580C]">
+                                                *
+                                            </span>
                                         </label>
 
-                                        <span className="text-xs text-neutral-400">
+                                        <span className="text-caption text-gray-400 tabular-nums">
                                             {form.message.length}/1000
                                         </span>
                                     </div>
@@ -358,46 +365,53 @@ export default function ContactSection() {
                                         placeholder="Tuliskan pertanyaan atau pesan yang ingin disampaikan..."
                                         value={form.message}
                                         onChange={(e) =>
-                                            handleChange('message', e.target.value)
+                                            handleChange(
+                                                'message',
+                                                e.target.value,
+                                            )
                                         }
-                                        className="w-full resize-y rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm leading-7 text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/5"
+                                        className="w-full resize-y rounded-xl border border-gray-200 bg-[#FFFCF9] px-4 py-3 text-body leading-7 text-gray-900 transition outline-none placeholder:text-gray-400 focus:border-[#F97316] focus:ring-2 focus:ring-[#F97316]/15"
                                     />
                                 </div>
 
                                 {/* Submit */}
-                                <div className="flex flex-col gap-3 border-t border-neutral-200 pt-5 sm:flex-row sm:items-center sm:justify-between">
-                                    <p className="text-xs leading-5 text-neutral-400">
-                                        <span className="text-neutral-600">*</span>
-                                        {' '}Wajib diisi.
+                                <div className="flex flex-col gap-4 border-t border-orange-100 pt-5 sm:flex-row sm:items-center sm:justify-between">
+                                    <p className="text-caption leading-5 text-gray-400">
+                                        <span className="text-[#EA580C]">
+                                            *
+                                        </span>{' '}
+                                        Wajib diisi.
                                     </p>
 
                                     <div className="flex flex-col-reverse gap-3 sm:flex-row">
                                         <button
                                             type="button"
                                             onClick={handleReset}
-                                            className="rounded-full border border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-neutral-600 transition hover:bg-neutral-100"
+                                            className="rounded-full border border-gray-200 bg-white px-6 py-3 text-body font-semibold text-gray-600 transition hover:border-gray-400 hover:bg-gray-50"
                                         >
                                             Reset
                                         </button>
 
                                         <button
                                             type="submit"
-                                            className="inline-flex items-center justify-center gap-2 rounded-full bg-neutral-950 px-7 py-3 text-sm font-semibold text-white transition hover:bg-neutral-700"
+                                            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#F97316] px-7 py-3 text-body font-semibold text-white transition hover:bg-[#EA580C]"
                                         >
                                             Kirim Pertanyaan
-                                            <Icon name="arrow-right" size={16} />
+                                            <Icon
+                                                name="arrow-right"
+                                                size={16}
+                                            />
                                         </button>
                                     </div>
                                 </div>
                             </form>
                         )}
-
                     </div>
                 </div>
 
                 {/* Footer Note */}
-                <div className="mt-10 border-t border-neutral-100 pt-6">
-                    <p className="text-xs leading-6 text-neutral-400">
+                <div className="mt-10 border-t border-orange-200/70 pt-6">
+                    <p className="text-caption leading-6 text-gray-500">
                         Informasi kontak pada halaman demo perlu disesuaikan
                         dengan informasi resmi institusi. Formulir pertanyaan
                         saat ini masih berupa simulasi frontend.

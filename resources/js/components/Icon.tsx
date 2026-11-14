@@ -1,4 +1,3 @@
-
 import type { SVGProps, ReactNode } from 'react';
 
 export type IconName =
@@ -14,6 +13,8 @@ export type IconName =
     | 'menu'
     | 'close'
     | 'search'
+    | 'search-x'
+    | 'mouse-pointer-click'
     | 'filter'
     | 'box'
     | 'package'
@@ -39,6 +40,7 @@ export type IconName =
     | 'file'
     | 'chevron-left'
     | 'chevron-right'
+    | 'chevron-down'
     | 'external'
     | 'plus'
     | 'minus'
@@ -113,21 +115,21 @@ const paths: Record<IconName, ReactNode> = {
         </>
     ),
     'image-plus': (
-    <>
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <circle cx="8.5" cy="8.5" r="1.5" />
-        <path d="m21 15-5-5L5 21" />
-        <path d="M19 8v6" />
-        <path d="M16 11h6" />
-    </>
+        <>
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="m21 15-5-5L5 21" />
+            <path d="M19 8v6" />
+            <path d="M16 11h6" />
+        </>
     ),
-    'map': (
-    <>
-        <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" />
-        <path d="M9 3v15M15 6v15" />
-    </>
+    map: (
+        <>
+            <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" />
+            <path d="M9 3v15M15 6v15" />
+        </>
     ),
-    'layers': (
+    layers: (
         <>
             <path d="m12 2 9 5-9 5-9-5 9-5Z" />
             <path d="m3 12 9 5 9-5" />
@@ -286,7 +288,7 @@ const paths: Record<IconName, ReactNode> = {
 
     x: <path d="m18 6-12 12M6 6l12 12" />,
 
-    'eye': (
+    eye: (
         <>
             <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
             <circle cx="12" cy="12" r="3" />
@@ -302,25 +304,25 @@ const paths: Record<IconName, ReactNode> = {
         </>
     ),
 
-        activity: (
+    activity: (
         <>
             <path d="M3 12h4l3-8 4 16 3-8h4" />
         </>
     ),
 
-        settings: (
-            <>
-                <path d="m12 2.5 2 1.5 2.4-.2 1.1 2.2 2.2 1.1-.2 2.4 1.5 2-1.5 2 .2 2.4-2.2 1.1-1.1 2.2-2.4-.2-2 1.5-2-1.5-2.4.2-1.1-2.2-2.2-1.1.2-2.4-1.5-2 1.5-2-.2-2.4L8 5.9l1.1-2.2 2.4.2 2-1.4Z" />
-                <circle cx="12" cy="12" r="3" />
-            </>
-        ),
+    settings: (
+        <>
+            <path d="m12 2.5 2 1.5 2.4-.2 1.1 2.2 2.2 1.1-.2 2.4 1.5 2-1.5 2 .2 2.4-2.2 1.1-1.1 2.2-2.4-.2-2 1.5-2-1.5-2.4.2-1.1-2.2-2.2-1.1.2-2.4-1.5-2 1.5-2-.2-2.4L8 5.9l1.1-2.2 2.4.2 2-1.4Z" />
+            <circle cx="12" cy="12" r="3" />
+        </>
+    ),
 
-        info: (
-            <>
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 16v-4m0-4h.01" />
-            </>
-        ),
+    info: (
+        <>
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4m0-4h.01" />
+        </>
+    ),
 
     close: <path d="m18 6-12 12M6 6l12 12" />,
 
@@ -328,6 +330,20 @@ const paths: Record<IconName, ReactNode> = {
         <>
             <circle cx="11" cy="11" r="7" />
             <path d="m16 16 4 4" />
+        </>
+    ),
+
+    'search-x': (
+        <>
+            <circle cx="10.5" cy="10.5" r="7" />
+            <path d="m8 8 5 5m0-5-5 5m8.5 8.5L21 21" />
+        </>
+    ),
+
+    'mouse-pointer-click': (
+        <>
+            <path d="m8 7 11 5-4 2-2 4L8 7Z" />
+            <path d="m17 17 4 4M12 2v2M5 5 3.5 3.5M4 12H2" />
         </>
     ),
 
@@ -458,6 +474,7 @@ const paths: Record<IconName, ReactNode> = {
 
     'chevron-left': <path d="m15 18-6-6 6-6" />,
     'chevron-right': <path d="m9 18 6-6-6-6" />,
+    'chevron-down': <path d="m6 9 6 6 6-6" />,
 
     external: (
         <>

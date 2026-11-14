@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Icon from '../Icon';
@@ -65,12 +64,12 @@ export default function NotificationDropdown() {
                 aria-label="Notifikasi"
                 aria-expanded={open}
                 aria-haspopup="dialog"
-                className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-950 text-white transition hover:bg-neutral-800"
+                className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/85 transition hover:bg-white/10 hover:text-white"
             >
                 <Icon name="bell" size={20} />
 
                 {unreadCount > 0 && (
-                    <span className="absolute right-2 top-2 flex h-2 w-2 rounded-full border-2 border-white bg-neutral-950" />
+                    <span className="absolute top-2 right-2 flex h-2 w-2 rounded-full border-2 border-charcoal-900 bg-primary-500" />
                 )}
             </button>
 
@@ -90,75 +89,80 @@ export default function NotificationDropdown() {
                             aria-labelledby="notification-modal-title"
                             className="w-full max-w-lg overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl"
                         >
-                        <div className="flex items-center justify-between gap-2 border-b border-neutral-100 px-4 py-4 sm:px-5">
-                            <div>
-                                <h2 id="notification-modal-title" className="text-sm font-semibold text-neutral-900">
-                                    Notifikasi
-                                </h2>
-                                <p className="mt-0.5 text-[10px] leading-4 text-neutral-400">
-                                    {unreadCount} pemberitahuan belum dibaca
-                                </p>
+                            <div className="flex items-center justify-between gap-2 border-b border-neutral-100 px-4 py-4 sm:px-5">
+                                <div>
+                                    <h2
+                                        id="notification-modal-title"
+                                        className="text-sm font-semibold text-neutral-900"
+                                    >
+                                        Notifikasi
+                                    </h2>
+                                    <p className="mt-0.5 text-[10px] leading-4 text-neutral-400">
+                                        {unreadCount} pemberitahuan belum dibaca
+                                    </p>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                    <button
+                                        type="button"
+                                        onClick={markAllAsRead}
+                                        aria-label="Tandai semua notifikasi sudah dibaca"
+                                        title="Tandai semua sudah dibaca"
+                                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950"
+                                    >
+                                        <Icon name="check" size={16} />
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setOpen(false)}
+                                        aria-label="Tutup notifikasi"
+                                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950"
+                                    >
+                                        <Icon name="close" size={18} />
+                                    </button>
+                                </div>
                             </div>
-                            <div className="flex items-center gap-1">
-                                <button
-                                    type="button"
-                                    onClick={markAllAsRead}
-                                    aria-label="Tandai semua notifikasi sudah dibaca"
-                                    title="Tandai semua sudah dibaca"
-                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950"
-                                >
-                                    <Icon name="check" size={16} />
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => setOpen(false)}
-                                    aria-label="Tutup notifikasi"
-                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950"
-                                >
-                                    <Icon name="close" size={18} />
-                                </button>
-                            </div>
-                        </div>
 
-                        <div className="max-h-[min(60dvh,420px)] overflow-y-auto">
-                            {notifications.map((item) => (
-                                <div
-                                    key={item.id}
-                                    className={`flex gap-3 border-b border-neutral-100 px-4 py-4 sm:px-5 ${
-                                        item.unread ? 'bg-neutral-50/80' : ''
-                                    }`}
-                                >
-                                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-white text-neutral-600">
-                                        <Icon name="clock" size={16} />
-                                    </div>
-
-                                    <div className="min-w-0 flex-1">
-                                        <div className="flex items-start justify-between gap-2">
-                                            <p className="break-words text-xs font-semibold text-neutral-800">
-                                                {item.title}
-                                            </p>
-                                            {item.unread && (
-                                                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-900" />
-                                            )}
+                            <div className="max-h-[min(60dvh,420px)] overflow-y-auto">
+                                {notifications.map((item) => (
+                                    <div
+                                        key={item.id}
+                                        className={`flex gap-3 border-b border-neutral-100 px-4 py-4 sm:px-5 ${
+                                            item.unread
+                                                ? 'bg-neutral-50/80'
+                                                : ''
+                                        }`}
+                                    >
+                                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-white text-neutral-600">
+                                            <Icon name="clock" size={16} />
                                         </div>
 
-                                        <p className="mt-1 break-words text-[11px] leading-5 text-neutral-500">
-                                            {item.description}
-                                        </p>
+                                        <div className="min-w-0 flex-1">
+                                            <div className="flex items-start justify-between gap-2">
+                                                <p className="text-xs font-semibold break-words text-neutral-800">
+                                                    {item.title}
+                                                </p>
+                                                {item.unread && (
+                                                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-900" />
+                                                )}
+                                            </div>
 
-                                        <p className="mt-2 text-[10px] text-neutral-400">
-                                            {item.time}
-                                        </p>
+                                            <p className="mt-1 text-[11px] leading-5 break-words text-neutral-500">
+                                                {item.description}
+                                            </p>
+
+                                            <p className="mt-2 text-[10px] text-neutral-400">
+                                                {item.time}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
 
-                        <div className="border-t border-neutral-100 p-3 text-center">
-                            <span className="text-[10px] text-neutral-400">
-                                Notifikasi FAMS
-                            </span>
-                        </div>
+                            <div className="border-t border-neutral-100 p-3 text-center">
+                                <span className="text-[10px] text-neutral-400">
+                                    Notifikasi FAMS
+                                </span>
+                            </div>
                         </section>
                     </div>,
                     document.body,

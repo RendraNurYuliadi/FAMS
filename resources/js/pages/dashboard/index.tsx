@@ -16,8 +16,8 @@ const stats = [
         value: '120',
         description: 'Seluruh aset terdaftar',
         icon: 'building',
-        color: '#262626',
-        light: '#e5e5e5',
+        color: '#F97316',
+        light: '#FFF0E5',
         trend: '+8 aset',
     },
     {
@@ -25,8 +25,8 @@ const stats = [
         value: '82',
         description: 'Siap untuk dipinjam',
         icon: 'shield',
-        color: '#525252',
-        light: '#e5e5e5',
+        color: '#EA580C',
+        light: '#FFF0E5',
         trend: '68,3% dari total',
     },
     {
@@ -34,8 +34,8 @@ const stats = [
         value: '25',
         description: 'Aset dalam peminjaman',
         icon: 'users',
-        color: '#737373',
-        light: '#f5f5f5',
+        color: '#FB923C',
+        light: '#FFF7ED',
         trend: '20,8% dari total',
     },
     {
@@ -43,8 +43,8 @@ const stats = [
         value: '8',
         description: 'Membutuhkan pengecekan',
         icon: 'clock',
-        color: '#404040',
-        light: '#d4d4d4',
+        color: '#242424',
+        light: '#F2DFCC',
         trend: 'Perlu tindak lanjut',
     },
 ] as const;
@@ -55,40 +55,40 @@ const activities = [
         detail: 'Proyektor Epson · Rendra Nur Yuliadi',
         time: '09.45',
         status: 'Menunggu',
-        color: '#737373',
-        light: '#f5f5f5',
+        color: '#F97316',
+        light: '#FFF0E5',
     },
     {
         title: 'Pengembalian aset',
         detail: 'Kamera Canon · Amelia Puji Lestari',
         time: '09.20',
         status: 'Pemeriksaan',
-        color: '#525252',
-        light: '#e5e5e5',
+        color: '#FB923C',
+        light: '#FFF7ED',
     },
     {
         title: 'Laporan kerusakan',
         detail: 'Kursi ruang kelas · Herliana Tri Cahyanti',
         time: '08.50',
         status: 'Dilaporkan',
-        color: '#404040',
-        light: '#d4d4d4',
+        color: '#EA580C',
+        light: '#FFF0E5',
     },
     {
         title: 'Peminjaman disetujui',
         detail: 'Laptop Lenovo · Wulan Nurfitriani',
         time: '08.15',
         status: 'Disetujui',
-        color: '#262626',
-        light: '#e5e5e5',
+        color: '#16A34A',
+        light: '#F0FDF4',
     },
 ];
 
 const assetCategories = [
-    { name: 'Elektronik', total: 45, percentage: 38, color: '#262626' },
-    { name: 'Peralatan Kelas', total: 32, percentage: 27, color: '#737373' },
-    { name: 'Furniture', total: 25, percentage: 21, color: '#525252' },
-    { name: 'Lainnya', total: 18, percentage: 14, color: '#404040' },
+    { name: 'Elektronik', total: 45, percentage: 38, color: '#F97316' },
+    { name: 'Peralatan Kelas', total: 32, percentage: 27, color: '#FB923C' },
+    { name: 'Furniture', total: 25, percentage: 21, color: '#EA580C' },
+    { name: 'Lainnya', total: 18, percentage: 14, color: '#242424' },
 ];
 
 type Booking = {
@@ -130,8 +130,8 @@ const bookings: Booking[] = [
         purpose: 'Kebutuhan kegiatan dan dokumentasi UKM.',
         start: '2026-11-03',
         end: '2026-11-07',
-        color: '#262626',
-        colorLight: '#e5e5e5',
+        color: '#F97316',
+        colorLight: '#FFF0E5',
         status: 'Disetujui',
     },
     {
@@ -147,8 +147,8 @@ const bookings: Booking[] = [
         purpose: 'Presentasi kegiatan akademik.',
         start: '2026-11-05',
         end: '2026-11-09',
-        color: '#737373',
-        colorLight: '#f5f5f5',
+        color: '#FB923C',
+        colorLight: '#FFF7ED',
         status: 'Disetujui',
     },
     {
@@ -164,8 +164,8 @@ const bookings: Booking[] = [
         purpose: 'Dokumentasi kegiatan fakultas.',
         start: '2026-11-12',
         end: '2026-11-15',
-        color: '#525252',
-        colorLight: '#e5e5e5',
+        color: '#EA580C',
+        colorLight: '#FFF0E5',
         status: 'Berlangsung',
     },
     {
@@ -182,8 +182,8 @@ const bookings: Booking[] = [
         purpose: 'Kebutuhan acara TahuConnect.',
         start: '2026-11-18',
         end: '2026-11-21',
-        color: '#404040',
-        colorLight: '#d4d4d4',
+        color: '#C2410C',
+        colorLight: '#FED7AA',
         status: 'Disetujui',
     },
     {
@@ -199,24 +199,24 @@ const bookings: Booking[] = [
         purpose: 'Praktikum dan penyusunan tugas.',
         start: '2026-11-24',
         end: '2026-11-27',
-        color: '#a3a3a3',
-        colorLight: '#f5f5f5',
+        color: '#FDBA74',
+        colorLight: '#FFF7ED',
         status: 'Disetujui',
     },
 ];
 
 const borrowerStats = [
-    { name: 'Mahasiswa', total: 68, percentage: 68, color: '#262626', light: '#e5e5e5' },
-    { name: 'Dosen', total: 18, percentage: 18, color: '#737373', light: '#f5f5f5' },
-    { name: 'Staf', total: 9, percentage: 9, color: '#525252', light: '#e5e5e5' },
-    { name: 'Organisasi', total: 5, percentage: 5, color: '#404040', light: '#d4d4d4' },
+    { name: 'Mahasiswa', total: 68, percentage: 68, color: '#F97316', light: '#FFF0E5' },
+    { name: 'Dosen', total: 18, percentage: 18, color: '#FB923C', light: '#FFF7ED' },
+    { name: 'Staf', total: 9, percentage: 9, color: '#EA580C', light: '#FFF0E5' },
+    { name: 'Organisasi', total: 5, percentage: 5, color: '#242424', light: '#F2DFCC' },
 ];
 
 const frequentBorrowers = [
-    { name: 'Rendra Nur Yuliadi', type: 'Mahasiswa', identity: '240160121104', total: 12, color: '#262626' },
-    { name: 'Amelia Puji Lestari', type: 'Mahasiswa', identity: '240160121007', total: 9, color: '#737373' },
-    { name: 'Herliana Tri Cahyanti', type: 'Mahasiswa', identity: '240160121044', total: 8, color: '#525252' },
-    { name: 'Jajang Didin', type: 'Mahasiswa', identity: '240160121120', total: 6, color: '#404040' },
+    { name: 'Rendra Nur Yuliadi', type: 'Mahasiswa', identity: '240160121104', total: 12, color: '#F97316' },
+    { name: 'Amelia Puji Lestari', type: 'Mahasiswa', identity: '240160121007', total: 9, color: '#FB923C' },
+    { name: 'Herliana Tri Cahyanti', type: 'Mahasiswa', identity: '240160121044', total: 8, color: '#EA580C' },
+    { name: 'Jajang Didin', type: 'Mahasiswa', identity: '240160121120', total: 6, color: '#242424' },
 ];
 
 const frequentAssets = [
@@ -533,11 +533,11 @@ function BookingCalendarSection() {
 
                     <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-neutral-100 pt-5">
                         {[
-                            { label: 'Peminjaman 1', color: '#262626' },
-                            { label: 'Peminjaman 2', color: '#737373' },
-                            { label: 'Peminjaman 3', color: '#525252' },
-                            { label: 'Peminjaman 4', color: '#404040' },
-                            { label: 'Peminjaman 5', color: '#a3a3a3' },
+                            { label: 'Peminjaman 1', color: '#F97316' },
+                            { label: 'Peminjaman 2', color: '#FB923C' },
+                            { label: 'Peminjaman 3', color: '#EA580C' },
+                            { label: 'Peminjaman 4', color: '#242424' },
+                            { label: 'Peminjaman 5', color: '#FDBA74' },
                         ].map((item) => (
                             <div key={item.label} className="flex items-center gap-2">
                                 <span className="size-2.5 rounded-full" style={{ backgroundColor: item.color }} />
@@ -820,7 +820,7 @@ function BorrowingChart() {
                                 style={{
                                     height: `${(item.value / maxValue) * 100}%`,
                                     minHeight: '8px',
-                                    backgroundColor: ['#262626', '#737373', '#525252', '#404040', '#a3a3a3', '#262626', '#737373'][index],
+                                    backgroundColor: ['#F97316', '#FB923C', '#EA580C', '#242424', '#FDBA74', '#F97316', '#FB923C'][index],
                                 }}
                                 title={`${item.value} peminjaman`}
                             />
@@ -879,10 +879,10 @@ function BorrowerDistribution() {
                     className="relative flex size-40 shrink-0 items-center justify-center rounded-full"
                     style={{
                         background: `conic-gradient(
-                            #262626 0% 68%,
-                            #737373 68% 86%,
-                            #525252 86% 95%,
-                            #404040 95% 100%
+                            #F97316 0% 68%,
+                            #FB923C 68% 86%,
+                            #EA580C 86% 95%,
+                            #242424 95% 100%
                         )`,
                     }}
                 >
@@ -1025,7 +1025,7 @@ function PopularAssets() {
                                 className="h-full rounded-full transition-all duration-500"
                                 style={{
                                     width: `${asset.percentage}%`,
-                                    backgroundColor: ['#262626', '#737373', '#525252', '#404040'][index],
+                                    backgroundColor: ['#F97316', '#FB923C', '#EA580C', '#242424'][index],
                                 }}
                             />
                         </div>

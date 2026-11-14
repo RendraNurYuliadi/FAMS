@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import Button from '../components/Button';
 
@@ -31,6 +30,7 @@ export default function HeroSection() {
             setVisibleCharacters(0);
 
             let characterIndex = 0;
+
             typingTimer = window.setInterval(() => {
                 characterIndex += 1;
                 setVisibleCharacters(characterIndex);
@@ -58,59 +58,67 @@ export default function HeroSection() {
     return (
         <section
             id="beranda"
-            className="relative overflow-hidden bg-gradient-to-br from-white via-neutral-100 to-neutral-300"
+            className="landing-section relative overflow-hidden bg-surface-warm"
         >
             {/* Background Decoration */}
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_18%_22%,rgba(255,255,255,0.95),transparent_38%),radial-gradient(ellipse_at_88%_72%,rgba(64,64,64,0.16),transparent_42%)]" />
-            <div
-                className="pointer-events-none absolute inset-0 opacity-30"
-                style={{
-                    backgroundImage:
-                        'linear-gradient(rgba(23,23,23,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,23,0.05) 1px, transparent 1px)',
-                    backgroundSize: '44px 44px',
-                    maskImage:
-                        'radial-gradient(ellipse at 70% 50%, black 0%, transparent 75%)',
-                }}
-            />
-            <div className="pointer-events-none absolute -right-32 -top-24 h-96 w-96 rounded-full bg-white/70 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-neutral-400/40 blur-3xl" />
+            <div className="pointer-events-none absolute inset-0">
+                <div className="absolute top-0 right-0 h-full w-[42%] bg-[#FED7AA]" />
 
-            <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-5 py-20 sm:py-28 lg:grid-cols-2 lg:gap-20 lg:px-8 lg:py-32">
+                <div className="absolute top-20 right-[34%] h-24 w-24 rounded-full border-[18px] border-[#FDBA74]" />
 
+                <div className="absolute bottom-10 left-10 h-28 w-28 rounded-full border border-[#FDBA74]" />
+
+                <div
+                    className="absolute inset-0 opacity-[0.12]"
+                    style={{
+                        backgroundImage:
+                            'linear-gradient(#9A3412 1px, transparent 1px), linear-gradient(90deg, #9A3412 1px, transparent 1px)',
+                        backgroundSize: '48px 48px',
+                        maskImage:
+                            'radial-gradient(ellipse at 30% 50%, black 0%, transparent 75%)',
+                    }}
+                />
+            </div>
+
+            <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-5 py-20 sm:py-28 lg:grid-cols-2 lg:gap-20 lg:px-space-2xl lg:py-32">
                 {/* Left Content */}
                 <div className="relative z-10">
-                    <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-4 py-2 shadow-sm">
-                        <span className="h-2 w-2 rounded-full bg-black" />
-                        <span className="text-xs font-medium text-neutral-600">
+                    <div className="mb-7 inline-flex items-center gap-space-sm rounded-pill border border-orange-200 bg-white px-space-lg py-space-sm shadow-sm">
+                        <span className="h-2 w-2 rounded-pill bg-[#F97316]" />
+
+                        <span className="text-caption font-medium text-gray-700">
                             Sistem Pengelolaan Aset Fakultas
                         </span>
                     </div>
 
                     <h1
                         aria-label={heroMessages[messageIndex]}
-                        className="max-w-2xl text-4xl font-semibold leading-[1.15] tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl"
+                        className="max-w-2xl text-display-md leading-[1.15] font-semibold tracking-tight text-[#171717] sm:text-display-lg lg:text-display-xl"
                     >
                         <span className="block min-h-[3.45em] sm:min-h-[2.3em]">
                             <span aria-hidden="true">
-                                {heroMessages[messageIndex].slice(0, visibleCharacters)}
+                                {heroMessages[messageIndex].slice(
+                                    0,
+                                    visibleCharacters,
+                                )}
                             </span>
+
                             <span
                                 aria-hidden="true"
-                                className="ml-1 inline-block h-[0.85em] translate-y-[0.08em] animate-pulse border-r-2 border-neutral-500"
+                                className="ml-space-xs inline-block h-[0.85em] translate-y-[0.08em] animate-pulse border-r-2 border-[#F97316]"
                             />
                         </span>
                     </h1>
 
-                    <p className="mt-7 max-w-xl text-base leading-8 text-neutral-500 sm:text-lg">
+                    <p className="mt-7 max-w-xl text-body leading-8 text-gray-600 sm:text-subheading">
                         FAMS membantu fakultas mengelola aset dan fasilitas,
                         memproses peminjaman, memantau kondisi, serta mencatat
                         pengembalian dalam satu sistem terpusat.
                     </p>
 
-                    <div className="mt-9 flex flex-wrap gap-3">
+                    <div className="mt-9 flex flex-wrap gap-space-md">
                         <Button href="#fitur">
-                            Jelajahi FAMS{' '}
-                            <span aria-hidden="true">→</span>
+                            Jelajahi FAMS <span aria-hidden="true">→</span>
                         </Button>
 
                         <Button href="#cara-kerja" variant="secondary">
@@ -119,13 +127,14 @@ export default function HeroSection() {
                     </div>
 
                     {/* Statistics */}
-                    <div className="mt-12 grid max-w-lg grid-cols-3 gap-4 border-t border-neutral-200 pt-6">
+                    <div className="mt-12 grid max-w-lg grid-cols-3 gap-space-lg border-t border-orange-200 pt-space-xl">
                         {stats.map((stat) => (
                             <div key={stat.value}>
-                                <p className="text-2xl font-semibold tracking-tight">
+                                <p className="text-heading font-semibold tracking-tight text-[#171717]">
                                     {stat.value}
                                 </p>
-                                <p className="mt-2 text-xs leading-5 text-neutral-500 sm:text-sm">
+
+                                <p className="mt-space-sm text-caption leading-5 text-gray-500 sm:text-body">
                                     {stat.label}
                                 </p>
                             </div>
@@ -134,21 +143,17 @@ export default function HeroSection() {
                 </div>
 
                 {/* Right Visual */}
-                <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
-
+                <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
                     {/* Decorative Background */}
-                    <div className="absolute -right-5 -top-5 h-40 w-40 rounded-full border border-neutral-200 sm:-right-8 sm:-top-8 sm:h-52 sm:w-52" />
+                    <div className="absolute -top-6 -right-6 h-32 w-32 rounded-full border-[10px] border-[#F97316] sm:h-40 sm:w-40" />
 
-                    <div className="absolute -bottom-8 -left-8 h-44 w-44 rounded-full bg-neutral-300/70 blur-2xl" />
+                    <div className="absolute -bottom-6 -left-6 h-32 w-32 rounded-full bg-[#EA580C] sm:h-40 sm:w-40" />
 
-                    {/* Embossed Outer Frame */}
-                    <div className="relative rounded-[2rem] border border-white/80 bg-gradient-to-br from-white via-neutral-200 to-neutral-400 p-3 shadow-[12px_12px_40px_rgba(0,0,0,0.14),-8px_-8px_24px_rgba(255,255,255,0.8)] sm:rounded-[2.5rem] sm:p-5">
-
-                        {/* Inner Frame */}
-                        <div className="relative overflow-hidden rounded-[1.5rem] border border-white bg-white p-2 shadow-inner sm:rounded-[2rem] sm:p-3">
-
-                            {/* Main Image */}
-                            <div className="relative aspect-[4/4.2] overflow-hidden rounded-[1.2rem] bg-neutral-200 sm:rounded-[1.6rem]">
+                    {/* Main Image Frame - Minimalist */}
+                    <div className="relative rounded-[1.5rem] border border-orange-200 bg-white p-2 shadow-[0_15px_40px_rgba(23,23,23,0.10)] sm:rounded-[1.8rem] sm:p-2.5">
+                        {/* Inner Image */}
+                        <div className="relative overflow-hidden rounded-[1.1rem] bg-[#F5F5F4] sm:rounded-[1.4rem]">
+                            <div className="relative aspect-[4/4.2] overflow-hidden">
                                 <img
                                     src="/storage/assets/barang/Fams3.jpg"
                                     alt="Ilustrasi aset dan fasilitas FAMS"
@@ -156,22 +161,23 @@ export default function HeroSection() {
                                 />
 
                                 {/* Image Overlay */}
-                                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-white/10" />
+                                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#171717]/75 via-transparent to-[#292524]/10" />
 
                                 {/* Image Label */}
-                                <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-3 sm:bottom-7 sm:left-7 sm:right-7">
+                                <div className="absolute right-5 bottom-5 left-5 flex items-end justify-between gap-space-md sm:right-6 sm:bottom-6 sm:left-6">
                                     <div className="text-white">
-                                        <p className="text-[10px] font-medium tracking-[0.2em] text-white/70">
+                                        <p className="text-micro font-medium tracking-[0.2em] text-orange-200">
                                             FACULTY ASSET MANAGEMENT
                                         </p>
-                                        <h2 className="mt-2 text-xl font-semibold tracking-tight sm:text-2xl">
+
+                                        <h2 className="mt-space-sm text-card-title font-semibold tracking-tight sm:text-heading">
                                             Manage Better.
                                             <br />
                                             Work Smarter.
                                         </h2>
                                     </div>
 
-                                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/30 bg-white/15 text-xl text-white shadow-lg backdrop-blur-md">
+                                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#F97316] text-lg text-white shadow-md sm:h-10 sm:w-10">
                                         ↗
                                     </div>
                                 </div>
@@ -179,19 +185,21 @@ export default function HeroSection() {
                         </div>
 
                         {/* Bottom Frame Detail */}
-                        <div className="flex items-center justify-between px-2 pb-1 pt-4 sm:px-3">
+                        <div className="flex items-center justify-between px-space-sm pt-space-md pb-space-xs sm:px-space-md">
                             <div>
-                                <p className="text-[10px] font-semibold tracking-[0.2em] text-neutral-400">
+                                <p className="text-micro font-semibold tracking-[0.2em] text-[#171717]">
                                     FAMS SYSTEM
                                 </p>
-                                <p className="mt-1 text-xs font-medium text-neutral-700">
+
+                                <p className="mt-space-xs text-caption font-medium text-gray-500">
                                     Integrated Asset Management
                                 </p>
                             </div>
 
-                            <div className="flex items-center gap-2">
-                                <span className="h-2 w-2 rounded-full bg-neutral-950" />
-                                <span className="text-[10px] font-medium text-neutral-500">
+                            <div className="flex items-center gap-space-sm">
+                                <span className="h-2 w-2 rounded-pill bg-[#F97316]" />
+
+                                <span className="text-micro font-medium text-gray-500">
                                     SMART MANAGEMENT
                                 </span>
                             </div>
@@ -199,17 +207,18 @@ export default function HeroSection() {
                     </div>
 
                     {/* Floating Card - Asset Management */}
-                    <div className="absolute -left-3 top-10 hidden rounded-2xl border border-neutral-200 bg-white/95 p-4 shadow-[0_12px_35px_rgba(0,0,0,0.12)] backdrop-blur-md sm:block lg:-left-10">
+                    <div className="absolute top-10 -left-3 hidden rounded-xl border border-orange-100 bg-white p-3 shadow-[0_8px_25px_rgba(23,23,23,0.10)] sm:block lg:-left-8">
                         <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-950 text-lg text-white">
+                            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#F97316] text-lg text-white">
                                 ◈
                             </div>
 
                             <div>
-                                <p className="text-xs font-semibold text-neutral-900">
+                                <p className="text-caption font-semibold text-[#171717]">
                                     Asset Tracking
                                 </p>
-                                <p className="mt-1 text-[10px] text-neutral-500">
+
+                                <p className="mt-space-xs text-micro text-gray-500">
                                     Pemantauan terintegrasi
                                 </p>
                             </div>
@@ -217,27 +226,20 @@ export default function HeroSection() {
                     </div>
 
                     {/* Floating Card - RFID */}
-                    <div className="group absolute -bottom-5 right-3 hidden overflow-hidden rounded-2xl border border-neutral-700 bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-600 p-4 text-white shadow-[0_18px_45px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(0,0,0,0.35)] sm:block lg:-right-7">
-                        <div
-                            className="pointer-events-none absolute inset-0 opacity-20"
-                            style={{
-                                backgroundImage:
-                                    'repeating-linear-gradient(135deg, white 0, white 1px, transparent 1px, transparent 12px)',
-                                maskImage:
-                                    'linear-gradient(135deg, black, transparent 65%)',
-                            }}
-                        />
-                        <div className="pointer-events-none absolute -right-7 -top-9 size-24 rounded-full border border-white/20" />
+                    <div className="group absolute right-3 -bottom-5 hidden overflow-hidden rounded-xl border border-white/10 bg-charcoal-900 p-3 text-white shadow-[0_12px_30px_rgba(0,0,0,0.25)] transition duration-300 hover:-translate-y-1 sm:block lg:-right-6">
+                        <div className="pointer-events-none absolute -top-9 -right-7 size-24 rounded-full border border-orange-500/40" />
+
                         <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-xl text-white shadow-inner">
+                            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#F97316] text-lg text-white">
                                 ⌁
                             </div>
 
                             <div>
-                                <p className="text-xs font-semibold text-white">
+                                <p className="text-caption font-semibold text-white">
                                     RFID Integration
                                 </p>
-                                <p className="mt-1 text-[10px] text-white/65">
+
+                                <p className="mt-space-xs text-micro text-gray-400">
                                     Identifikasi aset
                                 </p>
                             </div>
@@ -245,11 +247,11 @@ export default function HeroSection() {
                     </div>
 
                     {/* Decorative Dots */}
-                    <div className="absolute -right-5 top-1/2 hidden grid-cols-3 gap-2 sm:grid">
+                    <div className="absolute top-1/2 -right-5 hidden grid-cols-3 gap-space-sm sm:grid">
                         {Array.from({ length: 9 }).map((_, index) => (
                             <span
                                 key={index}
-                                className="h-1.5 w-1.5 rounded-full bg-neutral-300"
+                                className="h-1.5 w-1.5 rounded-pill bg-[#C2410C]"
                             />
                         ))}
                     </div>

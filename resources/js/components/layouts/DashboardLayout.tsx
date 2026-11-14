@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { usePage } from '@inertiajs/react';
@@ -9,15 +8,13 @@ type DashboardLayoutProps = {
     children: ReactNode;
 };
 
-export default function DashboardLayout({
-    children,
-}: DashboardLayoutProps) {
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
     const [collapsed, setCollapsed] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const { url } = usePage();
 
     return (
-        <div className="min-h-screen bg-neutral-50 text-neutral-950">
+        <div className="dashboard-theme min-h-screen bg-surface-warm text-text-primary">
             <div className="flex min-h-screen items-start">
                 <Sidebar
                     collapsed={collapsed}
@@ -35,8 +32,9 @@ export default function DashboardLayout({
                         </div>
                     </main>
 
-                    <footer className="border-t border-neutral-200 px-4 py-5 text-center text-xs text-neutral-400 sm:px-6 lg:px-8">
-                        © {new Date().getFullYear()} FAMS — Faculty Asset Management System.
+                    <footer className="border-t border-primary-200/80 px-4 py-5 text-center text-xs text-gray-500 sm:px-6 lg:px-8">
+                        © {new Date().getFullYear()} FAMS — Faculty Asset
+                        Management System.
                     </footer>
                 </div>
             </div>

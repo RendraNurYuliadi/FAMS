@@ -12,16 +12,21 @@ export default function AuthLogo({
     return (
         <div className="flex flex-col items-center gap-1">
             <span
-                className={`text-4xl font-bold tracking-[-0.09em] ${
-                    isDark ? 'text-white' : 'text-neutral-950'
+                className={`text-display-md font-bold tracking-[-0.09em] ${
+                    isDark ? 'text-white' : 'text-text-primary'
                 }`}
             >
-                FAMS<span className={isDark ? 'text-neutral-500' : 'text-neutral-400'}>.</span>
+                FAMS
+                <span
+                    className={isDark ? 'text-primary-400' : 'text-primary-500'}
+                >
+                    .
+                </span>
             </span>
 
             <span
-                className={`text-[9px] font-medium tracking-[0.24em] ${
-                    isDark ? 'text-neutral-500' : 'text-neutral-400'
+                className={`text-micro font-medium tracking-[0.24em] ${
+                    isDark ? 'text-white/70' : 'text-gray-500'
                 }`}
             >
                 {subtitle}

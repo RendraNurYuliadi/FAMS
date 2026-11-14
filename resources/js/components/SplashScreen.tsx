@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import Icon from './Icon';
 
@@ -25,38 +24,39 @@ export default function SplashScreen() {
 
     return (
         <div
-            className={`fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-neutral-50 to-neutral-200 transition-all duration-700 ${
-                isExiting
-                    ? 'pointer-events-none opacity-0'
-                    : 'opacity-100'
+            className={`fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-surface-warm transition-all duration-700 ${
+                isExiting ? 'pointer-events-none opacity-0' : 'opacity-100'
             }`}
             aria-label="Memuat FAMS"
             role="status"
         >
             {/* Background Decoration */}
             <div className="pointer-events-none absolute inset-0">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,rgba(255,255,255,0.95)_0%,rgba(245,245,245,0.65)_38%,rgba(163,163,163,0.16)_100%)]" />
+                {/* Soft Background */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,rgba(255,255,255,0.98)_0%,rgba(255,247,237,0.8)_45%,rgba(249,115,22,0.08)_100%)]" />
 
+                {/* Grid Pattern */}
                 <div
                     className="absolute inset-0 opacity-30"
                     style={{
                         backgroundImage:
-                            'linear-gradient(rgba(23,23,23,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,23,0.07) 1px, transparent 1px)',
+                            'linear-gradient(rgba(234,88,12,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(234,88,12,0.08) 1px, transparent 1px)',
                         backgroundSize: '42px 42px',
                         maskImage:
                             'radial-gradient(ellipse at center, black 5%, transparent 76%)',
                     }}
                 />
 
-                <div className="absolute -left-36 top-1/4 h-80 w-80 rounded-full bg-neutral-400/20 blur-3xl" />
+                {/* Orange Blur */}
+                <div className="absolute top-1/4 -left-36 h-80 w-80 rounded-full bg-orange-300/25 blur-3xl" />
+                <div className="absolute -right-36 -bottom-20 h-96 w-96 rounded-full bg-[#F97316]/15 blur-3xl" />
 
-                <div className="absolute -right-36 bottom-0 h-96 w-96 rounded-full bg-neutral-800/10 blur-3xl" />
+                {/* Center Rings */}
+                <div className="absolute top-1/2 left-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 animate-[pulse_3s_ease-in-out_infinite] rounded-full border border-orange-200/70" />
 
-                <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 animate-[pulse_3s_ease-in-out_infinite] rounded-full border border-neutral-300/70" />
+                <div className="absolute top-1/2 left-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 animate-[spin_25s_linear_infinite] rounded-full border border-dashed border-orange-300/70" />
 
-                <div className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 animate-[spin_25s_linear_infinite] rounded-full border border-dashed border-neutral-400/70" />
-
-                <div className="absolute left-1/2 top-1/2 h-[240px] w-[240px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/90 shadow-[0_0_80px_rgba(255,255,255,0.7)]" />
+                <div className="absolute top-1/2 left-1/2 h-[240px] w-[240px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white shadow-[0_0_80px_rgba(249,115,22,0.12)]" />
             </div>
 
             {/* Main Content */}
@@ -70,51 +70,47 @@ export default function SplashScreen() {
                 {/* Animated Logo */}
                 <div className="relative flex h-28 w-28 items-center justify-center">
                     {/* Rotating Rings */}
-                    <div className="absolute inset-0 animate-[spin_8s_linear_infinite] rounded-[2rem] border border-neutral-500/70" />
+                    <div className="absolute inset-0 animate-[spin_8s_linear_infinite] rounded-[2rem] border border-orange-400/70" />
 
-                    <div className="absolute -inset-3 animate-[spin_12s_linear_infinite_reverse] rounded-[2.5rem] border border-dashed border-neutral-400" />
+                    <div className="absolute -inset-3 animate-[spin_12s_linear_infinite_reverse] rounded-[2.5rem] border border-dashed border-orange-300" />
 
                     {/* Orbit Dot */}
-                    <span className="absolute -right-2 top-5 h-3 w-3 animate-pulse rounded-full bg-neutral-950 shadow-[0_0_15px_rgba(0,0,0,0.25)]" />
+                    <span className="absolute top-5 -right-2 h-3 w-3 animate-pulse rounded-full bg-[#F97316] shadow-[0_0_15px_rgba(249,115,22,0.5)]" />
 
-                    <span className="absolute -bottom-1 left-4 h-2 w-2 rounded-full bg-neutral-400 animate-pulse" />
+                    <span className="absolute -bottom-1 left-4 h-2 w-2 animate-pulse rounded-full bg-gray-400" />
 
                     {/* Logo Box */}
-                    <div className="relative flex h-20 w-20 items-center justify-center rounded-3xl border border-white/30 bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-600 shadow-2xl shadow-neutral-700/40 animate-[splash-logo_1.2s_ease-out_both]">
-                        <Icon
-                            name="box"
-                            size={40}
-                            className="text-white"
-                        />
+                    <div className="relative flex h-20 w-20 animate-[splash-logo_1.2s_ease-out_both] items-center justify-center rounded-2xl border border-white/20 bg-gradient-to-br from-charcoal-900 via-charcoal-800 to-charcoal-700 shadow-2xl shadow-orange-950/20">
+                        <Icon name="box" size={40} className="text-[#F97316]" />
                     </div>
                 </div>
 
                 {/* Brand Name */}
                 <div className="mt-10 overflow-hidden text-center">
-                    <h1 className="animate-[splash-text_0.8s_0.4s_both] text-4xl font-bold tracking-[0.28em] text-neutral-950">
+                    <h1 className="animate-[splash-text_0.8s_0.4s_both] text-display-md font-bold tracking-[0.28em] text-[#171717]">
                         FAMS
                     </h1>
 
-                    <p className="mt-3 animate-[splash-text_0.8s_0.6s_both] text-[10px] font-medium tracking-[0.22em] text-neutral-500 sm:text-xs">
+                    <p className="mt-space-md animate-[splash-text_0.8s_0.6s_both] text-micro font-semibold tracking-[0.22em] text-[#EA580C] sm:text-caption">
                         FACULTY ASSET MANAGEMENT SYSTEM
                     </p>
                 </div>
 
                 {/* Loading Animation */}
                 <div className="mt-12 w-44 animate-[splash-text_0.8s_0.8s_both]">
-                    <div className="h-[3px] overflow-hidden rounded-full bg-neutral-300">
-                        <div className="h-full w-full origin-left animate-[splash-loading_3.5s_1s_ease-in-out_both] rounded-full bg-gradient-to-r from-neutral-400 via-neutral-950 to-neutral-600" />
+                    <div className="h-[3px] overflow-hidden rounded-full bg-orange-200">
+                        <div className="h-full w-full origin-left animate-[splash-loading_3.5s_1s_ease-in-out_both] rounded-full bg-gradient-to-r from-[#EA580C] via-[#F97316] to-orange-300" />
                     </div>
 
-                    <div className="mt-4 flex items-center justify-between">
-                        <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-neutral-400">
+                    <div className="mt-space-lg flex items-center justify-between">
+                        <p className="text-micro font-medium tracking-[0.2em] text-gray-500 uppercase">
                             Initializing
                         </p>
 
-                        <div className="flex gap-1">
-                            <span className="h-1 w-1 animate-pulse rounded-full bg-neutral-950" />
-                            <span className="h-1 w-1 animate-pulse rounded-full bg-neutral-500 [animation-delay:150ms]" />
-                            <span className="h-1 w-1 animate-pulse rounded-full bg-neutral-300 [animation-delay:300ms]" />
+                        <div className="flex gap-space-xs">
+                            <span className="h-1 w-1 animate-pulse rounded-full bg-[#171717]" />
+                            <span className="h-1 w-1 animate-pulse rounded-full bg-[#F97316] [animation-delay:150ms]" />
+                            <span className="h-1 w-1 animate-pulse rounded-full bg-orange-300 [animation-delay:300ms]" />
                         </div>
                     </div>
                 </div>
@@ -126,7 +122,7 @@ export default function SplashScreen() {
                     isExiting ? 'opacity-0' : 'animate-[splash-text_1s_1s_both]'
                 }`}
             >
-                <p className="text-[10px] font-medium tracking-[0.18em] text-neutral-400">
+                <p className="text-micro font-medium tracking-[0.18em] text-gray-400">
                     © {new Date().getFullYear()} FAMS
                 </p>
             </div>
@@ -180,7 +176,9 @@ export default function SplashScreen() {
                 }
 
                 @media (prefers-reduced-motion: reduce) {
-                    *, *::before, *::after {
+                    *,
+                    *::before,
+                    *::after {
                         animation-duration: 0.01ms !important;
                         animation-iteration-count: 1 !important;
                         transition-duration: 0.01ms !important;

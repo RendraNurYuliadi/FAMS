@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { router, usePage } from '@inertiajs/react';
@@ -55,12 +54,12 @@ export default function UserDropdown() {
             <button
                 type="button"
                 onClick={() => setOpen(!open)}
-                className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-950 p-1 text-white transition hover:bg-neutral-800 sm:h-auto sm:w-auto sm:justify-start sm:gap-2 sm:p-1.5"
+                className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 p-1 text-white transition hover:bg-white/10 sm:h-auto sm:w-auto sm:justify-start sm:gap-2 sm:p-1.5"
                 aria-expanded={open}
                 aria-haspopup="dialog"
                 aria-label="Menu pengguna"
             >
-                <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-neutral-900 text-xs font-semibold text-white sm:h-9 sm:w-9">
+                <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-primary-500 text-xs font-semibold text-white sm:h-9 sm:w-9">
                     {user?.avatar ? (
                         <img
                             src={user.avatar}
@@ -76,10 +75,14 @@ export default function UserDropdown() {
                     <p className="max-w-[120px] truncate text-xs font-semibold text-white">
                         {name}
                     </p>
-                    <p className="text-[10px] text-neutral-400">{roleLabel}</p>
+                    <p className="text-[10px] text-white/60">{roleLabel}</p>
                 </div>
 
-                <Icon name="arrow-right" size={13} className="hidden rotate-90 text-neutral-300 sm:block" />
+                <Icon
+                    name="arrow-right"
+                    size={13}
+                    className="hidden rotate-90 text-white/60 sm:block"
+                />
             </button>
 
             {open &&
@@ -101,7 +104,7 @@ export default function UserDropdown() {
                             <div className="flex items-start justify-between gap-3 border-b border-neutral-100 p-5">
                                 <div className="min-w-0">
                                     <div className="flex items-center gap-3">
-                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-sm font-semibold text-white">
+                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-500 text-sm font-semibold text-white">
                                             {initial}
                                         </div>
                                         <div className="min-w-0">

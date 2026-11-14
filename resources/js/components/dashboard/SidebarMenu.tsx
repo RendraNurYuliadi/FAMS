@@ -46,7 +46,7 @@ export default function SidebarMenu({
                 title={collapsed ? item.title : undefined}
                 className={`group flex min-h-10 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     active
-                        ? 'bg-white font-semibold text-neutral-950 shadow-sm'
+                        ? 'bg-primary-500 font-semibold text-white shadow-sm'
                         : 'text-neutral-300 hover:bg-white/10 hover:text-white'
                 } ${collapsed ? 'justify-center px-2' : ''}`}
             >
@@ -111,7 +111,7 @@ export default function SidebarMenu({
                                 onClick={onNavigate}
                                 className={`flex min-h-9 items-center rounded-lg px-3 py-2 text-[13px] transition-colors ${
                                     childActive
-                                        ? 'bg-white font-semibold text-neutral-950 shadow-sm'
+                                        ? 'bg-primary-500 font-semibold text-white shadow-sm'
                                         : 'text-neutral-400 hover:bg-white/10 hover:text-white'
                                 }`}
                             >

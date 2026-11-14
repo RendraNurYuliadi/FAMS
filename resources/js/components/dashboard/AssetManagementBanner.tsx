@@ -22,7 +22,7 @@ export default function AssetManagementBanner({
     metrics,
 }: Props) {
     return (
-        <section className="relative isolate min-h-[230px] overflow-hidden rounded-2xl bg-neutral-950 text-white">
+        <section className="relative isolate min-h-[230px] overflow-hidden rounded-2xl bg-charcoal-900 text-white">
             <div
                 className="absolute inset-0 -z-20 bg-cover bg-center opacity-35"
                 style={{
@@ -30,16 +30,16 @@ export default function AssetManagementBanner({
                         "url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1600&q=85')",
                 }}
             />
-            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-neutral-950 via-neutral-950/90 to-neutral-950/30" />
+            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-900 via-charcoal-900/90 to-charcoal-900/30" />
 
             <div className="absolute -top-20 -right-12 size-64 rounded-full border border-white/10" />
             <div className="absolute -top-10 -right-2 size-44 rounded-full border border-white/10" />
-            <div className="absolute right-[20%] bottom-[-90px] size-52 rounded-full bg-white/5 blur-2xl" />
+            <div className="absolute right-[20%] bottom-[-90px] size-52 rounded-full bg-primary-500/15 blur-2xl" />
 
             <div className="relative flex min-h-[230px] flex-col justify-between gap-8 p-6 sm:p-8 lg:flex-row lg:items-center">
                 <div className="max-w-xl">
                     <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur-sm">
-                        <span className="size-1.5 rounded-full bg-neutral-300" />
+                        <span className="size-1.5 rounded-full bg-primary-400" />
                         <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/80">
                             Faculty Asset Management System
                         </span>
@@ -56,12 +56,12 @@ export default function AssetManagementBanner({
                     </p>
 
                     <div className="mt-6 flex flex-wrap items-center gap-3">
-                        <span className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-[10px] font-semibold text-neutral-950 shadow-lg">
+                        <span className="inline-flex items-center gap-2 rounded-lg bg-primary-500 px-4 py-2.5 text-[10px] font-semibold text-white shadow-lg">
                             <Icon name={icon} size={14} />
                             {contextLabel}
                         </span>
                         <span className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-2.5 text-[10px] font-medium text-white/90 backdrop-blur-sm">
-                            <span className="size-1.5 rounded-full bg-neutral-300" />
+                            <span className="size-1.5 rounded-full bg-primary-400" />
                             {statusLabel}
                         </span>
                     </div>
@@ -70,7 +70,7 @@ export default function AssetManagementBanner({
                 <div className="hidden shrink-0 flex-col items-end gap-3 lg:flex">
                     <div className="rounded-2xl border border-white/20 bg-white/10 p-5 shadow-2xl backdrop-blur-md">
                         <div className="flex items-center gap-3">
-                            <div className="flex size-12 items-center justify-center rounded-xl bg-white text-neutral-950">
+                            <div className="flex size-12 items-center justify-center rounded-xl bg-primary-500 text-white">
                                 <Icon name={icon} size={25} />
                             </div>
                             <div>

@@ -1,4 +1,3 @@
-
 import Icon from '../components/Icon';
 
 const faculties = [
@@ -46,217 +45,183 @@ const faculties = [
     },
 ];
 
-const facultyTones = [
-    {
-        card: 'from-white via-neutral-50 to-neutral-200',
-        foreground: 'text-neutral-950',
-        number: 'text-neutral-500',
-        arrow: 'border-neutral-300 text-neutral-500 group-hover:border-neutral-950 group-hover:bg-neutral-950 group-hover:text-white',
-        acronym: 'text-neutral-950',
-        divider: 'bg-neutral-300',
-        name: 'text-neutral-900',
-        description: 'text-neutral-600',
-        footer: 'border-neutral-300 text-neutral-500',
-        footerArrow: 'text-neutral-500 group-hover:text-neutral-950',
-    },
-    {
-        card: 'from-neutral-100 via-neutral-200 to-neutral-400',
-        foreground: 'text-neutral-950',
-        number: 'text-neutral-600',
-        arrow: 'border-neutral-400 text-neutral-700 group-hover:border-neutral-950 group-hover:bg-neutral-950 group-hover:text-white',
-        acronym: 'text-neutral-900',
-        divider: 'bg-neutral-400',
-        name: 'text-neutral-900',
-        description: 'text-neutral-700',
-        footer: 'border-neutral-400 text-neutral-600',
-        footerArrow: 'text-neutral-600 group-hover:text-neutral-950',
-    },
-    {
-        card: 'from-neutral-950 via-neutral-800 to-neutral-600',
-        foreground: 'text-white',
-        number: 'text-white/60',
-        arrow: 'border-white/25 text-white/70 group-hover:border-white group-hover:bg-white group-hover:text-neutral-950',
-        acronym: 'text-white',
-        divider: 'bg-white/25',
-        name: 'text-white',
-        description: 'text-white/70',
-        footer: 'border-white/20 text-white/60',
-        footerArrow: 'text-white/60 group-hover:text-white',
-    },
-    {
-        card: 'from-neutral-200 via-neutral-100 to-white',
-        foreground: 'text-neutral-950',
-        number: 'text-neutral-500',
-        arrow: 'border-neutral-300 text-neutral-500 group-hover:border-neutral-950 group-hover:bg-neutral-950 group-hover:text-white',
-        acronym: 'text-neutral-950',
-        divider: 'bg-neutral-300',
-        name: 'text-neutral-900',
-        description: 'text-neutral-600',
-        footer: 'border-neutral-300 text-neutral-500',
-        footerArrow: 'text-neutral-500 group-hover:text-neutral-950',
-    },
-    {
-        card: 'from-neutral-800 via-neutral-700 to-neutral-500',
-        foreground: 'text-white',
-        number: 'text-white/60',
-        arrow: 'border-white/25 text-white/70 group-hover:border-white group-hover:bg-white group-hover:text-neutral-950',
-        acronym: 'text-white',
-        divider: 'bg-white/25',
-        name: 'text-white',
-        description: 'text-white/70',
-        footer: 'border-white/20 text-white/60',
-        footerArrow: 'text-white/60 group-hover:text-white',
-    },
-    {
-        card: 'from-neutral-50 via-neutral-100 to-neutral-300',
-        foreground: 'text-neutral-950',
-        number: 'text-neutral-500',
-        arrow: 'border-neutral-300 text-neutral-500 group-hover:border-neutral-950 group-hover:bg-neutral-950 group-hover:text-white',
-        acronym: 'text-neutral-950',
-        divider: 'bg-neutral-300',
-        name: 'text-neutral-900',
-        description: 'text-neutral-600',
-        footer: 'border-neutral-300 text-neutral-500',
-        footerArrow: 'text-neutral-500 group-hover:text-neutral-950',
-    },
-];
-
 export default function FacultiesSection() {
     return (
         <section
             id="fakultas"
-            className="relative isolate overflow-hidden bg-neutral-100 py-20 sm:py-24 lg:py-28"
+            className="landing-section relative overflow-hidden bg-surface-warm py-space-section-sm sm:py-space-section lg:py-space-section-lg"
         >
-            <div className="pointer-events-none absolute inset-0 -z-10 opacity-40">
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        backgroundImage:
-                            'linear-gradient(rgba(23,23,23,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,23,0.045) 1px, transparent 1px)',
-                        backgroundSize: '36px 36px',
-                        maskImage:
-                            'radial-gradient(ellipse at center, black 10%, transparent 75%)',
-                    }}
-                />
-                <div className="absolute -left-40 top-20 size-96 rounded-full bg-white/80 blur-3xl" />
-                <div className="absolute -right-36 bottom-0 size-96 rounded-full bg-neutral-300/70 blur-3xl" />
-            </div>
-            <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-                {/* Section Heading */}
-                <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-                    <div className="max-w-2xl">
-                        <span className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-[10px] font-semibold tracking-[0.16em] text-neutral-500">
-                            <span className="h-1.5 w-1.5 rounded-full bg-neutral-950" />
-                            UNIVERSITAS SEBELAS APRIL
-                        </span>
+            {/* Soft Background Accent */}
+            <div className="pointer-events-none absolute -top-32 -right-32 size-[420px] rounded-full bg-orange-200/30 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-40 -left-32 size-[420px] rounded-full bg-white/80 blur-3xl" />
 
-                        <h2 className="mt-5 text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl lg:text-5xl">
+            <div className="relative mx-auto max-w-7xl px-5 sm:px-space-2xl lg:px-10">
+                {/* Section Heading */}
+                <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+                    <div className="max-w-2xl">
+                        <div className="inline-flex items-center gap-3 rounded-full bg-white px-4 py-2 shadow-sm">
+                            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#F97316] text-white">
+                                <Icon name="building" size={14} />
+                            </span>
+
+                            <span className="text-micro font-semibold tracking-[0.16em] text-gray-600">
+                                UNIVERSITAS SEBELAS APRIL
+                            </span>
+                        </div>
+
+                        <h2 className="mt-6 text-display-sm leading-tight font-semibold tracking-tight text-[#171717] sm:text-display-md lg:text-display-lg">
                             Mengenal Fakultas
                             <br />
-                            <span className="text-neutral-400">
+                            <span className="text-[#F97316]">
                                 di lingkungan UNSAP.
                             </span>
                         </h2>
 
-                        <p className="mt-4 max-w-xl text-sm leading-7 text-neutral-500 sm:text-[15px]">
+                        <p className="mt-5 max-w-xl text-body leading-7 text-gray-600">
                             Enam fakultas dengan bidang keilmuan yang beragam
-                            sebagai bagian dari lingkungan akademik
-                            Universitas Sebelas April.
+                            sebagai bagian dari lingkungan akademik Universitas
+                            Sebelas April.
                         </p>
                     </div>
 
-                    <div className="flex items-center gap-3 text-sm text-neutral-500">
-                        <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-neutral-200 bg-white text-neutral-950">
-                            <Icon name="building" size={19} />
-                        </span>
+                    {/* Faculty Count */}
+                    <div className="flex items-center gap-4 self-start rounded-2xl border border-orange-100 bg-white px-6 py-4 shadow-sm lg:self-auto">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#FFF0E3] text-[#EA580C]">
+                            <Icon name="building" size={23} />
+                        </div>
+
                         <div>
-                            <p className="text-lg font-semibold text-neutral-950">
+                            <p className="text-2xl font-bold tracking-tight text-[#171717]">
                                 06
                             </p>
-                            <p className="text-xs">Fakultas</p>
+                            <p className="text-caption text-gray-500">
+                                Fakultas
+                            </p>
                         </div>
                     </div>
                 </div>
 
                 {/* Faculty Cards */}
-                <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
+                <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
                     {faculties.map((faculty, index) => {
-                        const tone = facultyTones[index];
+                        const isFTI = faculty.acronym === 'FTI';
 
                         return (
-                        <article
-                            key={faculty.acronym}
-                            className={`group relative isolate overflow-hidden rounded-2xl border border-white/60 bg-gradient-to-br ${tone.card} ${tone.foreground} p-6 shadow-[0_12px_35px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-neutral-400 hover:shadow-[0_22px_55px_rgba(0,0,0,0.14)] sm:p-7`}
-                        >
-                            <div
-                                className="pointer-events-none absolute inset-0 -z-10 opacity-[0.12] transition-opacity duration-300 group-hover:opacity-25"
-                                style={{
-                                    backgroundImage:
-                                        'repeating-linear-gradient(135deg, currentColor 0, currentColor 1px, transparent 1px, transparent 12px)',
-                                    maskImage:
-                                        'linear-gradient(135deg, black, transparent 55%)',
-                                }}
-                            />
-                            <div className="pointer-events-none absolute -right-12 -top-14 -z-10 size-44 rounded-full border border-current opacity-10 transition-transform duration-500 group-hover:scale-125" />
-                            <div className="pointer-events-none absolute -right-5 -top-7 -z-10 size-28 rounded-full border border-current opacity-10" />
-                            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-neutral-950/10 via-neutral-950/50 to-white/70" />
+                            <article
+                                key={faculty.acronym}
+                                className={`group relative flex min-h-[310px] flex-col overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 sm:p-7 ${
+                                    isFTI
+                                        ? 'border-[#EA580C] bg-[#F97316] text-white shadow-[0_15px_35px_rgba(234,88,12,0.16)]'
+                                        : 'border-orange-100 bg-white text-[#171717] shadow-[0_8px_25px_rgba(23,23,23,0.04)] hover:border-orange-300 hover:shadow-[0_16px_35px_rgba(249,115,22,0.10)]'
+                                }`}
+                            >
+                                {/* Card Header */}
+                                <div className="flex items-center justify-between">
+                                    <span
+                                        className={`text-caption font-semibold tracking-widest ${
+                                            isFTI
+                                                ? 'text-white/70'
+                                                : 'text-gray-400'
+                                        }`}
+                                    >
+                                        {faculty.number}
+                                    </span>
 
-                            {/* Card Header */}
-                            <div className="flex items-start justify-between">
-                                <span className={`text-xs font-medium tracking-widest ${tone.number}`}>
-                                    {faculty.number}
-                                </span>
+                                    <span
+                                        className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 ${
+                                            isFTI
+                                                ? 'bg-white/15 text-white group-hover:bg-white group-hover:text-[#EA580C]'
+                                                : 'bg-[#FFF3E8] text-[#EA580C] group-hover:bg-[#F97316] group-hover:text-white'
+                                        }`}
+                                    >
+                                        <Icon name="arrow-up-right" size={17} />
+                                    </span>
+                                </div>
 
-                                <span className={`flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-300 ${tone.arrow}`}>
-                                    <Icon name="arrow-up-right" size={16} />
-                                </span>
-                            </div>
+                                {/* Faculty Acronym */}
+                                <div className="mt-8">
+                                    <h3
+                                        className={`text-display-md font-bold tracking-tight sm:text-display-lg ${
+                                            isFTI
+                                                ? 'text-white'
+                                                : 'text-[#171717]'
+                                        }`}
+                                    >
+                                        {faculty.acronym}
+                                        <span
+                                            className={
+                                                isFTI
+                                                    ? 'text-orange-200'
+                                                    : 'text-[#F97316]'
+                                            }
+                                        >
+                                            .
+                                        </span>
+                                    </h3>
 
-                            {/* Faculty Acronym */}
-                            <div className="mt-9">
-                                <p className={`text-4xl font-bold tracking-tight ${tone.acronym} transition-colors duration-300 sm:text-5xl`}>
-                                    {faculty.acronym}
-                                    <span className={tone.number}>.</span>
-                                </p>
+                                    <div
+                                        className={`mt-4 h-1 w-10 rounded-full transition-all duration-300 group-hover:w-16 ${
+                                            isFTI ? 'bg-white' : 'bg-[#F97316]'
+                                        }`}
+                                    />
+                                </div>
 
-                                <div className={`mt-5 h-px w-full ${tone.divider}`} />
-                            </div>
+                                {/* Faculty Information */}
+                                <div className="mt-5 flex-1">
+                                    <p
+                                        className={`text-body leading-6 font-semibold ${
+                                            isFTI
+                                                ? 'text-white'
+                                                : 'text-gray-900'
+                                        }`}
+                                    >
+                                        {faculty.name}
+                                    </p>
 
-                            {/* Faculty Information */}
-                            <div className="mt-5">
-                                <h3 className={`min-h-[52px] text-base font-semibold leading-6 ${tone.name}`}>
-                                    {faculty.name}
-                                </h3>
+                                    <p
+                                        className={`mt-3 text-caption leading-6 ${
+                                            isFTI
+                                                ? 'text-white/80'
+                                                : 'text-gray-500'
+                                        }`}
+                                    >
+                                        {faculty.description}
+                                    </p>
+                                </div>
 
-                                <p className={`mt-3 min-h-[72px] text-[13px] leading-6 ${tone.description}`}>
-                                    {faculty.description}
-                                </p>
-                            </div>
+                                {/* Card Footer */}
+                                <div
+                                    className={`mt-7 flex items-center justify-between border-t pt-4 ${
+                                        isFTI
+                                            ? 'border-white/25 text-white/75'
+                                            : 'border-gray-100 text-gray-400'
+                                    }`}
+                                >
+                                    <span className="text-[10px] font-semibold tracking-[0.12em]">
+                                        UNIVERSITAS SEBELAS APRIL
+                                    </span>
 
-                            {/* Card Footer */}
-                            <div className={`mt-7 flex items-center justify-between border-t pt-5 ${tone.footer}`}>
-                                <span className="text-[10px] font-semibold tracking-[0.14em]">
-                                    UNIVERSITAS SEBELAS APRIL
-                                </span>
-
-                                <span className={`transition-all duration-300 group-hover:translate-x-1 ${tone.footerArrow}`}>
-                                    <Icon name="arrow-right" size={17} />
-                                </span>
-                            </div>
-                        </article>
+                                    <Icon
+                                        name="arrow-right"
+                                        size={16}
+                                        className="transition-transform duration-300 group-hover:translate-x-1"
+                                    />
+                                </div>
+                            </article>
                         );
                     })}
                 </div>
 
                 {/* Bottom Information */}
-                <div className="mt-10 flex flex-col items-start justify-between gap-4 rounded-2xl border border-neutral-200 bg-white p-6 sm:flex-row sm:items-center sm:p-8">
+                <div className="mt-10 flex flex-col items-start justify-between gap-6 rounded-2xl bg-charcoal-900 p-6 text-white sm:flex-row sm:items-center sm:p-8">
                     <div>
-                        <p className="text-sm font-semibold text-neutral-950">
+                        <p className="text-body font-semibold">
                             Satu universitas, beragam bidang keilmuan.
                         </p>
-                        <p className="mt-1 text-xs leading-5 text-neutral-500">
-                            Mengenal lebih dekat lingkungan akademik
-                            Universitas Sebelas April.
+
+                        <p className="mt-2 max-w-xl text-caption leading-6 text-gray-400">
+                            Mengenal lebih dekat lingkungan akademik Universitas
+                            Sebelas April.
                         </p>
                     </div>
 
@@ -264,9 +229,10 @@ export default function FacultiesSection() {
                         href="https://unsap.ac.id/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex h-11 shrink-0 items-center gap-3 rounded-xl bg-neutral-950 px-5 text-xs font-semibold text-white transition-all duration-300 hover:bg-neutral-800"
+                        className="group inline-flex h-11 shrink-0 items-center gap-3 rounded-xl bg-[#F97316] px-5 text-caption font-semibold text-white transition-all duration-300 hover:bg-[#EA580C]"
                     >
                         <span>Website UNSAP</span>
+
                         <Icon
                             name="arrow-up-right"
                             size={15}

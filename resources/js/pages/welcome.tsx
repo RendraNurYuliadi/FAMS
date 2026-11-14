@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -15,7 +14,6 @@ import AssetCatalogSection from '../sections/AssetCatalogSection';
 import ArticlesSection from '../sections/ArticlesSection';
 import TestimonialsSection from '../sections/TestimonialsSection';
 import FAQSection from '../sections/FAQSection';
-import SubscriptionSection from '../sections/SubscriptionSection';
 import ContactSection from '../sections/ContactSection';
 import AssetFlowSection from '../sections/AssetFlowSection';
 import FacultiesSection from '../sections/FacultiesSection';
@@ -65,7 +63,7 @@ export default function Welcome() {
     }, []);
 
     return (
-        <main className="min-h-screen overflow-x-clip bg-white text-neutral-950">
+        <main className="landing-page min-h-screen overflow-x-clip bg-surface-primary text-text-primary">
             <Navbar />
 
             <HeroSection />
@@ -80,7 +78,6 @@ export default function Welcome() {
             <ArticlesSection />
             <TestimonialsSection />
             <FAQSection />
-            <SubscriptionSection />
             <ContactSection />
             <Footer />
             <FloatingActions />

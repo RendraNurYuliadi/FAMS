@@ -15,15 +15,19 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
     return (
         <div className={`max-w-2xl ${centered ? 'mx-auto text-center' : ''}`}>
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-neutral-500">
+            <p className="mb-space-lg text-caption font-bold tracking-[0.25em] text-primary-600 uppercase">
                 {eyebrow}
             </p>
 
-            <h2 className={`text-3xl font-semibold tracking-tight ${dark ? 'text-white' : 'text-neutral-950'} sm:text-4xl lg:text-5xl`}>
+            <h2
+                className={`text-heading font-semibold tracking-tight ${dark ? 'text-white' : 'text-text-primary'} sm:text-display-sm lg:text-display-md`}
+            >
                 {title}
             </h2>
 
-            <p className={`mt-5 text-base leading-7 ${dark ? 'text-neutral-400' : 'text-neutral-500'} sm:text-lg`}>
+            <p
+                className={`mt-space-xl text-body leading-7 ${dark ? 'text-gray-300' : 'text-text-secondary'} sm:text-subheading`}
+            >
                 {description}
             </p>
         </div>
