@@ -450,7 +450,7 @@ export default function DataLokasi() {
 
     return (
         <DashboardLayout>
-            <div className="space-y-6 p-4 sm:p-6 lg:p-8">
+            <div className="w-full min-w-0 space-y-6">
                 <AssetManagementBanner
                     title="Kelola Data Lokasi."
                     description="Atur gedung dan area fakultas sebagai referensi penempatan aset serta ruangan."

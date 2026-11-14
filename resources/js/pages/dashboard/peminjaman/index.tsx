@@ -2365,7 +2365,7 @@ export default function PeminjamanIndex({
 
     return (
         <DashboardLayout>
-            <div className="space-y-6 pb-8">
+            <div className="w-full min-w-0 space-y-6 pb-8">
                 <AssetManagementBanner
                     title="Kelola Peminjaman Aset."
                     description="Pantau pengajuan peminjaman barang dan ruangan, kelola persetujuan, serta awasi penggunaan aset fakultas."

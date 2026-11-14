@@ -592,7 +592,7 @@ export default function DataAset() {
 
     return (
         <DashboardLayout>
-            <div className="space-y-6 p-4 sm:p-6 lg:p-8">
+            <div className="w-full min-w-0 space-y-6">
                 <AssetManagementBanner
                     title="Kelola Data Aset."
                     description="Pantau inventaris barang dan ruangan, status penggunaan, serta kondisi aset fakultas."

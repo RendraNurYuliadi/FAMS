@@ -1188,7 +1188,7 @@ export default function DashboardIndex() {
         <DashboardLayout>
             <Head title="Dashboard — FAMS" />
 
-            <div className="space-y-6">
+            <div className="w-full min-w-0 space-y-6">
                 {/* WELCOME BANNER */}
                 <section className="relative isolate min-h-[230px] overflow-hidden rounded-2xl bg-neutral-950 text-white">
                     <div

@@ -8,6 +8,8 @@ export type IconName =
     | 'arrow-down'
     | 'arrow-up-right'
     | 'rotate-ccw'
+    | 'refresh-cw'
+    | 'history'
     | 'trending-up'
     | 'menu'
     | 'close'
@@ -65,6 +67,7 @@ export type IconName =
     | 'inbox'
     | 'save'
     | 'alert-circle'
+    | 'circle'
     | 'x-circle'
     | 'check-check'
     | 'pencil'
@@ -85,6 +88,21 @@ const paths: Record<IconName, ReactNode> = {
         <>
             <path d="M3 12a9 9 0 1 0 2.6-6.4L3 8" />
             <path d="M3 3v5h5" />
+            <path d="M12 7v5l3 2" />
+        </>
+    ),
+    'refresh-cw': (
+        <>
+            <path d="M3 12a9 9 0 1 0 2.6-6.4L3 8" />
+            <path d="M3 4v5h5" />
+            <path d="M21 12a9 9 0 1 1-2.6-6.4L21 8" />
+            <path d="M21 4v5h-5" />
+        </>
+    ),
+    history: (
+        <>
+            <path d="M3 12a9 9 0 1 0 3-6.7" />
+            <path d="M3 4v5h5" />
             <path d="M12 7v5l3 2" />
         </>
     ),
@@ -236,6 +254,8 @@ const paths: Record<IconName, ReactNode> = {
             <path d="M12 8v4m0 4h.01" />
         </>
     ),
+
+    circle: <circle cx="12" cy="12" r="10" />,
 
     'x-circle': (
         <>

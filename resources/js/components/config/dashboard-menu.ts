@@ -54,6 +54,11 @@ export const dashboardMenu: DashboardMenuItem[] = [
                 href: '/dashboard/peminjaman/pengajuan',
                 icon: 'file',
             },
+            {
+                title: 'Persetujuan Peminjaman',
+                href: '/dashboard/peminjaman/persetujuan',
+                icon: 'check-circle',
+            },
         ],
     },
     {

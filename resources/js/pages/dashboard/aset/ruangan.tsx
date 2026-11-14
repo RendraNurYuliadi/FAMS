@@ -522,7 +522,7 @@ export default function DataRuangan() {
 
     return (
         <DashboardLayout>
-            <div className="space-y-6 p-4 sm:p-6 lg:p-8">
+            <div className="w-full min-w-0 space-y-6">
                 <AssetManagementBanner
                     title="Kelola Data Ruangan."
                     description="Atur informasi ruangan, kapasitas, fasilitas, dan dokumentasi untuk mendukung inventaris fakultas."

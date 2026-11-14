@@ -81,19 +81,19 @@ Route::middleware(['auth', 'role.access'])->group(function () {
     })->name('dashboard.peminjaman.pengajuan');
 
     Route::get('/dashboard/pengembalian', function () {
-        return Inertia::render('dashboard/Placeholder', ['title' => 'Data Pengembalian']);
+        return Inertia::render('dashboard/pengembalian/index');
     })->name('dashboard.pengembalian');
 
     Route::get('/dashboard/pengembalian/pemeriksaan', function () {
-        return Inertia::render('dashboard/Placeholder', ['title' => 'Pemeriksaan Aset']);
+        return Inertia::render('dashboard/pengembalian/pemeriksaan');
     })->name('dashboard.pengembalian.pemeriksaan');
 
     Route::get('/dashboard/pengaduan', function () {
-        return Inertia::render('dashboard/Placeholder', ['title' => 'Laporan Kerusakan']);
+        return Inertia::render('dashboard/pengaduan/index');
     })->name('dashboard.pengaduan');
 
     Route::get('/dashboard/pengaduan/riwayat', function () {
-        return Inertia::render('dashboard/Placeholder', ['title' => 'Riwayat Pengaduan']);
+        return Inertia::render('dashboard/pengaduan/riwayat');
     })->name('dashboard.pengaduan.riwayat');
 
     Route::get('/dashboard/pemeliharaan', function () {
@@ -124,12 +124,8 @@ Route::middleware(['auth', 'role.access'])->group(function () {
         return Inertia::render('dashboard/Placeholder', ['title' => 'Laporan Kerusakan']);
     })->name('dashboard.laporan.kerusakan');
 
-    Route::get('/dashboard/pengguna', function () {
-        return Inertia::render('dashboard/Placeholder', ['title' => 'Manajemen Pengguna']);
-    })->name('dashboard.pengguna');
-
     Route::get('/dashboard/pengguna/organisasi', function () {
-        return Inertia::render('dashboard/Placeholder', ['title' => 'Data Organisasi']);
+        return Inertia::render('dashboard/pengguna/organisasi/index');
     })->name('dashboard.pengguna.organisasi');
 
     Route::get('/dashboard/pengaturan', function () {
@@ -139,4 +135,13 @@ Route::middleware(['auth', 'role.access'])->group(function () {
     Route::get('/dashboard/pengaturan/profil', function () {
         return Inertia::render('dashboard/Placeholder', ['title' => 'Profil Saya']);
     })->name('dashboard.pengaturan.profil');
+
+    Route::get('/dashboard/pengguna', function () {
+        return Inertia::render('dashboard/pengguna/index');
+    })->name('dashboard.pengguna');
+
+    Route::get('/dashboard/peminjaman/persetujuan', function () {
+    return Inertia::render('dashboard/peminjaman/persetujuan');
+    })->name('dashboard.peminjaman.persetujuan');
+
 });

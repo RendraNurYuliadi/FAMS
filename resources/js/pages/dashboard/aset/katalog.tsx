@@ -293,7 +293,7 @@ export default function KatalogAset() {
 
     return (
         <DashboardLayout>
-            <div className="space-y-6 pb-10">
+            <div className="w-full min-w-0 space-y-6 pb-8">
                 <AssetManagementBanner
                     title="Jelajahi Katalog Aset."
                     description="Telusuri aset barang dan ruangan beserta lokasi serta status ketersediaannya."

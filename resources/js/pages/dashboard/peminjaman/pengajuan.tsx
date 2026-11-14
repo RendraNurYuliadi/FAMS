@@ -2365,7 +2365,7 @@ export default function PengajuanPeminjaman() {
 
     return (
         <DashboardLayout>
-            <div className="mx-auto max-w-[1500px] space-y-6 pb-10">
+            <div className="w-full min-w-0 space-y-6 pb-8">
                 <AssetManagementBanner
                     title="Pengajuan Peminjaman."
                     description="Ajukan peminjaman barang dan ruangan fakultas melalui satu alur yang terarah. Lengkapi setiap tahap agar pengajuan dapat ditinjau pengelola."
