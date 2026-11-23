@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Button from '../components/Button';
+import famsHeroImage from '../../images/fams-hero.jpg';
 
 const heroMessages = [
     'Kelola Aset Lebih Mudah.',
@@ -155,7 +156,7 @@ export default function HeroSection() {
                         <div className="relative overflow-hidden rounded-[1.1rem] bg-[#F5F5F4] sm:rounded-[1.4rem]">
                             <div className="relative aspect-[4/4.2] overflow-hidden">
                                 <img
-                                    src="/storage/assets/barang/Fams3.jpg"
+                                    src={famsHeroImage}
                                     alt="Ilustrasi aset dan fasilitas FAMS"
                                     className="h-full w-full object-cover transition duration-700 hover:scale-105"
                                 />

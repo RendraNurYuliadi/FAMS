@@ -1,3 +1,4 @@
+import famsHeroImage from '../../../images/fams-hero.jpg';
 import Icon from '../Icon';
 
 type AuthVisualPanelProps = {
@@ -15,7 +16,7 @@ export default function AuthVisualPanel({
         >
             <div className="relative flex min-h-[320px] flex-1 flex-col justify-end overflow-hidden rounded-card border border-primary-200/80 bg-white shadow-sm">
                 <img
-                    src="/storage/assets/barang/Fams3.jpg"
+                    src={famsHeroImage}
                     alt="Fasilitas dan aset fakultas"
                     className="absolute inset-0 h-full w-full object-cover"
                 />

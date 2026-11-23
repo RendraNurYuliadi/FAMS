@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Head, router } from '@inertiajs/react';
 import AuthLogo from '../../components/auth/AuthLogo';
 import Icon from '../../components/Icon';
+import famsHeroImage from '../../../images/fams-hero.jpg';
 
 export default function Splash() {
     useEffect(() => {
@@ -19,7 +20,7 @@ export default function Splash() {
             <main className="auth-page-enter relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-surface-warm px-6 text-text-primary">
                 <div className="pointer-events-none absolute inset-0">
                     <img
-                        src="/storage/assets/barang/Fams3.jpg"
+                        src={famsHeroImage}
                         alt=""
                         className="h-full w-full object-cover opacity-[0.08]"
                     />
